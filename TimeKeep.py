@@ -30,7 +30,7 @@ class Player:
 
 def read_players():
     # beginning is reserved for last_reap timer, and the last one is an empty new line
-    return list(map(Player, pathlib.Path("./data/playerData.txt").read_text().split("\n")[1:-1]))
+    return list(map(Player, pathlib.Path("./data/playerData.txt").read_text().split("\n")[1:]))
 
 
 def write_players(players):
@@ -102,31 +102,29 @@ async def reap(ctx):
     added_time = current_time - latest_clear
 
     players = read_players()
-
     try:
         # Find the current player
         player = next(player for player in players if player.id == author_id)
     except StopIteration:
         # We couldn't find the player, so create a new one and insert it into players
         # This is kind of ugly, but Python doesn't have overloading...
-        player = Player("{}|{}|{}|{}").format(author_id, author, 0, 0)
-        players += [player]
+        player = Player("{}|{}|{}|{}".format(author_id, author, 0, 0))
+        players.append(player)
 
-    if time.time() < player.next_reap:
+    if current_time < player.next_reap:
         await bot.say("""Sorry, reaping is still on cooldown
                       please wait another {} hours {} minutes and {} seconds
-                      """.format(*hms(player.next_reap - time)))
+                      """.format(*hms(player.next_reap - current_time)))
     else:
         await bot.say('<@!{}> has added {} to their total'.format(author_id, seconds_format(added_time)))
         latest_clear = current_time
-        print(current_time)
         player.reaped_time += added_time
         player.next_reap = current_time + CD
         # Strip out the last five characters (the #NNNN part)
         update_logs(str(author)[:-5], seconds_format(added_time))
 
     write_players(players)
-    print("reap attempt by {}".format(author))
+    print("reap attempt by {} with {}".format(author, math.floor(added_time)))
 
 
 def update_logs(author, added_time):
