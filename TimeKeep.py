@@ -4,6 +4,7 @@ import math
 import pathlib
 import random
 import time
+import websockets
 from discord.ext import commands
 from DiscordTimeKeep import SecretFile
 
@@ -56,9 +57,13 @@ def seconds_format(seconds):
 
 
 async def start_timer():
-    while True:
-        await update_time_status()
-        await asyncio.sleep(4.975)
+    try:
+        while True:
+            await update_time_status()
+            await asyncio.sleep(4.975)
+    except websockets.exceptions.ConnectionClosed:
+        print('crashed')
+        await start_timer()
 
 
 async def update_time_status():
@@ -95,6 +100,9 @@ async def start():
 
 @bot.command(pass_context=True)
 async def reap(ctx):
+    if ctx.message.author.bot:
+        await bot.say("bot detected, reap canceled")
+        return
     global latest_clear
     author_id = ctx.message.author.id
     author = ctx.message.author
@@ -116,12 +124,14 @@ async def reap(ctx):
                       please wait another {} hours {} minutes and {} seconds
                       """.format(*hms(player.next_reap - current_time)))
     else:
-        await bot.say('<@!{}> has added {} to their total'.format(author_id, seconds_format(added_time)))
-        latest_clear = current_time
-        player.reaped_time += added_time
+        player.reaped_time = math.floor(player.reaped_time + added_time)
         player.next_reap = current_time + CD
+        await bot.say('<@!{}> has added {} to their total\n'
+                      'Adding up to be {}'.format(author_id, seconds_format(added_time),
+                                                  seconds_format(player.reaped_time)))
         # Strip out the last five characters (the #NNNN part)
         update_logs(str(author)[:-5], seconds_format(added_time))
+        latest_clear = current_time
 
     write_players(players)
     print("reap attempt by {} with {}".format(author, math.floor(added_time)))
@@ -139,17 +149,30 @@ def update_logs(author, added_time):
 
 
 @bot.command(pass_context=True)
+async def info(ctx):
+    user_id = ctx.message.content.split('@')[1][:-1]
+    if user_id[0] == '!':
+        user_id = user_id[1:]
+    await print_info(ctx.message.channel, user_id)
+
+
+@bot.command(pass_context=True)
 async def me(ctx):
     author_id = ctx.message.author.id
+    await print_info(ctx.message.channel, author_id)
+
+
+async def print_info(channel, author_id):
     players = read_players()
     try:
         # Find the current player
         index, player = next((index, player) for index, player in enumerate(players) if player.id == author_id)
     except StopIteration:
         # Player doesn't exist in our logs, so tell them to reap
-        await bot.say("""<@!{}> has stored 0 seconds
-                        use t!reap to get started""".format(author_id))
+        await bot.send_message(channel, """<@!{}> has stored 0 seconds
+                            use t!reap to get started""".format(author_id))
         index = len(players)
+        return
 
     current_time = float(time.time())
     if current_time < player.next_reap:
@@ -157,14 +180,14 @@ async def me(ctx):
     else:
         next_reap = 'Your next reap is up'
 
-    await bot.say("""Stats of <@!{}>
-                  stored time: {} seconds
-                  or {}
-                  Next Reap: {}
-                  Rank: {}
-                  """.format(author_id, str(player.reaped_time)[:-2],
-                             seconds_format(player.reaped_time),
-                             next_reap, index + 1))
+    await bot.send_message(channel,"""Stats of <@!{}>
+                      stored time: {} seconds
+                      or {}
+                      Next Reap: {}
+                      Rank: {}
+                      """.format(author_id, str(player.reaped_time)[:-2],
+                                 seconds_format(player.reaped_time),
+                                 next_reap, index + 1))
 
 
 @bot.command(pass_context=True)
@@ -201,13 +224,23 @@ async def help():
                **t!start:** game description~
                **t!reap:** reap the time as your own
                **t!me:** see how much time you reaped
-               **t!leaderboard:** shows who's top 10
-               **t!log:** shows who recently reaped"""
+               **t!leaderboard / b:** shows who's top 10
+               **t!log:** shows who recently reaped
+               **t!info @player:** get player info"""
     await bot.say(help_str)
 
 
 @bot.command(pass_context=True)
 async def leaderboard(ctx):
+    await print_leaderboard(ctx.message.channel)
+
+
+@bot.command(pass_context=True)
+async def b(ctx):
+    await print_leaderboard(ctx.message.channel)
+
+
+async def print_leaderboard(channel):
     players = read_players()[:10]
     embed = discord.Embed(color=0x42d7f4)
     embed.title = "The current top {} are:".format(len(players))
@@ -215,7 +248,7 @@ async def leaderboard(ctx):
         # Drop the number at the end of the author's name (#NNNN)
         embed.add_field(name='#{} {}'.format(index + 1, player.name[:-5]),
                         value=seconds_format(player.reaped_time))
-    await bot.say(embed=embed)
+    await bot.send_message(channel, embed=embed)
 
 
 @bot.command(pass_context=True)
@@ -227,16 +260,20 @@ async def invite(ctx):
 
 
 @bot.command(pass_context=True)
-async def stored(ctx):
-    await bot.say('Currently stored {}'.format(seconds_format(int(time.time() - latest_clear))))
+async def status(ctx):
+    await send_status(ctx.message.channel)
 
 
 @bot.event
 async def on_message(message):
     if '538078061682229258' in message.content:
-        await bot.send_message(message.channel, 'Currently stored {}'
-                               .format(seconds_format(int(time.time() - latest_clear))))
+        await send_status(message.channel)
     await bot.process_commands(message)
 
+
+async def send_status(channel):
+    await bot.send_message(channel, 'Currently stored {}\n'
+                                    'across {} servers'
+                           .format(seconds_format(math.floor(time.time() - latest_clear)), len(bot.servers)))
 
 bot.run(SecretFile.get_token())  # are you happy now Soap????
