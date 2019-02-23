@@ -226,7 +226,9 @@ async def help():
                **t!me:** see how much time you reaped
                **t!leaderboard / b:** shows who's top 10
                **t!log:** shows who recently reaped
-               **t!info @player:** get player info"""
+               **t!info @player:** get player info
+               **t!invite:** invite me :heart:"""
+
     await bot.say(help_str)
 
 
