@@ -89,12 +89,12 @@ async def choose(ctx):
     try:
         # Find the current player
         next(player for player in players if player.id == ctx.message.author.id)
-        await bot.say("Sorry you have already chosen your class")
+        await bot.say("Sorry you have already chosen your class \n"
+                      "However class change is a available with t!change <class #>")
         return
     except StopIteration:
         # Player doesn't exist in our logs, so tell them to reap
         try:
-            print(ctx.message.content[9:])
             player_class_id = (int(ctx.message.content[9:]))
             await bot.say("<@!{}> is now a **{}**".format(ctx.message.author.id,
                                                           GameStat.class_name[player_class_id]))
@@ -106,6 +106,35 @@ async def choose(ctx):
         player = GameStat.Player("{}|{}|{}|{}|{}|{}".format(author.id, author, 0, 0, 0, player_class_id))
         players.append(player)
         DataManager.write_players(players, latest_clear)
+        DataManager.update_logs_class(str(player.name)[:-5], GameStat.class_name[player_class_id])
+
+
+@bot.command(pass_context=True)
+async def change(ctx):
+    players = DataManager.read_players()
+    try:
+        # Find the current player
+        player = next(player for player in players if player.id == ctx.message.author.id)
+        try:
+            player_class_id = (int(ctx.message.content[9:]))
+            await bot.say("<@!{}> is now a **{}**".format(ctx.message.author.id,
+                                                          GameStat.class_name[player_class_id]))
+        except ValueError:
+            await bot.say("Sorry I don't understand")
+            return
+
+        player.name = ctx.message.author
+        player.class_type = player_class_id
+        if player.class_type == 2:
+            player.next_reap = time.time() + GameStat.reap_cooldown * (1 - GameStat.mage_reduction_rate)
+        else:
+            player.next_reap = time.time() + GameStat.reap_cooldown
+        DataManager.write_players(players, latest_clear)
+        DataManager.update_logs_class(str(player.name)[:-5], GameStat.class_name[player_class_id], True)
+    except StopIteration:
+        # Player doesn't exist in our logs, so tell them to reap
+        await bot.say("Sorry But You Haven't Benn Assigned a Class Yet \nUse **t!start** to get started")
+        return
 
 
 @bot.command(pass_context=True)
@@ -175,12 +204,13 @@ async def reap(ctx):
 
     # --------------------- Store Data ------------------
     player.reaped_time = math.floor(player.reaped_time + added_time)
-    reap_message += '<@!{}> has added {} to their total\n' \
-                    'Adding up to be {}'.format(author.id, seconds_format(added_time),
-                                                seconds_format(player.reaped_time))
+    reap_message += '<@!{}> has added **{}** to their total\n' \
+                    'Adding up to be **{}**\nNext reap in **{}**'\
+        .format(author.id, seconds_format(added_time), seconds_format(player.reaped_time),
+                "{} hours and {} minutes".format(*hms(player.next_reap - current_time)))
     await bot.say(reap_message)
     # Strip out the last five characters (the #NNNN part)
-    DataManager.update_logs(str(author)[:-5], seconds_format(added_time), player.class_type)
+    DataManager.update_logs_reap(str(author)[:-5], seconds_format(added_time), player.class_type)
     latest_clear = current_time
     await update_time_status()
 
@@ -215,18 +245,18 @@ async def steal(ctx):
     player.reap_count += 1
     player.next_reap = current_time + GameStat.reap_cooldown
     player.name = str(author)
-    reap_message = '<@!{}> has *STOLEN* {} to their total\n'' \
-    ''Adding up to be {}'.format(author.id, seconds_format(reap_in_progress),
-                                 seconds_format(player.reaped_time))
+    reap_message = '<@!{}> has *STOLEN* **{}** to their total\n' \
+                   'Adding up to be **{}**\nNext reap in **{}**' \
+        .format(author.id, seconds_format(reap_in_progress), seconds_format(player.reaped_time),
+                "{} hours and {} minutes".format(*hms(player.next_reap - current_time)))
 
     global latest_clear
     await bot.say(reap_message)
     # Strip out the last five characters (the #NNNN part)
-    DataManager.update_logs(str(author)[:-5], seconds_format(reap_in_progress), player.class_type, stolen=True)
+    DataManager.update_logs_reap(str(author)[:-5], seconds_format(reap_in_progress), player.class_type, stolen=True)
+    reap_in_progress = 0
     latest_clear = current_time
     await update_time_status()
-
-    reap_in_progress = 0
     DataManager.write_players(players, latest_clear)
 
 

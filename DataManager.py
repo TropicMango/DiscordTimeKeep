@@ -13,7 +13,7 @@ def write_players(players, latest_clear):
                      "\n".join(map(str, sorted(players, key=lambda player: player.reaped_time, reverse=True))))
 
 
-def update_logs(author, added_time, class_type, stolen=False):
+def update_logs_reap(author, added_time, class_type, stolen=False):
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
 
@@ -21,6 +21,22 @@ def update_logs(author, added_time, class_type, stolen=False):
         info = '**{}** - *STOLEN* by {}\n'.format(added_time, author)
     else:
         info = '**{}** - *{}:* {}\n'.format(added_time, GameStat.class_name[class_type], author)
+
+    content = [info] + content
+    if len(content) > 10:
+        content.pop()
+    with open("./data/reapLog.txt", "w", encoding='utf-8') as f:
+        f.writelines(content)
+
+
+def update_logs_class(author, class_type, change=False):
+    with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
+        content = f.readlines()
+
+    if change:
+        info = '**{}** is changed class to *{}*\n'.format(author, class_type)
+    else:
+        info = '**{}** joined the arena as a *{}*\n'.format(author, class_type)
 
     content = [info] + content
     if len(content) > 10:
