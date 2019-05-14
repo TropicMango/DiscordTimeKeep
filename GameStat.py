@@ -24,7 +24,7 @@ rank_icon = ['<:Challenger_Rank:559574999149838377>', '<:Diamond_Rank:5595750178
 help_str = """Current Available Commands
                **t!start:** Game Description~
                **t!choose** Choose Your Class
-               **t!change** Change Your Class (with pentalty)
+               **t!change** Change Your Class (resets reap)
                **t!reap:** Reap The Time as Your Own
                **t!me:** See How Much Time You Reaped
                **t!leaderboard / b:** Shows Who's Top 10
@@ -34,13 +34,14 @@ help_str = """Current Available Commands
 
 start_str = """"Welcome to the Arena of Time,
      Use **t!choose <Class #>** begin
+     DW you can change with **t!change <Class #>**
      
     1. **Chrono Warrior**: bonus {}% Time Reaped
     2. **Time Mage**: {}% Faster Reap Cooldown
     3. **Space-Time Hunter**: {}% Chance to Crit
     4. **Thousand Year Fairy**: Bonus {} Min per Reap
     5. **Dimensional Bandit**: Gains a *steal* ability
-    (Bandit Only)*t!steal:* Available 1 Min After the Latest Reap"""\
+    (Bandit Only)**t!steal:** Available 1 Min After the Latest Reap"""\
     .format((warrior_buff - 1) * 100, mage_reduction_rate * 100, hunter_crit_rate * 100, fairy_boost)
 
 

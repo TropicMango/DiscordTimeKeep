@@ -10,7 +10,7 @@ from DiscordTimeKeep import DataManager
 from DiscordTimeKeep import GameStat
 
 description = '''An bot designed to get time'''
-bot = commands.Bot(command_prefix='m!', description=description)
+bot = commands.Bot(command_prefix='t!', description=description)
 bot.remove_command("help")
 
 maintenance = False
@@ -45,9 +45,14 @@ def seconds_format(seconds):
 
 async def start_timer():
     try:
+        t_interval = 0
         while True:
-            await update_time_status()
-            await asyncio.sleep(30)
+            if t_interval % 30 == 0:
+                await update_time_status()
+            if reap_in_progress != 0:
+                break
+            await asyncio.sleep(1)
+            t_interval += 1
     except websockets.exceptions.ConnectionClosed:
         await asyncio.sleep(10)
         global restart
@@ -90,7 +95,7 @@ async def choose(ctx):
         # Find the current player
         next(player for player in players if player.id == ctx.message.author.id)
         await bot.say("Sorry you have already chosen your class \n"
-                      "However class change is a available with t!change <class #>")
+                      "However class change is a available with **t!change <class #>**")
         return
     except StopIteration:
         # Player doesn't exist in our logs, so tell them to reap
@@ -111,6 +116,8 @@ async def choose(ctx):
 
 @bot.command(pass_context=True)
 async def change(ctx):
+    # if await check_player(ctx) is None:
+    #    return
     players = DataManager.read_players()
     try:
         # Find the current player
@@ -159,8 +166,6 @@ async def reap(ctx):
     player.next_reap = current_time + GameStat.reap_cooldown
     player.name = str(author)
 
-    DataManager.write_players(players, latest_clear)
-
     # --------------------- Unique Class Passive ------------------
     if player.class_type == 1:
         added_time *= GameStat.warrior_buff
@@ -184,6 +189,8 @@ async def reap(ctx):
         added_time += GameStat.fairy_boost * 60
         reap_message += '**FAIRY CHARM ACTIVATED!**\n reap time increased by {}m\n'.format(GameStat.fairy_boost)
 
+    DataManager.write_players(players, latest_clear)
+    
     # ------------------------------- Initialize Reaping -------------------------
     reap_in_progress = added_time
     reap_lockin_message = await bot.say("Reap Initiated, Will be Completed in 60 Seconds")
@@ -195,7 +202,8 @@ async def reap(ctx):
             reap_delay -= 1
             await bot.edit_message(reap_lockin_message, "Reap Initiated, Will be Completed in {} Seconds".format(reap_delay))
         else:
-            await bot.edit_message(reap_lockin_message, "Your Reap Has Been *STOLEN* by <@!{}>".format(thief_id))
+            await bot.edit_message(reap_lockin_message, "<@!{}> Your Reap Has Been *STOLEN* by {}"
+                                   .format(player.id, thief_id))
             return
 
     await bot.edit_message(reap_lockin_message, "Reap Successful")
@@ -212,10 +220,10 @@ async def reap(ctx):
     # Strip out the last five characters (the #NNNN part)
     DataManager.update_logs_reap(str(author)[:-5], seconds_format(added_time), player.class_type)
     latest_clear = current_time
-    await update_time_status()
 
     DataManager.write_players(players, latest_clear)
     print("reap attempt by {} with {}".format(author, math.floor(added_time)))
+    await start_timer()
 
 
 @bot.command(pass_context=True)
@@ -237,7 +245,7 @@ async def steal(ctx):
         return
 
     global thief_id
-    thief_id = ctx.message.author.id
+    thief_id = ctx.message.author
 
     author = ctx.message.author
     current_time = time.time()
@@ -258,9 +266,11 @@ async def steal(ctx):
     latest_clear = current_time
     await update_time_status()
     DataManager.write_players(players, latest_clear)
+    await start_timer()
 
 
 async def check_player(ctx):
+    print("- Check by {} -".format(ctx.message.author))
     if maintenance:
         await bot.say("Sorry currently under maintenance")
         return None
@@ -285,8 +295,8 @@ async def check_player(ctx):
 
     # check for cooldown
     if current_time < player.next_reap:
-        await bot.say("""Sorry, reaping is still on cooldown
-                      please wait another {} hours {} minutes and {} seconds
+        await bot.say("""Sorry, actions is still on cooldown
+                      please wait another **{} hours {} minutes and {} seconds**
                       """.format(*hms(player.next_reap - current_time)))
         return None
 
@@ -347,7 +357,7 @@ async def print_info(channel, author_id):
 async def log():
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
-    log_string = '\n'.join(content)
+    log_string = ''.join(content)
     embed = discord.Embed(color=0x42d7f4)
     embed.title = "Reap Log"
     embed.description = log_string
@@ -390,7 +400,7 @@ async def print_leaderboard(channel):
             if ranked_player == player.name:
                 player_title += " " + GameStat.rank_icon[i]
         player_class_type = GameStat.class_name_short[player.class_type]
-        embed.add_field(name='#{} {}: {}  '.format(index + 1, player_class_type, player_title),
+        embed.add_field(name='#{} {}: {}'.format(index + 1, player_class_type, player_title),
                         value=seconds_format(player.reaped_time))
     await bot.send_message(channel, embed=embed)
 
