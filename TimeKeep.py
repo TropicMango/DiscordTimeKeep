@@ -45,14 +45,16 @@ def seconds_format(seconds):
 
 async def start_timer():
     try:
-        t_interval = 0
+        # t_interval = 0
         while True:
-            if t_interval % 30 == 0:
-                await update_time_status()
-            if reap_in_progress != 0:
-                break
-            await asyncio.sleep(1)
-            t_interval += 1
+            # if t_interval % 30 == 0:
+            #     await update_time_status()
+            # if reap_in_progress != 0:
+            #     break
+            # await asyncio.sleep(1)
+            # t_interval += 1
+            await update_time_status()
+            await asyncio.sleep(30)
     except websockets.exceptions.ConnectionClosed:
         await asyncio.sleep(10)
         global restart
@@ -165,37 +167,41 @@ async def reap(ctx):
     player.reap_count += 1
     player.next_reap = current_time + GameStat.reap_cooldown
     player.name = str(author)
+    reap_delay = 60
 
     # --------------------- Unique Class Passive ------------------
     if player.class_type == 1:
         added_time *= GameStat.warrior_buff
-        reap_message += '**WARRIOR FORCE ACTIVATED!**\n Reap Time Increased to {}%\n'\
+        reap_message += '**HEROIC STRIKE ACTIVATED!**\n Reap Time Increased to {}%\n'\
             .format(GameStat.warrior_buff * 100)
 
     elif player.class_type == 2:
-        reap_message += '**MAGE SPELL ACTIVATED!**\n Reap Cooldown Reduced by {}%\n'\
+        reap_message += '**TIME WARP ACTIVATED!**\n Reap Cooldown Reduced by {}%\n'\
             .format(GameStat.mage_reduction_rate * 100)
         player.next_reap = current_time + GameStat.reap_cooldown * (1 - GameStat.mage_reduction_rate)
 
     elif player.class_type == 3:
         if random.random() < GameStat.hunter_crit_rate:
             added_time *= 2
-            reap_message += '**HUNTER CRIT ACTIVATED!**\n Reap Time Increased to {}%\n'\
+            reap_message += '**HUNTER\'s MARK ACTIVATED!**\n Reap Time Increased to {}%\n'\
                 .format(GameStat.hunter_crit_dmg * 100)
         else:
-            reap_message += '**HUNTER CRIT FAILED!**\n Reap Time Gains No Modifier\n'
+            reap_message += '**HUNTER\'s MARK FAILED!**\n Reap Time Gains No Modifier\n'
 
     elif player.class_type == 4:
         added_time += GameStat.fairy_boost * 60
-        reap_message += '**FAIRY CHARM ACTIVATED!**\n reap time increased by {}m\n'.format(GameStat.fairy_boost)
+        reap_message += '**WILD GROWTH ACTIVATED!**\n reap time increased by {}m\n'.format(GameStat.fairy_boost)
+
+    elif player.class_type == 6:
+        reap_delay = 0
+        reap_message += '**BLINDING ASSAULT ACTIVATED!**\n instant reap complete\n'
 
     DataManager.write_players(players, latest_clear)
-    
+
     # ------------------------------- Initialize Reaping -------------------------
     reap_in_progress = added_time
     reap_lockin_message = await bot.say("Reap Initiated, Will be Completed in 60 Seconds")
     await bot.change_presence(game=discord.Game(name='Reaping: {}'.format("{}H {}M {}S".format(*hms(added_time)))))
-    reap_delay = 60
     while reap_delay > 0:
         if reap_in_progress != 0:
             await asyncio.sleep(1)
@@ -203,7 +209,7 @@ async def reap(ctx):
             await bot.edit_message(reap_lockin_message, "Reap Initiated, Will be Completed in {} Seconds".format(reap_delay))
         else:
             await bot.edit_message(reap_lockin_message, "<@!{}> Your Reap Has Been *STOLEN* by {}"
-                                   .format(player.id, thief_id))
+                                   .format(player.id, thief_id[:-5]))
             return
 
     await bot.edit_message(reap_lockin_message, "Reap Successful")
@@ -222,8 +228,8 @@ async def reap(ctx):
     latest_clear = current_time
 
     DataManager.write_players(players, latest_clear)
-    print("reap attempt by {} with {}".format(author, math.floor(added_time)))
-    await start_timer()
+    print("reap by {} with {}".format(author, math.floor(added_time)))
+    # await start_timer()
 
 
 @bot.command(pass_context=True)
@@ -266,7 +272,7 @@ async def steal(ctx):
     latest_clear = current_time
     await update_time_status()
     DataManager.write_players(players, latest_clear)
-    await start_timer()
+    # await start_timer()
 
 
 async def check_player(ctx):

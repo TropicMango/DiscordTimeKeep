@@ -18,9 +18,9 @@ def update_logs_reap(author, added_time, class_type, stolen=False):
         content = f.readlines()
 
     if stolen:
-        info = '{} - **STOLEN** by *{}*\n'.format(added_time, author)
+        info = '{} - ***STOLEN*** by **{}**\n'.format(added_time, author)
     else:
-        info = '{} - **{}:** *{}*\n'.format(added_time, GameStat.class_name[class_type], author)
+        info = '{} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
 
     content = [info] + content
     if len(content) > 20:
@@ -34,9 +34,9 @@ def update_logs_class(author, class_type, change=False):
         content = f.readlines()
 
     if change:
-        info = '**Class change:** *{}* is now a *{}*\n'.format(author, class_type)
+        info = 'Class change: **{}** is now a *{}*\n'.format(author, class_type)
     else:
-        info = '*{}* joined the arena as a **{}**\n'.format(author, class_type)
+        info = '**{}** joined the arena as a *{}*\n'.format(author, class_type)
 
     content = [info] + content
     if len(content) > 10:

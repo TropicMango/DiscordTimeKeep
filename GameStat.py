@@ -7,11 +7,11 @@ reap_cooldown = 21600  # reap_cooldown = 21600
 
 class_name = {1: "Chrono Warrior", 2: "Time Mage",
               3: "Space-Time Hunter", 4: "Thousand Year Fairy",
-              5: "Dimensional Bandit"}
+              5: "Dimensional Bandit", 6: "Twilight Mercenary"}
 
 class_name_short = {1: "Warrior", 2: "Mage",
                     3: "Hunter", 4: "Fairy",
-                    5: "Bandit"}
+                    5: "Bandit", 6: "Merc"}
 
 teir_list = ['Soap#3672', 'Porolific#3003',
              'LuxuFate#8990', 'Tropic Mango#6755',
@@ -41,7 +41,8 @@ start_str = """"Welcome to the Arena of Time,
     3. **Space-Time Hunter**: {}% Chance to Crit
     4. **Thousand Year Fairy**: Bonus {} Min per Reap
     5. **Dimensional Bandit**: Gains a *steal* ability
-    (Bandit Only)**t!steal:** Available 1 Min After the Latest Reap"""\
+    (Bandit Only) **t!steal:** Available 1 Min After the Latest Reap
+    6. **Twilight Mercenary**: Instant Reap, Can't be Stolen"""\
     .format((warrior_buff - 1) * 100, mage_reduction_rate * 100, hunter_crit_rate * 100, fairy_boost)
 
 
