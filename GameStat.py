@@ -3,15 +3,19 @@ hunter_crit_rate = 0.25
 hunter_crit_dmg = 2
 mage_reduction_rate = 0.25
 fairy_boost = 15
+gamble_change = 0.05
+gamble_reward = 25
 reap_cooldown = 21600  # reap_cooldown = 21600
 
 class_name = {1: "Chrono Warrior", 2: "Time Mage",
               3: "Space-Time Hunter", 4: "Thousand Year Fairy",
-              5: "Dimensional Bandit", 6: "Twilight Mercenary"}
+              5: "Dimensional Bandit", 6: "Twilight Mercenary",
+              7: "Exo Gambler"}
 
 class_name_short = {1: "Warrior", 2: "Mage",
                     3: "Hunter", 4: "Fairy",
-                    5: "Bandit", 6: "Merc"}
+                    5: "Bandit", 6: "Merc",
+                    7: "Gambler"}
 
 teir_list = ['Soap#3672', 'Porolific#3003',
              'LuxuFate#8990', 'Tropic Mango#6755',
@@ -23,8 +27,8 @@ rank_icon = ['<:Challenger_Rank:559574999149838377>', '<:Diamond_Rank:5595750178
 
 help_str = """Current Available Commands
                **t!start:** Game Description~
-               **t!choose** Choose Your Class
-               **t!change** Change Your Class (resets reap)
+               **t!choose:** Choose Your Class
+               **t!change:** Change Your Class (resets reap)
                **t!reap:** Reap The Time as Your Own
                **t!me:** See How Much Time You Reaped
                **t!leaderboard / b:** Shows Who's Top 10
@@ -32,18 +36,28 @@ help_str = """Current Available Commands
                **t!info @player:** Get Player Info
                **t!invite:** Invite Me :heart:"""
 
-start_str = """"Welcome to the Arena of Time,
-     Use **t!choose <Class #>** begin
-     DW you can change with **t!change <Class #>**
-     
+char_list = """
     1. **Chrono Warrior**: bonus {}% Time Reaped
     2. **Time Mage**: {}% Faster Reap Cooldown
     3. **Space-Time Hunter**: {}% Chance to Crit
     4. **Thousand Year Fairy**: Bonus {} Min per Reap
     5. **Dimensional Bandit**: Gains a *steal* ability
     (Bandit Only) **t!steal:** Available 1 Min After the Latest Reap
-    6. **Twilight Mercenary**: Instant Reap, Can't be Stolen"""\
-    .format((warrior_buff - 1) * 100, mage_reduction_rate * 100, hunter_crit_rate * 100, fairy_boost)
+    6. **Twilight Mercenary**: Instant Reap, Can't be Stolen
+    7. **Exo Gambler**: {}% Chance of Getting {}x or Nothing
+    """\
+    .format((warrior_buff - 1) * 100,
+            mage_reduction_rate * 100,
+            hunter_crit_rate * 100,
+            fairy_boost,
+            gamble_change * 100,
+            gamble_reward)
+
+
+start_str = """"Welcome to the Arena of Time,
+     Use **t!choose <Class #>** begin
+     You can change with **t!change <Class #>**
+     """ + char_list
 
 
 class Player:

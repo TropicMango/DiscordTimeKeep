@@ -73,6 +73,8 @@ async def update_time_status():
 async def on_ready():  # when ready it prints the username, id, and starts the status update
     global latest_clear
     latest_clear = float(get_latest_time())
+    if latest_clear == 0:
+        latest_clear = time.time()
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
@@ -106,7 +108,8 @@ async def choose(ctx):
             await bot.say("<@!{}> is now a **{}**".format(ctx.message.author.id,
                                                           GameStat.class_name[player_class_id]))
         except ValueError:
-            await bot.say("Sorry I don't understand")
+            msg = "Sorry I don't understand\nUse t!choose <Class #>\n" + GameStat.char_list
+            await bot.say(msg)
             return
 
         author = ctx.message.author
@@ -129,7 +132,8 @@ async def change(ctx):
             await bot.say("<@!{}> is now a **{}**".format(ctx.message.author.id,
                                                           GameStat.class_name[player_class_id]))
         except ValueError:
-            await bot.say("Sorry I don't understand")
+            msg = "Sorry I don't understand\nUse t!change <Class #>\n" + GameStat.char_list
+            await bot.say(msg)
             return
 
         player.name = ctx.message.author
@@ -142,7 +146,7 @@ async def change(ctx):
         DataManager.update_logs_class(str(player.name)[:-5], GameStat.class_name[player_class_id], True)
     except StopIteration:
         # Player doesn't exist in our logs, so tell them to reap
-        await bot.say("Sorry But You Haven't Benn Assigned a Class Yet \nUse **t!start** to get started")
+        await bot.say("Sorry But You Haven't Been Assigned a Class Yet \nUse **t!start** to get started")
         return
 
 
@@ -201,7 +205,7 @@ async def reap(ctx):
     # ------------------------------- Initialize Reaping -------------------------
     reap_in_progress = added_time
     reap_lockin_message = await bot.say("Reap Initiated, Will be Completed in 60 Seconds")
-    await bot.change_presence(game=discord.Game(name='Reaping: {}'.format("{}H {}M {}S".format(*hms(added_time)))))
+    await bot.change_presence(game=discord.Game(name='⚔️Reaping: {}'.format("{}H {}M {}S".format(*hms(added_time)))))
     while reap_delay > 0:
         if reap_in_progress != 0:
             await asyncio.sleep(1)
@@ -209,7 +213,7 @@ async def reap(ctx):
             await bot.edit_message(reap_lockin_message, "Reap Initiated, Will be Completed in {} Seconds".format(reap_delay))
         else:
             await bot.edit_message(reap_lockin_message, "<@!{}> Your Reap Has Been *STOLEN* by {}"
-                                   .format(player.id, thief_id[:-5]))
+                                   .format(player.id, str(thief_id)[:-5]))
             return
 
     await bot.edit_message(reap_lockin_message, "Reap Successful")
@@ -230,6 +234,7 @@ async def reap(ctx):
     DataManager.write_players(players, latest_clear)
     print("reap by {} with {}".format(author, math.floor(added_time)))
     # await start_timer()
+    await update_time_status()
 
 
 @bot.command(pass_context=True)
@@ -312,7 +317,7 @@ async def check_player(ctx):
 @bot.command(pass_context=True)
 async def info(ctx):
     if '@' not in ctx.message.content:
-        await bot.say("Sorry I don't understand")
+        await bot.say("Sorry I don't understand\nUse t!info @player or t!me")
         return
     user_id = ctx.message.content.split('@')[1][:-1]
     if user_id[0] == '!':
@@ -415,7 +420,8 @@ async def print_leaderboard(channel):
 async def invite():
     embed = discord.Embed(color=0x42d7f4)
     embed.description = \
-        "[Invite me~](https://discordapp.com/api/oauth2/authorize?client_id=538078061682229258&permissions=0&scope=bot)"
+        "[Invite me~]" \
+        "(https://discordapp.com/api/oauth2/authorize?client_id=538078061682229258&permissions=14336&scope=bot)"
     await bot.say(embed=embed)
 
 
