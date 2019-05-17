@@ -3,7 +3,7 @@ hunter_crit_rate = 0.25
 hunter_crit_dmg = 2
 mage_reduction_rate = 0.25
 fairy_boost = 15
-gamble_change = 0.05
+gamble_chance = 0.05
 gamble_reward = 25
 reap_cooldown = 21600  # reap_cooldown = 21600
 
@@ -34,6 +34,7 @@ help_str = """Current Available Commands
                **t!leaderboard / b:** Shows Who's Top 10
                **t!log:** Shows Who Recently Reaped
                **t!info @player:** Get Player Info
+               **t!pn** Get Patch Notes
                **t!invite:** Invite Me :heart:"""
 
 char_list = """
@@ -42,15 +43,15 @@ char_list = """
     3. **Space-Time Hunter**: {}% Chance to Crit
     4. **Thousand Year Fairy**: Bonus {} Min per Reap
     5. **Dimensional Bandit**: Gains a *steal* ability
-    (Bandit Only) **t!steal:** Available 1 Min After the Latest Reap
+     - Bandit Only - **t!steal:** Available 1 Min After the Latest Reap
     6. **Twilight Mercenary**: Instant Reap, Can't be Stolen
-    7. **Exo Gambler**: {}% Chance of Getting {}x or Nothing
+    7. **Exo Gambler**: {}% Chance of Getting {}x or Nothing (can't be stolen)
     """\
     .format((warrior_buff - 1) * 100,
             mage_reduction_rate * 100,
             hunter_crit_rate * 100,
             fairy_boost,
-            gamble_change * 100,
+            gamble_chance * 100,
             gamble_reward)
 
 

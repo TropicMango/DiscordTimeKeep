@@ -1,0 +1,10 @@
+**16 Mar 2019**
+    Patch Notes Added:
+     - Official Documentation of Changes
+    Exo Gambler Added:
+     - 5% Chance of 25x or Nothing
+**14 Mar 2019**
+    Twilight Mercenary Added:
+     - Instant Reap, Can't be Stolen
+**12 Mar 2019**
+    Season Begin

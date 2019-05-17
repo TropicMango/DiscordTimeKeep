@@ -187,18 +187,29 @@ async def reap(ctx):
     elif player.class_type == 3:
         if random.random() < GameStat.hunter_crit_rate:
             added_time *= 2
-            reap_message += '**HUNTER\'s MARK ACTIVATED!**\n Reap Time Increased to {}%\n'\
+            reap_message += '**HUNTER\'S MARK ACTIVATED!**\n Reap Time Increased to {}%\n'\
                 .format(GameStat.hunter_crit_dmg * 100)
         else:
-            reap_message += '**HUNTER\'s MARK FAILED!**\n Reap Time Gains No Modifier\n'
+            reap_message += '**HUNTER\'S MARK FAILED!**\n Reap Time Gains No Modifier\n'
 
     elif player.class_type == 4:
         added_time += GameStat.fairy_boost * 60
-        reap_message += '**WILD GROWTH ACTIVATED!**\n reap time increased by {}m\n'.format(GameStat.fairy_boost)
+        reap_message += '**WILD GROWTH ACTIVATED!**\n Reap Time Increased by {}M\n'.format(GameStat.fairy_boost)
 
     elif player.class_type == 6:
         reap_delay = 0
-        reap_message += '**BLINDING ASSAULT ACTIVATED!**\n instant reap complete\n'
+        reap_message += '**BLINDING ASSAULT ACTIVATED!**\n Instant Reap Complete\n'
+
+    elif player.class_type == 7:
+        if random.random() < GameStat.gamble_chance:
+            reap_delay = 0
+            added_time *= GameStat.gamble_reward
+            reap_message += '**💰!!!LUCKY COIN ACTIVATED!!!💰**\n Reap Time Increased to {}%!!!\n'\
+                .format(GameStat.gamble_reward * 100)
+        else:
+            await bot.say('**LUCKY COIN FAILED**\n Nothing happened\n')
+            DataManager.write_players(players, latest_clear)
+            return
 
     DataManager.write_players(players, latest_clear)
 
@@ -210,7 +221,8 @@ async def reap(ctx):
         if reap_in_progress != 0:
             await asyncio.sleep(1)
             reap_delay -= 1
-            await bot.edit_message(reap_lockin_message, "Reap Initiated, Will be Completed in {} Seconds".format(reap_delay))
+            await bot.edit_message(reap_lockin_message, "Reap Initiated, Will be Completed in {} Seconds"
+                                                        "".format(reap_delay))
         else:
             await bot.edit_message(reap_lockin_message, "<@!{}> Your Reap Has Been *STOLEN* by {}"
                                    .format(player.id, str(thief_id)[:-5]))
@@ -371,6 +383,17 @@ async def log():
     log_string = ''.join(content)
     embed = discord.Embed(color=0x42d7f4)
     embed.title = "Reap Log"
+    embed.description = log_string
+    await bot.say(embed=embed)
+
+
+@bot.command()
+async def pn():
+    with open("./data/patchNotes.txt", "r", encoding='utf-8') as f:
+        content = f.readlines()
+    log_string = ''.join(content)
+    embed = discord.Embed(color=0x644fdd)
+    embed.title = "Patch Notes"
     embed.description = log_string
     await bot.say(embed=embed)
 
