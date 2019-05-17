@@ -10,7 +10,7 @@ reap_cooldown = 21600  # reap_cooldown = 21600
 class_name = {1: "Chrono Warrior", 2: "Time Mage",
               3: "Space-Time Hunter", 4: "Thousand Year Fairy",
               5: "Dimensional Bandit", 6: "Twilight Mercenary",
-              7: "Exo Gambler"}
+              7: "Void Gambler"}
 
 class_name_short = {1: "Warrior", 2: "Mage",
                     3: "Hunter", 4: "Fairy",
@@ -45,7 +45,7 @@ char_list = """
     5. **Dimensional Bandit**: Gains a *steal* ability
      - Bandit Only - **t!steal:** Available 1 Min After the Latest Reap
     6. **Twilight Mercenary**: Instant Reap, Can't be Stolen
-    7. **Exo Gambler**: {}% Chance of Getting {}x or Nothing (can't be stolen)
+    7. **Void Gambler**: {}% Chance of Getting {}x or Nothing (can't be stolen)
     """\
     .format((warrior_buff - 1) * 100,
             mage_reduction_rate * 100,

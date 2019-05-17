@@ -204,8 +204,10 @@ async def reap(ctx):
         if random.random() < GameStat.gamble_chance:
             reap_delay = 0
             added_time *= GameStat.gamble_reward
-            reap_message += '**💰!!!LUCKY COIN ACTIVATED!!!💰**\n Reap Time Increased to {}%!!!\n'\
-                .format(GameStat.gamble_reward * 100)
+            for win in range(10):
+                reap_message += '**💰!!!LUCKY COIN ACTIVATED!!!💰**\n Reap Time Increased to {}%!!!\n'\
+                    .format(GameStat.gamble_reward * 100)
+            DataManager.update_logs_gamble()
         else:
             await bot.say('**LUCKY COIN FAILED**\n Nothing happened\n')
             DataManager.write_players(players, latest_clear)
