@@ -94,6 +94,9 @@ async def start():
 
 @bot.command(pass_context=True)
 async def choose(ctx):
+    if reap_in_progress != 0:
+        await bot.say("Sorry Reap is Currently In Progress\nClass Selection is Temporarily Disabled")
+        return
     players = DataManager.read_players()
     try:
         # Find the current player
@@ -121,6 +124,9 @@ async def choose(ctx):
 
 @bot.command(pass_context=True)
 async def change(ctx):
+    if reap_in_progress != 0:
+        await bot.say("Sorry Reap is Currently In Progress\nClass Selection is Temporarily Disabled")
+        return
     # if await check_player(ctx) is None:
     #    return
     players = DataManager.read_players()
@@ -132,6 +138,10 @@ async def change(ctx):
             await bot.say("<@!{}> is now a **{}**".format(ctx.message.author.id,
                                                           GameStat.class_name[player_class_id]))
         except ValueError:
+            msg = "Sorry I don't understand\nUse t!change <Class #>\n" + GameStat.char_list
+            await bot.say(msg)
+            return
+        except KeyError:
             msg = "Sorry I don't understand\nUse t!change <Class #>\n" + GameStat.char_list
             await bot.say(msg)
             return
@@ -207,10 +217,11 @@ async def reap(ctx):
             for win in range(10):
                 reap_message += '**💰!!!LUCKY COIN ACTIVATED!!!💰**\n Reap Time Increased to {}%!!!\n'\
                     .format(GameStat.gamble_reward * 100)
-            DataManager.update_logs_gamble()
+            DataManager.update_logs_gamble(True)
         else:
             await bot.say('**LUCKY COIN FAILED**\n Nothing happened\n')
             DataManager.write_players(players, latest_clear)
+            DataManager.update_logs_gamble(False, str(author)[:-5], seconds_format(added_time))
             return
 
     DataManager.write_players(players, latest_clear)

@@ -13,11 +13,14 @@ def write_players(players, latest_clear):
                      "\n".join(map(str, sorted(players, key=lambda player: player.reaped_time, reverse=True))))
 
 
-def update_logs_gamble():
+def update_logs_gamble(success, author=None, amount=None):
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
 
-    info = '**!!!-💰-💰-💰-💰-GAMBLE SUCCESS-💰-💰-💰-!!!**\n'
+    if success:
+        info = '**!!!-💰-💰-💰-💰-GAMBLE SUCCESS-💰-💰-💰-!!!**\n'
+    else:
+        info = '{} has failed a **GAMBLE** of {}\n'.format(author, amount)
 
     content = [info] + content
     with open("./data/reapLog.txt", "w", encoding='utf-8') as f:
