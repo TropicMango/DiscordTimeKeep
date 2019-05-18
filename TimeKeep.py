@@ -10,7 +10,7 @@ from DiscordTimeKeep import DataManager
 from DiscordTimeKeep import GameStat
 
 description = '''An bot designed to get time'''
-bot = commands.Bot(command_prefix='t!', description=description)
+bot = commands.Bot(command_prefix='m!', description=description)
 bot.remove_command("help")
 
 maintenance = False
@@ -437,9 +437,20 @@ async def print_leaderboard(channel):
     if notice_message != "":
         await bot.send_message(channel, notice_message)
 
-    players = DataManager.read_players()[:10]
+    embed = generate_leaderboard_embed(1)
+    msg = await bot.send_message(channel, embed=embed)
+    await bot.add_reaction(msg, "\U00002B05")
+    await bot.add_reaction(msg, "\U000027A1")
+
+
+def generate_leaderboard_embed(start_rank):
+    players = DataManager.read_players()[start_rank - 1: start_rank + 9]
     embed = discord.Embed(color=0x42d7f4)
-    embed.title = "The current top {} are:".format(len(players))
+    if start_rank == 1:
+        embed.title = "The Current Top {} Are!!!".format(len(players))
+    else:
+        embed.title = "The {} to {} Place are:".format(start_rank, start_rank + len(players) - 1)
+    embed.set_footer(text="Rank: {} - {}".format(start_rank, start_rank + len(players) - 1))
     for index, player in enumerate(players):
         # Drop the number at the end of the author's name (#NNNN)
         player_title = player.name[:-5]
@@ -447,9 +458,9 @@ async def print_leaderboard(channel):
             if ranked_player == player.name:
                 player_title += " " + GameStat.rank_icon[i]
         player_class_type = GameStat.class_name_short[player.class_type]
-        embed.add_field(name='#{} {}: {}'.format(index + 1, player_class_type, player_title),
+        embed.add_field(name='#{} {}: {}'.format(index + start_rank, player_class_type, player_title),
                         value=seconds_format(player.reaped_time))
-    await bot.send_message(channel, embed=embed)
+    return embed
 
 
 @bot.command()
@@ -459,6 +470,24 @@ async def invite():
         "[Invite me~]" \
         "(https://discordapp.com/api/oauth2/authorize?client_id=538078061682229258&permissions=14336&scope=bot)"
     await bot.say(embed=embed)
+
+
+@bot.event
+async def on_reaction_add(reaction, user):
+    if user.name != bot.user.name:
+        if reaction.message.author.name == bot.user.name:
+            await bot.remove_reaction(reaction.message, reaction.emoji, user)
+
+            footer = reaction.message.embeds[0]["footer"]["text"]
+
+            if str(reaction.emoji) == "➡":
+                embed = generate_leaderboard_embed(int(footer.split()[1]) + 10)
+            elif str(reaction.emoji) == "⬅":
+                if int(footer.split()[1]) - 10 < 1:
+                    return
+                embed = generate_leaderboard_embed(int(footer.split()[1]) - 10)
+
+            await bot.edit_message(reaction.message, embed=embed)
 
 
 @bot.command(pass_context=True)

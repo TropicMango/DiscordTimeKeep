@@ -1,4 +1,5 @@
 **18 Mar 2019**
+    Leaderboard Scroll Added
     Class Change During Reap Disabled
 **16 Mar 2019**
     Patch Notes Added:
