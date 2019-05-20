@@ -1,4 +1,5 @@
 **18 Mar 2019**
+    **Shadowhelm** Became the First to Succeed a Gamble 💰
     Leaderboard Scroll Added
     Class Change During Reap Disabled
 **16 Mar 2019**
@@ -6,7 +7,6 @@
      - Official Documentation of Changes
     Exo Gambler Added:
      - 5% Chance of 25x or Nothing
-     - *💰The First to Succeed a GAMBLE is Rewarded with a Unique Icon💰*
 **14 Mar 2019**
     Twilight Mercenary Added:
      - Instant Reap, Can't be Stolen

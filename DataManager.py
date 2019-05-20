@@ -23,6 +23,8 @@ def update_logs_gamble(success, author=None, amount=None):
         info = '{} has failed a **GAMBLE** of {}\n'.format(author, amount)
 
     content = [info] + content
+    while len(content) > 25:
+        content.pop()
     with open("./data/reapLog.txt", "w", encoding='utf-8') as f:
         f.writelines(content)
 
@@ -37,7 +39,7 @@ def update_logs_reap(author, added_time, class_type, stolen=False):
         info = '{} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
 
     content = [info] + content
-    if len(content) > 20:
+    while len(content) > 25:
         content.pop()
     with open("./data/reapLog.txt", "w", encoding='utf-8') as f:
         f.writelines(content)

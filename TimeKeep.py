@@ -10,7 +10,7 @@ from DiscordTimeKeep import DataManager
 from DiscordTimeKeep import GameStat
 
 description = '''An bot designed to get time'''
-bot = commands.Bot(command_prefix='m!', description=description)
+bot = commands.Bot(command_prefix='t!', description=description)
 bot.remove_command("help")
 
 maintenance = False
@@ -232,10 +232,14 @@ async def reap(ctx):
     await bot.change_presence(game=discord.Game(name='⚔️Reaping: {}'.format("{}H {}M {}S".format(*hms(added_time)))))
     while reap_delay > 0:
         if reap_in_progress != 0:
-            await asyncio.sleep(1)
-            reap_delay -= 1
-            await bot.edit_message(reap_lockin_message, "Reap Initiated, Will be Completed in {} Seconds"
-                                                        "".format(reap_delay))
+            await asyncio.sleep(5)
+            reap_delay -= 5
+            try:
+                await bot.edit_message(reap_lockin_message, "Reap Initiated, Will be Completed in {} Seconds"
+                                                            "".format(reap_delay))
+            except discord.ext.commands.errors.CommandInvokeError:
+                await bot.say("Reap Initiated, Will be Completed in {} Seconds"
+                              "".format(reap_delay))
         else:
             await bot.edit_message(reap_lockin_message, "<@!{}> Your Reap Has Been *STOLEN* by {}"
                                    .format(player.id, str(thief_id)[:-5]))
@@ -445,6 +449,8 @@ async def print_leaderboard(channel):
 
 def generate_leaderboard_embed(start_rank):
     players = DataManager.read_players()[start_rank - 1: start_rank + 9]
+    if len(players) == 0:
+        return None
     embed = discord.Embed(color=0x42d7f4)
     if start_rank == 1:
         embed.title = "The Current Top {} Are!!!".format(len(players))
@@ -486,8 +492,8 @@ async def on_reaction_add(reaction, user):
                 if int(footer.split()[1]) - 10 < 1:
                     return
                 embed = generate_leaderboard_embed(int(footer.split()[1]) - 10)
-
-            await bot.edit_message(reaction.message, embed=embed)
+            if embed is not None:
+                await bot.edit_message(reaction.message, embed=embed)
 
 
 @bot.command(pass_context=True)
