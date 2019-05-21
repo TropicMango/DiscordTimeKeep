@@ -1,3 +1,5 @@
+**20 May 2019**
+    t!info #rank introduced
 **18 May 2019**
     **Shadowhelm** Became the First to Succeed a Gamble 💰
     Leaderboard Scroll Added

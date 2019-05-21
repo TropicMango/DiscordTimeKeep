@@ -33,7 +33,7 @@ help_str = """Current Available Commands
                **t!me:** See How Much Time You Reaped
                **t!leaderboard / b:** Shows Who's Top 10
                **t!log:** Shows Who Recently Reaped
-               **t!info @player:** Get Player Info
+               **t!info @player / #rank:** Get Player Info
                **t!pn** Get Patch Notes
                **t!invite:** Invite Me :heart:"""
 

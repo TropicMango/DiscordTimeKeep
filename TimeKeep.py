@@ -10,7 +10,7 @@ from DiscordTimeKeep import DataManager
 from DiscordTimeKeep import GameStat
 
 description = '''An bot designed to get time'''
-bot = commands.Bot(command_prefix='t!', description=description)
+bot = commands.Bot(command_prefix=SecretFile.get_command_prefix(), description=description)
 bot.remove_command("help")
 
 maintenance = False
@@ -345,34 +345,49 @@ async def check_player(ctx):
 
 @bot.command(pass_context=True)
 async def info(ctx):
-    if '@' not in ctx.message.content:
+    if '@' in ctx.message.content:
+        user_id = ctx.message.content.split('@')[1][:-1]
+        if user_id[0] == '!':
+            user_id = user_id[1:]
+        await print_info(ctx.message.channel, user_id=user_id)
+    elif '#' in ctx.message.content:
+        user_rank = ctx.message.content.split('#')[1]
+        await print_info(ctx.message.channel, user_rank=user_rank)
+    else:
         await bot.say("Sorry I don't understand\nUse t!info @player or t!me")
         return
-    user_id = ctx.message.content.split('@')[1][:-1]
-    if user_id[0] == '!':
-        user_id = user_id[1:]
-    await print_info(ctx.message.channel, user_id)
 
 
 @bot.command(pass_context=True)
 async def me(ctx):
-    author_id = ctx.message.author.id
-    await print_info(ctx.message.channel, author_id)
+    user_id = ctx.message.author.id
+    await print_info(ctx.message.channel, user_id=user_id)
 
 
-async def print_info(channel, author_id):
+async def print_info(channel, user_id=0, user_rank=0):
     if notice_message != "":
         await bot.send_message(channel, notice_message)
 
     players = DataManager.read_players()
-    try:
-        # Find the current player
-        index, player = next((index, player) for index, player in enumerate(players) if player.id == author_id)
-    except StopIteration:
-        # Player doesn't exist in our logs, so tell them to reap
-        await bot.send_message(channel, """<@!{}> has stored 0 seconds
-                            use t!reap to get started""".format(author_id))
-        return
+    if user_id != 0:
+        try:
+            # Find the current player
+            index, player = next((index, player) for index, player in enumerate(players) if player.id == user_id)
+        except StopIteration:
+            # Player doesn't exist in our logs, so tell them to reap
+            await bot.send_message(channel, """<@!{}> has stored 0 seconds
+                                use t!reap to get started""".format(user_id))
+            return
+    elif user_rank != 0:
+        user_rank = int(user_rank)
+        try:
+            # Find the current player
+            index, player = next((index, player) for index, player in enumerate(players) if index+1 == user_rank)
+        except StopIteration:
+            # Player doesn't exist in our logs, so tell them to reap
+            await bot.send_message(channel, """<@!{}> has stored 0 seconds
+                                use t!reap to get started""".format(user_id))
+            return
 
     current_time = float(time.time())
     if current_time < player.next_reap:
@@ -382,15 +397,18 @@ async def print_info(channel, author_id):
 
     average_reap = seconds_format(0 if (player.reap_count == 0) else player.reaped_time / player.reap_count)
     # in case of div by zero
-    await bot.send_message(channel, "Stats of <@!{}>\n"
-                                    "```"
-                                    "Class: {}\n"
-                                    "Rank: {}\nStored Time: {}\nAverage Reap: {}\n"
-                                    "Reap Count: {}\nNext Reap: {}\n"
-                                    "```"
-                           .format(author_id, GameStat.class_name[player.class_type], index + 1,
-                                   seconds_format(player.reaped_time), average_reap,
-                                   int(player.reap_count), next_reap))
+    embed = discord.Embed(color=0xfc795c)
+    embed.add_field(name="Stats of *{}*" .format(player.name[:-5]), value="""
+    **Class:** {}
+    **Rank:** {}
+    **Stored Time:** {}
+    **Average Reap:** {}
+    **Reap Count:** {}
+    **Next Reap:** {}
+    """.format(GameStat.class_name[player.class_type], index + 1,
+               seconds_format(player.reaped_time), average_reap,
+               int(player.reap_count), next_reap))
+    await bot.say(embed=embed)
 
 
 @bot.command()
@@ -464,7 +482,7 @@ def generate_leaderboard_embed(start_rank):
             if ranked_player == player.name:
                 player_title += " " + GameStat.rank_icon[i]
         player_class_type = GameStat.class_name_short[player.class_type]
-        embed.add_field(name='#{} {}: {}'.format(index + start_rank, player_class_type, player_title),
+        embed.add_field(name='*#{}* {}: {}'.format(index + start_rank, player_class_type, player_title),
                         value=seconds_format(player.reaped_time))
     return embed
 

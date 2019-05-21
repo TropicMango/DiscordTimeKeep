@@ -1,4 +1,6 @@
 
 SecretFile.py
 data/playerData.txt
+
 data/reapLog.txt
+*.pyc
