@@ -1,15 +1,15 @@
-**18 Mar 2019**
+**18 May 2019**
     **Shadowhelm** Became the First to Succeed a Gamble 💰
     Leaderboard Scroll Added
     Class Change During Reap Disabled
-**16 Mar 2019**
+**16 May 2019**
     Patch Notes Added:
      - Official Documentation of Changes
     Exo Gambler Added:
      - 5% Chance of 25x or Nothing
-**14 Mar 2019**
+**14 May 2019**
     Twilight Mercenary Added:
      - Instant Reap, Can't be Stolen
-**12 Mar 2019**
+**12 May 2019**
     Season 4 Begin
      - Class System Introduced

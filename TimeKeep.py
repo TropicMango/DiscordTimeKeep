@@ -237,9 +237,9 @@ async def reap(ctx):
             try:
                 await bot.edit_message(reap_lockin_message, "Reap Initiated, Will be Completed in {} Seconds"
                                                             "".format(reap_delay))
-            except discord.ext.commands.errors.CommandInvokeError:
-                await bot.say("Reap Initiated, Will be Completed in {} Seconds"
-                              "".format(reap_delay))
+            except discord.errors.NotFound:
+                reap_lockin_message = await bot.say("Reap Initiated, Will be Completed in {} Seconds"
+                                                    "".format(reap_delay))
         else:
             await bot.edit_message(reap_lockin_message, "<@!{}> Your Reap Has Been *STOLEN* by {}"
                                    .format(player.id, str(thief_id)[:-5]))
