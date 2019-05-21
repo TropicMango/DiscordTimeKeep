@@ -1,4 +1,9 @@
 **20 May 2019**
+    Blue Shell Added:
+     - 1% chance of launching upon reap
+     - 100% reap time as damage for 1st
+     - 75% reap time as damage for 2nd
+     - 50% reap time as damage for 3rd
     t!info #rank introduced
 **18 May 2019**
     **Shadowhelm** Became the First to Succeed a Gamble 💰

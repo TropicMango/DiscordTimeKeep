@@ -248,13 +248,25 @@ async def reap(ctx):
     await bot.edit_message(reap_lockin_message, "Reap Successful")
 
     reap_in_progress = 0
-
     # --------------------- Store Data ------------------
     player.reaped_time = math.floor(player.reaped_time + added_time)
     reap_message += '<@!{}> has added **{}** to their total\n' \
-                    'Adding up to be **{}**\nNext reap in **{}**'\
+                    'Adding up to be **{}**\nNext reap in **{}**\n'\
         .format(author.id, seconds_format(added_time), seconds_format(player.reaped_time),
                 "{} hours and {} minutes".format(*hms(player.next_reap - current_time)))
+
+    # --------------------- Roll Shell ------------------
+    if random.random() < GameStat.blue_shell_chance and len(players) > 3:
+        reap_message += "\n{} BLUE SHELL ACTIVATED {}\n**{}** dealt to *{}*\n**{}** dealt to *{}*\n**{}** dealt to *{}*"\
+            .format(GameStat.blue_shell_icon, GameStat.blue_shell_icon,
+                    seconds_format(added_time), players[0].name,
+                    seconds_format(added_time * 0.75), players[1].name,
+                    seconds_format(added_time * 0.5), players[2].name)
+        players[0].reaped_time -= added_time
+        players[1].reaped_time -= added_time * 0.75
+        players[2].reaped_time -= added_time * 0.5
+        DataManager.update_logs_shell(str(author)[:-5], seconds_format(added_time))
+
     await bot.say(reap_message)
     # Strip out the last five characters (the #NNNN part)
     DataManager.update_logs_reap(str(author)[:-5], seconds_format(added_time), player.class_type)

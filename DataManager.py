@@ -13,6 +13,20 @@ def write_players(players, latest_clear):
                      "\n".join(map(str, sorted(players, key=lambda player: player.reaped_time, reverse=True))))
 
 
+def update_logs_shell(author, added_time):
+    with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
+        content = f.readlines()
+
+    info = '<:Blue_Shell:580276103491485701> {} has activated a blue shell <:Blue_Shell:580276103491485701>\n'\
+        .format(author)
+
+    content = [info] + content
+    while len(content) > 25:
+        content.pop()
+    with open("./data/reapLog.txt", "w", encoding='utf-8') as f:
+        f.writelines(content)
+
+
 def update_logs_gamble(success, author=None, amount=None):
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()

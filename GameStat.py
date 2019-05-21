@@ -7,6 +7,9 @@ gamble_chance = 0.05
 gamble_reward = 25
 reap_cooldown = 21600  # reap_cooldown = 21600
 
+blue_shell_chance = 0.01
+blue_shell_icon = '<:Blue_Shell:580276103491485701>'
+
 class_name = {1: "Chrono Warrior", 2: "Time Mage",
               3: "Space-Time Hunter", 4: "Thousand Year Fairy",
               5: "Dimensional Bandit", 6: "Twilight Mercenary",
