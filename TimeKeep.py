@@ -354,7 +354,7 @@ async def info(ctx):
         user_rank = ctx.message.content.split('#')[1]
         await print_info(ctx.message.channel, user_rank=user_rank)
     else:
-        await bot.say("Sorry I don't understand\nUse t!info @player or t!me")
+        await bot.say("Sorry I don't understand\nUse t!info @player or t!info #<rank> or t!me")
         return
 
 
