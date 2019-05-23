@@ -94,70 +94,63 @@ async def start():
 
 @bot.command(pass_context=True)
 async def choose(ctx):
-    if reap_in_progress != 0:
-        await bot.say("Sorry Reap is Currently In Progress\nClass Selection is Temporarily Disabled")
-        return
-    players = DataManager.read_players()
-    try:
-        # Find the current player
-        next(player for player in players if player.id == ctx.message.author.id)
-        await bot.say("Sorry you have already chosen your class \n"
-                      "However class change is a available with **t!change <class #>**")
-        return
-    except StopIteration:
-        # Player doesn't exist in our logs, so tell them to reap
-        try:
-            player_class_id = (int(ctx.message.content[9:]))
-            await bot.say("<@!{}> is now a **{}**".format(ctx.message.author.id,
-                                                          GameStat.class_name[player_class_id]))
-        except ValueError:
-            msg = "Sorry I don't understand\nUse t!choose <Class #>\n" + GameStat.char_list
-            await bot.say(msg)
-            return
-
-        author = ctx.message.author
-        player = GameStat.Player("{}|{}|{}|{}|{}|{}".format(author.id, author, 0, 0, 0, player_class_id))
-        players.append(player)
-        DataManager.write_players(players, latest_clear)
-        DataManager.update_logs_class(str(player.name)[:-5], GameStat.class_name[player_class_id])
+    await class_selection(ctx)
 
 
 @bot.command(pass_context=True)
 async def change(ctx):
+    await class_selection(ctx)
+
+
+async def class_selection(ctx):
     if reap_in_progress != 0:
         await bot.say("Sorry Reap is Currently In Progress\nClass Selection is Temporarily Disabled")
         return
-    # if await check_player(ctx) is None:
-    #    return
+
+    try:
+        player_class_id = (int(ctx.message.content[9:]))
+        if player_class_id == 8:
+            msg = await bot.say("<@!{}> **Abyssal Voyager Warning: **\n"
+                                "One Look into the Abyss and There Will be no Turning Back\n"
+                                "(Class Change Will be Disabled)\n**Is {} Ready to Venture Into the Abyss**"
+                                "".format(ctx.message.author.id, str(ctx.message.author)[:-5]))
+            await bot.add_reaction(msg, "✅")
+            await bot.add_reaction(msg, "❎")
+            return
+    except (ValueError, KeyError):
+        msg = "Sorry I don't understand\nUse t!choose / t!change <Class #>\n" + GameStat.char_list
+        await bot.say(msg)
+        return
+    if change_player_class(ctx.message.author.id, ctx.message.author, player_class_id):
+        await bot.say("<@!{}> is now a **{}**".format(ctx.message.author.id, GameStat.class_name[player_class_id]))
+    else:
+        await bot.say("<@!{}> Sorry Abyssal Voyage is Never Ending"
+                      "\nClass Change Cancelled".format(ctx.message.author.id))
+
+
+def change_player_class(author_id, author_name, player_class_id):
     players = DataManager.read_players()
     try:
         # Find the current player
-        player = next(player for player in players if player.id == ctx.message.author.id)
-        try:
-            player_class_id = (int(ctx.message.content[9:]))
-            await bot.say("<@!{}> is now a **{}**".format(ctx.message.author.id,
-                                                          GameStat.class_name[player_class_id]))
-        except ValueError:
-            msg = "Sorry I don't understand\nUse t!change <Class #>\n" + GameStat.char_list
-            await bot.say(msg)
-            return
-        except KeyError:
-            msg = "Sorry I don't understand\nUse t!change <Class #>\n" + GameStat.char_list
-            await bot.say(msg)
-            return
+        player = next(player for player in players if player.id == author_id)
+        if player.class_type == 8:
+            return False
 
-        player.name = ctx.message.author
+        player.name = str(author_name)[:-5]
         player.class_type = player_class_id
         if player.class_type == 2:
             player.next_reap = time.time() + GameStat.reap_cooldown * (1 - GameStat.mage_reduction_rate)
         else:
             player.next_reap = time.time() + GameStat.reap_cooldown
         DataManager.write_players(players, latest_clear)
-        DataManager.update_logs_class(str(player.name)[:-5], GameStat.class_name[player_class_id], True)
+        DataManager.update_logs_class(player.name, GameStat.class_name[player_class_id], True)
     except StopIteration:
-        # Player doesn't exist in our logs, so tell them to reap
-        await bot.say("Sorry But You Haven't Been Assigned a Class Yet \nUse **t!start** to get started")
-        return
+        # Player doesn't exist in our logs
+        player = GameStat.Player("{}|{}|{}|{}|{}|{}".format(author_id, author_name, 0, 0, 0, player_class_id))
+        players.append(player)
+        DataManager.write_players(players, latest_clear)
+        DataManager.update_logs_class(player.name, GameStat.class_name[player_class_id])
+    return True
 
 
 @bot.command(pass_context=True)
@@ -180,7 +173,7 @@ async def reap(ctx):
     author = ctx.message.author
     player.reap_count += 1
     player.next_reap = current_time + GameStat.reap_cooldown
-    player.name = str(author)
+    player.name = str(author)[:-5]
     reap_delay = 60
 
     # --------------------- Unique Class Passive ------------------
@@ -214,14 +207,28 @@ async def reap(ctx):
         if random.random() < GameStat.gamble_chance:
             reap_delay = 0
             added_time *= GameStat.gamble_reward
-            for win in range(10):
+            for win in range(3):
                 reap_message += '**💰!!!LUCKY COIN ACTIVATED!!!💰**\n Reap Time Increased to {}%!!!\n'\
                     .format(GameStat.gamble_reward * 100)
-            DataManager.update_logs_gamble(True)
+            DataManager.update_logs_win(True, "GAMBLE")
         else:
             await bot.say('**LUCKY COIN FAILED**\n Nothing happened\n')
             DataManager.write_players(players, latest_clear)
-            DataManager.update_logs_gamble(False, str(author)[:-5], seconds_format(added_time))
+            DataManager.update_logs_win(False, "GAMBLE", str(author)[:-5], seconds_format(added_time))
+            return
+
+    elif player.class_type == 8:
+        if random.random() < GameStat.voyage_chance:
+            reap_delay = 0
+            added_time *= GameStat.voyage_reward
+            for win in range(20):
+                reap_message += '**🌌!!!ABYSSAL VOYAGE SUCCESSFUL!!!🌌**\n Reap Time Increased to {}%!!!\n'\
+                    .format(GameStat.voyage_reward * 100)
+            DataManager.update_logs_win(True, "VOYAGE")
+        else:
+            await bot.say('**ABYSSAL VOYAGE FAILED**\n🌌There is Nothing in the Abyss🌌\n')
+            DataManager.write_players(players, latest_clear)
+            DataManager.update_logs_win(False, "VOYAGE", str(author)[:-5], seconds_format(added_time))
             return
 
     DataManager.write_players(players, latest_clear)
@@ -304,7 +311,7 @@ async def steal(ctx):
     player.reaped_time += reap_in_progress
     player.reap_count += 1
     player.next_reap = current_time + GameStat.reap_cooldown
-    player.name = str(author)
+    player.name = str(author)[:-5]
     reap_message = '<@!{}> has *STOLEN* **{}** to their total\n' \
                    'Adding up to be **{}**\nNext reap in **{}**' \
         .format(author.id, seconds_format(reap_in_progress), seconds_format(player.reaped_time),
@@ -410,7 +417,7 @@ async def print_info(channel, user_id=0, user_rank=0):
     average_reap = seconds_format(0 if (player.reap_count == 0) else player.reaped_time / player.reap_count)
     # in case of div by zero
     embed = discord.Embed(color=0xfc795c)
-    embed.add_field(name="Stats of *{}*" .format(player.name[:-5]), value="""
+    embed.add_field(name="Stats of *{}*" .format(player.name), value="""
     **Class:** {}
     **Rank:** {}
     **Stored Time:** {}
@@ -473,8 +480,8 @@ async def print_leaderboard(channel):
 
     embed = generate_leaderboard_embed(1)
     msg = await bot.send_message(channel, embed=embed)
-    await bot.add_reaction(msg, "\U00002B05")
-    await bot.add_reaction(msg, "\U000027A1")
+    await bot.add_reaction(msg, "⬅")
+    await bot.add_reaction(msg, "➡")
 
 
 def generate_leaderboard_embed(start_rank):
@@ -489,11 +496,11 @@ def generate_leaderboard_embed(start_rank):
     embed.set_footer(text="Rank: {} - {}".format(start_rank, start_rank + len(players) - 1))
     for index, player in enumerate(players):
         # Drop the number at the end of the author's name (#NNNN)
-        player_title = player.name[:-5]
+        player_title = player.name
         for i, ranked_player in enumerate(GameStat.teir_list):
-            if ranked_player == player.name:
+            if ranked_player == player.id:
                 player_title += " " + GameStat.rank_icon[i]
-        if player.name == "Shadowhelm#3741":
+        if player.id == "117388990729945096":
             player_title += " <:Gamble:580329443374006282>"
         player_class_type = GameStat.class_name_short[player.class_type]
         embed.add_field(name='*#{}* {}: {}'.format(index + start_rank, player_class_type, player_title),
@@ -514,18 +521,28 @@ async def invite():
 async def on_reaction_add(reaction, user):
     if user.name != bot.user.name:
         if reaction.message.author.name == bot.user.name:
-            await bot.remove_reaction(reaction.message, reaction.emoji, user)
+            if reaction.message.content.startswith("<@!"):  # this should be a player
+                if str(reaction.emoji) == "✅":
+                    change_player_class(reaction.message.content[3:21], reaction.message.content[148:-34] + "#1234", 8)
+                    await bot.send_message(reaction.message.channel,
+                                           "<@!{}> is now a **{}**".format(reaction.message.content[3:21],
+                                                                           GameStat.class_name[8]))
+                else:
+                    await bot.send_message(reaction.message.channel, "Class Change Cancelled")
+                await bot.delete_message(reaction.message)
+            else:  # this should be a leaderboard msg
+                await bot.remove_reaction(reaction.message, reaction.emoji, user)
 
-            footer = reaction.message.embeds[0]["footer"]["text"]
+                footer = reaction.message.embeds[0]["footer"]["text"]
 
-            if str(reaction.emoji) == "➡":
-                embed = generate_leaderboard_embed(int(footer.split()[1]) + 10)
-            elif str(reaction.emoji) == "⬅":
-                if int(footer.split()[1]) - 10 < 1:
-                    return
-                embed = generate_leaderboard_embed(int(footer.split()[1]) - 10)
-            if embed is not None:
-                await bot.edit_message(reaction.message, embed=embed)
+                if str(reaction.emoji) == "➡":
+                    embed = generate_leaderboard_embed(int(footer.split()[1]) + 10)
+                elif str(reaction.emoji) == "⬅":
+                    if int(footer.split()[1]) - 10 < 1:
+                        return
+                    embed = generate_leaderboard_embed(int(footer.split()[1]) - 10)
+                if embed is not None:
+                    await bot.edit_message(reaction.message, embed=embed)
 
 
 @bot.command(pass_context=True)

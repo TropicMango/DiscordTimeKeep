@@ -17,7 +17,7 @@ def update_logs_shell(author, added_time):
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
 
-    info = '<:Blue_Shell:580276103491485701> {} has activated a blue shell <:Blue_Shell:580276103491485701>\n'\
+    info = '***Blue Shell:*** {} has activated a blue shell ^ ^ ^\n'\
         .format(author)
 
     content = [info] + content
@@ -27,14 +27,14 @@ def update_logs_shell(author, added_time):
         f.writelines(content)
 
 
-def update_logs_gamble(success, author=None, amount=None):
+def update_logs_win(success, type, author=None, amount=None):
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
 
     if success:
         info = '**!!!-💰-💰-💰-💰-GAMBLE SUCCESS-💰-💰-💰-!!!**\n'
     else:
-        info = '{} has failed a **GAMBLE** of {}\n'.format(author, amount)
+        info = '***GAMBLE*** - {} failed by **{}**\n'.format(amount, author)
 
     content = [info] + content
     while len(content) > 25:
@@ -48,9 +48,9 @@ def update_logs_reap(author, added_time, class_type, stolen=False):
         content = f.readlines()
 
     if stolen:
-        info = '{} - ***STOLEN*** by **{}**\n'.format(added_time, author)
+        info = '***REAP*** - {} - *STOLEN* by **{}**\n'.format(added_time, author)
     else:
-        info = '{} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
+        info = '***REAP*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
 
     content = [info] + content
     while len(content) > 25:
@@ -64,9 +64,9 @@ def update_logs_class(author, class_type, change=False):
         content = f.readlines()
 
     if change:
-        info = 'Class change: **{}** is now a *{}*\n'.format(author, class_type)
+        info = '***Class Change:*** *{}* is now a *{}*\n'.format(author, class_type)
     else:
-        info = '**{}** joined the arena as a *{}*\n'.format(author, class_type)
+        info = '***New Player:*** *{}* joined the arena as a *{}*\n'.format(author, class_type)
 
     content = [info] + content
     if len(content) > 10:

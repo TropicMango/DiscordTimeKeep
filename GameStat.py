@@ -5,8 +5,10 @@ hunter_crit_rate = 0.25
 hunter_crit_dmg = 2
 mage_reduction_rate = 0.25
 fairy_boost = 15
-gamble_chance = 0.05
-gamble_reward = 25
+gamble_chance = 0.125
+gamble_reward = 10
+voyage_chance = 0.01
+voyage_reward = 150
 reap_cooldown = 21600  # reap_cooldown = 21600
 
 blue_shell_chance = 0.05
@@ -15,16 +17,16 @@ blue_shell_icon = '<:Blue_Shell:580276103491485701>'
 class_name = {1: "Chrono Warrior", 2: "Time Mage",
               3: "Space-Time Hunter", 4: "Thousand Year Fairy",
               5: "Dimensional Bandit", 6: "Twilight Mercenary",
-              7: "Void Gambler"}
+              7: "Void Gambler", 8: "Abyssal Voyager"}
 
 class_name_short = {1: "Warrior", 2: "Mage",
                     3: "Hunter", 4: "Fairy",
                     5: "Bandit", 6: "Merc",
-                    7: "Gambler"}
+                    7: "Gambler", 8: "Voyager"}
 
-teir_list = ['Soap#3672', 'Porolific#3003',
-             'LuxuFate#8990', 'Tropic Mango#6755',
-             'Howyu#7873', 'Whispyr#0001']
+teir_list = ['137016970917707776', '195755433766420480',
+             '219324654290993153', '297971074518351872',
+             '229808879356215296', '167090536602140682']
 
 rank_icon = ['<:Challenger_Rank:559574999149838377>', '<:Diamond_Rank:559575017885532194>',
              '<:Plat_Rank:559575046516113423>', '<:Gold_Rank:559575070670848001>',
@@ -51,13 +53,14 @@ char_list = """
      - Bandit Only - **t!steal:** Available 1 Min After the Latest Reap
     6. **Twilight Mercenary**: Instant Reap, Can't be Stolen
     7. **Void Gambler**: {}% Chance of Getting {}x or Nothing (can't be stolen)
+    8. **Abyssal Voyager**: Like Void Gambler but {}% for {}x 
     """\
     .format((warrior_buff - 1) * 100,
             mage_reduction_rate * 100,
             hunter_crit_rate * 100,
             fairy_boost,
-            gamble_chance * 100,
-            gamble_reward)
+            gamble_chance * 100, gamble_reward,
+            voyage_chance * 100, voyage_reward)
 
 
 start_str = """"Welcome to the Arena of Time,

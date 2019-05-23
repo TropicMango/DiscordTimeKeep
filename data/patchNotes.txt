@@ -1,5 +1,12 @@
-**22 May 2019**
+**23 May 2019**
     Blue Shell Buffed to 5% Chance of Activation
+    Log System Reformatted
+    Void Gambler Adjust:
+     - 12.5% Chance of 10x
+    Abyssal Voyager Added:
+     - 1% Chance of 150x
+     - There might be no turning back
+     - Can't be stolen
 **20 May 2019**
     Blue Shell Added <:Blue_Shell:580276103491485701>:
      - 1% Chance of Launching Upon Reap
@@ -7,13 +14,13 @@
      - 75% and 50% for 2nd and 3rd
     t!info #rank Introduced
 **18 May 2019**
-    **Shadowhelm** Became the First to Succeed a Gamble 💰
+    **Shadowhelm** Became the First to Succeed a 5% Gamble 💰
     Leaderboard Scroll Added
     Class Change During Reap Disabled
 **16 May 2019**
     Patch Notes Added:
      - Official Documentation of Changes
-    Exo Gambler Added:
+    Void Gambler Added:
      - 5% Chance of 25x or Nothing
 **14 May 2019**
     Twilight Mercenary Added:
