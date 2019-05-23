@@ -493,6 +493,8 @@ def generate_leaderboard_embed(start_rank):
         for i, ranked_player in enumerate(GameStat.teir_list):
             if ranked_player == player.name:
                 player_title += " " + GameStat.rank_icon[i]
+        if player.name == "Shadowhelm#3741":
+            player_title += " <:Gamble:580329443374006282>"
         player_class_type = GameStat.class_name_short[player.class_type]
         embed.add_field(name='*#{}* {}: {}'.format(index + start_rank, player_class_type, player_title),
                         value=seconds_format(player.reaped_time))

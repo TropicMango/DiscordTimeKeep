@@ -1,3 +1,5 @@
+game_update_str = '**UPDATE** new patch released, use t!pn for more information~'
+
 warrior_buff = 1.25
 hunter_crit_rate = 0.25
 hunter_crit_dmg = 2
@@ -7,7 +9,7 @@ gamble_chance = 0.05
 gamble_reward = 25
 reap_cooldown = 21600  # reap_cooldown = 21600
 
-blue_shell_chance = 0.01
+blue_shell_chance = 0.05
 blue_shell_icon = '<:Blue_Shell:580276103491485701>'
 
 class_name = {1: "Chrono Warrior", 2: "Time Mage",

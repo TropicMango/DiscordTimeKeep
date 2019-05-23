@@ -1,10 +1,11 @@
+**22 May 2019**
+    Blue Shell Buffed to 5% Chance of Activation
 **20 May 2019**
-    Blue Shell Added:
-     - 1% chance of launching upon reap
-     - 100% reap time as damage for 1st
-     - 75% reap time as damage for 2nd
-     - 50% reap time as damage for 3rd
-    t!info #rank introduced
+    Blue Shell Added <:Blue_Shell:580276103491485701>:
+     - 1% Chance of Launching Upon Reap
+     - 100% Reap Time as damage for 1st
+     - 75% and 50% for 2nd and 3rd
+    t!info #rank Introduced
 **18 May 2019**
     **Shadowhelm** Became the First to Succeed a Gamble 💰
     Leaderboard Scroll Added
