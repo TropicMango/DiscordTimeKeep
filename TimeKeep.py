@@ -210,9 +210,12 @@ async def reap(ctx):
             for win in range(3):
                 reap_message += '**💰!!!LUCKY COIN ACTIVATED!!!💰**\n Reap Time Increased to {}%!!!\n'\
                     .format(GameStat.gamble_reward * 100)
-            DataManager.update_logs_win(True, "GAMBLE")
+            # DataManager.update_logs_win(True, "GAMBLE")
         else:
-            await bot.say('**LUCKY COIN FAILED**\n Nothing happened\n')
+            msg = '**LUCKY COIN FAILED**\n{} Minutes has Been Lost\n'.format(GameStat.gamble_cost) \
+                  + roll_shell(added_time, players)
+            player.reaped_time -= GameStat.gamble_cost * 60
+            await bot.say(msg)
             DataManager.write_players(players, latest_clear)
             DataManager.update_logs_win(False, "GAMBLE", str(author)[:-5], seconds_format(added_time))
             return
@@ -226,7 +229,8 @@ async def reap(ctx):
                     .format(GameStat.voyage_reward * 100)
             DataManager.update_logs_win(True, "VOYAGE")
         else:
-            await bot.say('**ABYSSAL VOYAGE FAILED**\n🌌There is Nothing in the Abyss🌌\n')
+            msg = '**ABYSSAL VOYAGE FAILED**\n🌌There is Nothing in the Abyss🌌\n' + roll_shell(added_time, players)
+            await bot.say(msg)
             DataManager.write_players(players, latest_clear)
             DataManager.update_logs_win(False, "VOYAGE", str(author)[:-5], seconds_format(added_time))
             return
@@ -263,16 +267,7 @@ async def reap(ctx):
                 "{} hours and {} minutes".format(*hms(player.next_reap - current_time)))
 
     # --------------------- Roll Shell ------------------
-    if random.random() < GameStat.blue_shell_chance and len(players) > 3:
-        reap_message += "\n{} BLUE SHELL ACTIVATED {}\n**{}** dealt to *{}*\n**{}** dealt to *{}*\n**{}** dealt to *{}*"\
-            .format(GameStat.blue_shell_icon, GameStat.blue_shell_icon,
-                    seconds_format(added_time), players[0].name,
-                    seconds_format(added_time * 0.75), players[1].name,
-                    seconds_format(added_time * 0.5), players[2].name)
-        players[0].reaped_time -= added_time
-        players[1].reaped_time -= added_time * 0.75
-        players[2].reaped_time -= added_time * 0.5
-        DataManager.update_logs_shell(str(author)[:-5], seconds_format(added_time))
+    reap_message += roll_shell(added_time, players)
 
     await bot.say(reap_message)
     # Strip out the last five characters (the #NNNN part)
@@ -283,6 +278,21 @@ async def reap(ctx):
     print("reap by {} with {}".format(author, math.floor(added_time)))
     # await start_timer()
     await update_time_status()
+
+
+def roll_shell(added_time, players):
+    reap_message = ""
+    if random.random() < GameStat.blue_shell_chance and len(players) > 3:
+        reap_message += "\n{} BLUE SHELL ACTIVATED {}\n**{}** dealt to *{}*\n**{}** dealt to *{}*\n**{}** dealt to *{}*"\
+            .format(GameStat.blue_shell_icon, GameStat.blue_shell_icon,
+                    seconds_format(added_time), players[0].name,
+                    seconds_format(added_time * 0.75), players[1].name,
+                    seconds_format(added_time * 0.5), players[2].name)
+        players[0].reaped_time -= added_time
+        players[1].reaped_time -= added_time * 0.75
+        players[2].reaped_time -= added_time * 0.5
+        DataManager.update_logs_shell(str(author)[:-5], seconds_format(added_time))
+    return reap_message
 
 
 @bot.command(pass_context=True)
@@ -360,6 +370,11 @@ async def check_player(ctx):
         return None
 
     return player, players
+
+
+@bot.command()
+async def c():
+    await bot.say(" " + GameStat.char_list)
 
 
 @bot.command(pass_context=True)
@@ -522,7 +537,7 @@ async def on_reaction_add(reaction, user):
     if user.name != bot.user.name:
         if reaction.message.author.name == bot.user.name:
             if reaction.message.content.startswith("<@!"):  # this should be a player
-                if str(reaction.emoji) == "✅":
+                if str(reaction.emoji) == "✅" and reaction.message.content[3:21] == str(user.id):
                     change_player_class(reaction.message.content[3:21], reaction.message.content[148:-34] + "#1234", 8)
                     await bot.send_message(reaction.message.channel,
                                            "<@!{}> is now a **{}**".format(reaction.message.content[3:21],

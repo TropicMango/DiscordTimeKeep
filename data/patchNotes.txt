@@ -1,8 +1,15 @@
+**24 May 2019**
+    Void Gambler Nerf:
+     - Now cost 15 Min per gamble
+     - Reap reward is now instant
+    Abyssal Voyager Nerf:
+     - Chance of success lowered to 0.5%
 **23 May 2019**
     Blue Shell Buffed to 5% Chance of Activation
     Log System Reformatted
     Void Gambler Adjust:
      - 12.5% Chance of 10x
+     - Now Takes 60s To Reap (can be stolen)
     Abyssal Voyager Added:
      - 1% Chance of 150x
      - There might be no turning back
@@ -14,7 +21,7 @@
      - 75% and 50% for 2nd and 3rd
     t!info #rank Introduced
 **18 May 2019**
-    **Shadowhelm** Became the First to Succeed a 5% Gamble 💰
+    *Shadowhelm* Became the First to Succeed a 5% Gamble 💰
     Leaderboard Scroll Added
     Class Change During Reap Disabled
 **16 May 2019**

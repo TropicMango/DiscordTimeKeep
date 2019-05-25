@@ -7,7 +7,8 @@ mage_reduction_rate = 0.25
 fairy_boost = 15
 gamble_chance = 0.125
 gamble_reward = 10
-voyage_chance = 0.01
+gamble_cost = 15
+voyage_chance = 0.005
 voyage_reward = 150
 reap_cooldown = 21600  # reap_cooldown = 21600
 
@@ -45,21 +46,21 @@ help_str = """Current Available Commands
                **t!invite:** Invite Me :heart:"""
 
 char_list = """
-    1. **Chrono Warrior**: bonus {}% Time Reaped
-    2. **Time Mage**: {}% Faster Reap Cooldown
-    3. **Space-Time Hunter**: {}% Chance to Crit
-    4. **Thousand Year Fairy**: Bonus {} Min per Reap
-    5. **Dimensional Bandit**: Gains a *steal* ability
-     - Bandit Only - **t!steal:** Available 1 Min After the Latest Reap
-    6. **Twilight Mercenary**: Instant Reap, Can't be Stolen
-    7. **Void Gambler**: {}% Chance of Getting {}x or Nothing (can't be stolen)
-    8. **Abyssal Voyager**: Like Void Gambler but {}% for {}x 
-    """\
+1. **Chrono Warrior**: bonus {}% Time Reaped
+2. **Time Mage**: {}% Faster Reap Cooldown
+3. **Space-Time Hunter**: {}% Chance to Crit
+4. **Thousand Year Fairy**: Bonus {} Min per Reap
+5. **Dimensional Bandit**: Gains a *steal* ability
+ - Bandit Only - **t!steal:** Available 1 Min After the Latest Reap
+6. **Twilight Mercenary**: Instant Reap, Can't be Stolen
+7. **Void Gambler**: {}% Chance of Getting {}x or Lose {} Minutes
+8. **Abyssal Voyager**: {}% Chance of Getting {}x (can't be stolen)
+"""\
     .format((warrior_buff - 1) * 100,
             mage_reduction_rate * 100,
             hunter_crit_rate * 100,
             fairy_boost,
-            gamble_chance * 100, gamble_reward,
+            gamble_chance * 100, gamble_reward, gamble_cost,
             voyage_chance * 100, voyage_reward)
 
 

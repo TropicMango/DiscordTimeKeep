@@ -32,9 +32,15 @@ def update_logs_win(success, type, author=None, amount=None):
         content = f.readlines()
 
     if success:
-        info = '**!!!-💰-💰-💰-💰-GAMBLE SUCCESS-💰-💰-💰-!!!**\n'
+        if type == "GAMBLE":
+            info = '**💰!!!LUCKY COIN ACTIVATED!!!💰**\n'
+        elif type == "VOYAGE":
+            info = '**🌌!!!ABYSSAL VOYAGE SUCCESSFUL!!!🌌**\n'
     else:
-        info = '***GAMBLE*** - {} failed by **{}**\n'.format(amount, author)
+        if type == "GAMBLE":
+            info = '***GAMBLE*** - {} failed by **{}**\n'.format(amount, author)
+        elif type == "VOYAGE":
+            info = '***VOYAGE*** - {} failed by **{}**\n'.format(amount, author)
 
     content = [info] + content
     while len(content) > 25:
@@ -50,7 +56,12 @@ def update_logs_reap(author, added_time, class_type, stolen=False):
     if stolen:
         info = '***REAP*** - {} - *STOLEN* by **{}**\n'.format(added_time, author)
     else:
-        info = '***REAP*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
+        if class_type == 7:
+            info = '***💰GAMBLE💰*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
+        elif class_type == 8:
+            info = '***🌌VOYAGE🌌*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
+        else:
+            info = '***REAP*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
 
     content = [info] + content
     while len(content) > 25:
