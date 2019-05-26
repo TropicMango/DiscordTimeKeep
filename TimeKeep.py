@@ -40,7 +40,10 @@ def hms(seconds):
 
 
 def seconds_format(seconds):
-    return '{} Hours {} Minutes {} Seconds'.format(*hms(seconds))
+    if seconds < 0:
+        return '-{} Hours {} Minutes {} Seconds'.format(*hms(-seconds))
+    else:
+        return '{} Hours {} Minutes {} Seconds'.format(*hms(seconds))
 
 
 async def start_timer():
@@ -213,7 +216,7 @@ async def reap(ctx):
             # DataManager.update_logs_win(True, "GAMBLE")
         else:
             msg = '**LUCKY COIN FAILED**\n{} Minutes has Been Lost\n'.format(GameStat.gamble_cost) \
-                  + roll_shell(added_time, players)
+                  + roll_shell(added_time, players, author)
             player.reaped_time -= GameStat.gamble_cost * 60
             await bot.say(msg)
             DataManager.write_players(players, latest_clear)
@@ -229,7 +232,7 @@ async def reap(ctx):
                     .format(GameStat.voyage_reward * 100)
             DataManager.update_logs_win(True, "VOYAGE")
         else:
-            msg = '**ABYSSAL VOYAGE FAILED**\n🌌There is Nothing in the Abyss🌌\n' + roll_shell(added_time, players)
+            msg = '**ABYSSAL VOYAGE FAILED**\n🌌There is Nothing in the Abyss🌌\n' + roll_shell(added_time, players, author)
             await bot.say(msg)
             DataManager.write_players(players, latest_clear)
             DataManager.update_logs_win(False, "VOYAGE", str(author)[:-5], seconds_format(added_time))
@@ -267,7 +270,7 @@ async def reap(ctx):
                 "{} hours and {} minutes".format(*hms(player.next_reap - current_time)))
 
     # --------------------- Roll Shell ------------------
-    reap_message += roll_shell(added_time, players)
+    reap_message += roll_shell(added_time, players, author)
 
     await bot.say(reap_message)
     # Strip out the last five characters (the #NNNN part)
@@ -280,14 +283,14 @@ async def reap(ctx):
     await update_time_status()
 
 
-def roll_shell(added_time, players):
+def roll_shell(added_time, players, author):
     reap_message = ""
     if random.random() < GameStat.blue_shell_chance and len(players) > 3:
-        reap_message += "\n{} BLUE SHELL ACTIVATED {}\n**{}** dealt to *{}*\n**{}** dealt to *{}*\n**{}** dealt to *{}*"\
+        reap_message += "\n{} BLUE SHELL ACTIVATED {}\n**{}** lost *{}*\n**{}** lost *{}*\n**{}** lost *{}*"\
             .format(GameStat.blue_shell_icon, GameStat.blue_shell_icon,
-                    seconds_format(added_time), players[0].name,
-                    seconds_format(added_time * 0.75), players[1].name,
-                    seconds_format(added_time * 0.5), players[2].name)
+                    players[0].name, seconds_format(added_time),
+                    players[1].name, seconds_format(added_time * 0.75),
+                    players[2].name, seconds_format(added_time * 0.5),)
         players[0].reaped_time -= added_time
         players[1].reaped_time -= added_time * 0.75
         players[2].reaped_time -= added_time * 0.5

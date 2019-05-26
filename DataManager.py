@@ -17,7 +17,7 @@ def update_logs_shell(author, added_time):
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
 
-    info = '***Blue Shell:*** {} has activated a blue shell ^ ^ ^\n'\
+    info = '***Blue Shell*** - {} has activated a blue shell <:Blue_Shell:580276103491485701>\n'\
         .format(author)
 
     content = [info] + content
