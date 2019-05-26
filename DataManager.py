@@ -2,9 +2,15 @@ from DiscordTimeKeep import GameStat
 import pathlib
 
 
-def read_players():
+def read_players(season):
     # beginning is reserved for last_reap timer, and the last one is an empty new line
-    return list(map(GameStat.Player, pathlib.Path("./data/playerData.txt").read_text(encoding='utf-8').split("\n")[1:]))
+    if season == GameStat.current_season:
+        return list(map(GameStat.Player, pathlib.Path("./data/playerData.txt")
+                        .read_text(encoding='utf-8').split("\n")[1:]))
+    else:
+        path = "./data/S{}.txt".format(season)
+        return list(map(GameStat.Player, pathlib.Path(path)
+                        .read_text(encoding='utf-8').split("\n")[1:]))
 
 
 def write_players(players, latest_clear):

@@ -1,4 +1,6 @@
 game_update_str = '**UPDATE** new patch released, use t!pn for more information~'
+log_size = 20
+current_season = 4
 
 warrior_buff = 1.25
 hunter_crit_rate = 0.25
@@ -39,7 +41,8 @@ help_str = """Current Available Commands
                **t!change:** Change Your Class (resets reap)
                **t!reap:** Reap The Time as Your Own
                **t!me:** See How Much Time You Reaped
-               **t!leaderboard / b:** Shows Who's Top 10
+               **t!leaderboard / b:** Shows Who's Top 10, and more
+               **t!leaderboard / b: <Season #>** Shows the Season
                **t!log:** Shows Who Recently Reaped
                **t!info @player / #rank:** Get Player Info
                **t!pn** Get Patch Notes
@@ -77,8 +80,12 @@ class Player:
         self.name = representation[1]
         self.reaped_time = float(representation[2])
         self.next_reap = float(representation[3])
-        self.reap_count = int(representation[4])
-        self.class_type = int(representation[5])
+
+        try:
+            self.reap_count = int(representation[4])
+            self.class_type = int(representation[5])
+        except ValueError:
+            return  # Nothing happens
 
     def __str__(self):
         return "{}|{}|{}|{}|{}|{}"\

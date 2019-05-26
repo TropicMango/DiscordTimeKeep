@@ -461,13 +461,34 @@ async def log():
 
 @bot.command()
 async def pn():
+    msg = await bot.say(embed=generate_patch_embed(1))
+    await bot.add_reaction(msg, "⬅")
+    await bot.add_reaction(msg, "➡")
+
+
+def generate_patch_embed(start_point):
     with open("./data/patchNotes.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
-    log_string = ''.join(content)
+    record = False
+    log_string = ""
+    content = content[(start_point - 1) * GameStat.log_size:]
+    if len(content) == 0:
+        return None
+    for index, line in enumerate(content):
+        if line.startswith("**"):
+            if record and index > GameStat.log_size:
+                break
+            else:
+                record = True
+
+        if record:
+            log_string += line
+
     embed = discord.Embed(color=0x644fdd)
     embed.title = "Patch Notes"
     embed.description = log_string
-    await bot.say(embed=embed)
+    embed.set_footer(text="Patch Notes Page: {}".format(start_point))
+    return embed
 
 
 @bot.command(pass_context=True)
@@ -484,12 +505,35 @@ async def help():
 
 @bot.command(pass_context=True)
 async def leaderboard(ctx):
-    await print_leaderboard(ctx.message.channel)
+    if len(ctx.message.content) == 13:
+        await print_leaderboard(ctx.message.channel)
+    else:
+        await print_season_leaderboard(ctx.message.channel, ctx.message.content)
 
 
 @bot.command(pass_context=True)
 async def b(ctx):
-    await print_leaderboard(ctx.message.channel)
+    if len(ctx.message.content) == 3:
+        await print_leaderboard(ctx.message.channel)
+    else:
+        await print_season_leaderboard(ctx.message.channel, ctx.message.content)
+
+
+async def print_season_leaderboard(channel, msg):
+    try:
+        target_season = int(msg.split()[1])
+        if target_season > GameStat.current_season:
+            raise ValueError()
+    except ValueError:
+        return
+
+    if notice_message != "":
+        await bot.send_message(channel, notice_message)
+
+    embed = generate_leaderboard_embed(1, target_season)
+    msg = await bot.send_message(channel, embed=embed)
+    await bot.add_reaction(msg, "⬅")
+    await bot.add_reaction(msg, "➡")
 
 
 async def print_leaderboard(channel):
@@ -502,27 +546,45 @@ async def print_leaderboard(channel):
     await bot.add_reaction(msg, "➡")
 
 
-def generate_leaderboard_embed(start_rank):
-    players = DataManager.read_players()[start_rank - 1: start_rank + 9]
+def generate_leaderboard_embed(start_rank, season=GameStat.current_season):
+    players = DataManager.read_players(season)[start_rank - 1: start_rank + 9]
     if len(players) == 0:
         return None
     embed = discord.Embed(color=0x42d7f4)
-    if start_rank == 1:
-        embed.title = "The Current Top {} Are!!!".format(len(players))
+
+    # determine title
+    if season == GameStat.current_season:
+        if start_rank == 1:
+            embed.title = "The Current Top {} Are!!!".format(len(players))
+        else:
+            embed.title = "The {} to {} Place are:".format(start_rank, start_rank + len(players) - 1)
+        embed.set_footer(text="Rank: {} - {}".format(start_rank, start_rank + len(players) - 1))
     else:
-        embed.title = "The {} to {} Place are:".format(start_rank, start_rank + len(players) - 1)
-    embed.set_footer(text="Rank: {} - {}".format(start_rank, start_rank + len(players) - 1))
+        if start_rank == 1:
+            embed.title = "The Season {} Top {} Are!".format(season, len(players))
+        else:
+            embed.title = "The Season {} {} to {} Place are:".format(season, start_rank, start_rank + len(players) - 1)
+        embed.set_footer(text="Season {} Rank: {} - {}".format(season, start_rank, start_rank + len(players) - 1))
+
+    # cycle through players
     for index, player in enumerate(players):
         # Drop the number at the end of the author's name (#NNNN)
         player_title = player.name
-        for i, ranked_player in enumerate(GameStat.teir_list):
-            if ranked_player == player.id:
-                player_title += " " + GameStat.rank_icon[i]
-        if player.id == "117388990729945096":
-            player_title += " <:Gamble:580329443374006282>"
-        player_class_type = GameStat.class_name_short[player.class_type]
-        embed.add_field(name='*#{}* {}: {}'.format(index + start_rank, player_class_type, player_title),
-                        value=seconds_format(player.reaped_time))
+
+        # sets the icons if it's current_season
+        if season >= 4:  # the season where classes are introduced
+            for i, ranked_player in enumerate(GameStat.teir_list):
+                if ranked_player == player.id:
+                    player_title += " " + GameStat.rank_icon[i]
+            if player.id == "117388990729945096":
+                player_title += " <:Gamble:580329443374006282>"
+
+            player_class_type = GameStat.class_name_short[player.class_type]
+            embed.add_field(name='*#{}* {}: {}'.format(index + start_rank, player_class_type, player_title),
+                            value=seconds_format(player.reaped_time))
+        else:
+            embed.add_field(name='*#{}* {}'.format(index + start_rank, player_title),
+                            value=seconds_format(player.reaped_time))
     return embed
 
 
@@ -548,19 +610,42 @@ async def on_reaction_add(reaction, user):
                 else:
                     await bot.send_message(reaction.message.channel, "Class Change Cancelled")
                 await bot.delete_message(reaction.message)
-            else:  # this should be a leaderboard msg
+            else:  # this should be a leaderboard or patch note msg
                 await bot.remove_reaction(reaction.message, reaction.emoji, user)
 
                 footer = reaction.message.embeds[0]["footer"]["text"]
 
-                if str(reaction.emoji) == "➡":
-                    embed = generate_leaderboard_embed(int(footer.split()[1]) + 10)
-                elif str(reaction.emoji) == "⬅":
-                    if int(footer.split()[1]) - 10 < 1:
-                        return
-                    embed = generate_leaderboard_embed(int(footer.split()[1]) - 10)
-                if embed is not None:
-                    await bot.edit_message(reaction.message, embed=embed)
+                if footer.startswith('Rank'):  # process for current leaderboard
+                    index = int(footer.split()[1])
+                    if str(reaction.emoji) == "➡":
+                        embed = generate_leaderboard_embed(index + 10)
+                    elif str(reaction.emoji) == "⬅":
+                        if index - 10 < 1:
+                            return
+                        embed = generate_leaderboard_embed(index - 10)
+                    if embed is not None:
+                        await bot.edit_message(reaction.message, embed=embed)
+                elif footer.startswith('Season'):
+                    index = int(footer.split()[3])
+                    season = int(footer.split()[1])
+                    if str(reaction.emoji) == "➡":
+                        embed = generate_leaderboard_embed(index + 10, season)
+                    elif str(reaction.emoji) == "⬅":
+                        if index - 10 < 1:
+                            return
+                        embed = generate_leaderboard_embed(index - 10, season)
+                    if embed is not None:
+                        await bot.edit_message(reaction.message, embed=embed)
+                elif footer.startswith('Patch Notes'):  # process for patch notes
+                    index = int(footer.split()[3])
+                    if str(reaction.emoji) == "➡":
+                        embed = generate_patch_embed(index + 1)
+                    elif str(reaction.emoji) == "⬅":
+                        if int(footer.split()[3]) - 1 < 1:
+                            return
+                        embed = generate_patch_embed(index - + 1)
+                    if embed is not None:
+                        await bot.edit_message(reaction.message, embed=embed)
 
 
 @bot.command(pass_context=True)
