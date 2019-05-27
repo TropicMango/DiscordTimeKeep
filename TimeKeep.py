@@ -452,7 +452,7 @@ async def print_info(channel, user_id=0, user_rank=0):
 async def log():
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
-    log_string = ''.join(content)
+    log_string = ''.join(content[:25])
     embed = discord.Embed(color=0x42d7f4)
     embed.title = "Reap Log"
     embed.description = log_string
@@ -525,6 +525,7 @@ async def print_season_leaderboard(channel, msg):
         if target_season > GameStat.current_season:
             raise ValueError()
     except ValueError:
+        await bot.send_message(channel, "Sorry I don't Understand")
         return
 
     if notice_message != "":
@@ -561,9 +562,9 @@ def generate_leaderboard_embed(start_rank, season=GameStat.current_season):
         embed.set_footer(text="Rank: {} - {}".format(start_rank, start_rank + len(players) - 1))
     else:
         if start_rank == 1:
-            embed.title = "The Season {} Top {} Are!".format(season, len(players))
+            embed.title = "The Season {}: Top {} Are!".format(season, len(players))
         else:
-            embed.title = "The Season {} {} to {} Place are:".format(season, start_rank, start_rank + len(players) - 1)
+            embed.title = "The Season {}: {} to {} Place are:".format(season, start_rank, start_rank + len(players) - 1)
         embed.set_footer(text="Season {} Rank: {} - {}".format(season, start_rank, start_rank + len(players) - 1))
 
     # cycle through players

@@ -2,7 +2,7 @@ from DiscordTimeKeep import GameStat
 import pathlib
 
 
-def read_players(season):
+def read_players(season=GameStat.current_season):
     # beginning is reserved for last_reap timer, and the last one is an empty new line
     if season == GameStat.current_season:
         return list(map(GameStat.Player, pathlib.Path("./data/playerData.txt")
@@ -27,7 +27,7 @@ def update_logs_shell(author, added_time):
         .format(author)
 
     content = [info] + content
-    while len(content) > 25:
+    while len(content) > 100:
         content.pop()
     with open("./data/reapLog.txt", "w", encoding='utf-8') as f:
         f.writelines(content)
@@ -49,7 +49,7 @@ def update_logs_win(success, type, author=None, amount=None):
             info = '***VOYAGE*** - {} failed by **{}**\n'.format(amount, author)
 
     content = [info] + content
-    while len(content) > 25:
+    while len(content) > 100:
         content.pop()
     with open("./data/reapLog.txt", "w", encoding='utf-8') as f:
         f.writelines(content)
@@ -70,7 +70,7 @@ def update_logs_reap(author, added_time, class_type, stolen=False):
             info = '***REAP*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
 
     content = [info] + content
-    while len(content) > 25:
+    while len(content) > 100:
         content.pop()
     with open("./data/reapLog.txt", "w", encoding='utf-8') as f:
         f.writelines(content)
@@ -86,7 +86,7 @@ def update_logs_class(author, class_type, change=False):
         info = '***New Player:*** *{}* joined the arena as a *{}*\n'.format(author, class_type)
 
     content = [info] + content
-    if len(content) > 10:
+    if len(content) > 100:
         content.pop()
     with open("./data/reapLog.txt", "w", encoding='utf-8') as f:
         f.writelines(content)

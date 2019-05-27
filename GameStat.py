@@ -84,7 +84,7 @@ class Player:
         try:
             self.reap_count = int(representation[4])
             self.class_type = int(representation[5])
-        except ValueError:
+        except (ValueError, IndexError):
             return  # Nothing happens
 
     def __str__(self):
