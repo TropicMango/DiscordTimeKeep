@@ -22,7 +22,7 @@ notice_message = ""
 reap_in_progress = 0
 thief_id = 0
 
-# notice_message = "** ------ Notice ------ **\nSeason Ending (delayed) May 12th 11:59 P.M.\nClass Systems Coming~"
+notice_message = "** ------ Notice ------ **\nSeason Ending June 17th 11:59 P.M.\nRace Systems Coming Soon~"
 
 
 def get_latest_time():

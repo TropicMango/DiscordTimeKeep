@@ -23,7 +23,7 @@ def update_logs_shell(author, added_time):
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
 
-    info = '***Blue Shell*** - {} has activated a blue shell <:Blue_Shell:580276103491485701>\n'\
+    info = '***Blue Shell <:Blue_Shell:580276103491485701>*** - {} has activated a blue shell\n'\
         .format(author)
 
     content = [info] + content
@@ -63,7 +63,7 @@ def update_logs_reap(author, added_time, class_type, stolen=False):
         info = '***REAP*** - {} - *STOLEN* by **{}**\n'.format(added_time, author)
     else:
         if class_type == 7:
-            info = '***💰GAMBLE💰*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
+            info = '***GAMBLE💰*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
         elif class_type == 8:
             info = '***🌌VOYAGE🌌*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
         else:
