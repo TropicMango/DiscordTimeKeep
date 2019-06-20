@@ -1,6 +1,6 @@
 game_update_str = '**UPDATE** new patch released, use t!pn for more information~'
 log_size = 20
-current_season = 4
+current_season = 5
 
 warrior_buff = 1.25
 hunter_crit_rate = 0.25
@@ -27,9 +27,9 @@ class_name_short = {1: "Warrior", 2: "Mage",
                     5: "Bandit", 6: "Merc",
                     7: "Gambler", 8: "Voyager"}
 
-teir_list = ['137016970917707776', '195755433766420480',
-             '219324654290993153', '297971074518351872',
-             '229808879356215296', '167090536602140682']
+teir_list = ['195755433766420480', '219324654290993153',
+             '186208659221643264', '192144504998854658',
+             '236279950259257345', '137016970917707776']
 
 rank_icon = ['<:Challenger_Rank:559574999149838377>', '<:Diamond_Rank:559575017885532194>',
              '<:Plat_Rank:559575046516113423>', '<:Gold_Rank:559575070670848001>',

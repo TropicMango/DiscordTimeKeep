@@ -1,10 +1,49 @@
-Yuzuru reaped for 0 Hours 19 Minutes 14 Seconds
-PandaDriver CRIT x2 for 4 Hours 17 Minutes 36 Seconds
-hecc off CRIT x2 for 2 Hours 49 Minutes 5 Seconds
-Porolific CRIT x2 for 4 Hours 2 Minutes 43 Seconds
-Soap CRIT x2 for 6 Hours 53 Minutes 45 Seconds
-Howyu CRIT x2 for 8 Hours 51 Minutes 35 Seconds
-Tired CRIT x2 for 5 Hours 35 Minutes 42 Seconds
-Porolific CRIT x2 for 4 Hours 2 Minutes 10 Seconds
-Tropic Mango reaped for 2 Hours 5 Minutes 6 Seconds
-LuxuFate CRIT x2 for 4 Hours 47 Minutes 24 Seconds
+***REAP*** - 1 Hours 11 Minutes 0 Seconds - *Space-Time Hunter:* **Kitoaka**
+***New Player:*** *Kitoaka* joined the arena as a *Space-Time Hunter*
+***VOYAGE*** - 0 Hours 9 Minutes 51 Seconds failed by **sjslapshot**
+***REAP*** - 3 Hours 17 Minutes 13 Seconds - *Chrono Warrior:* **nolo**
+***VOYAGE*** - 2 Hours 32 Minutes 32 Seconds failed by **Ajisoo**
+***REAP*** - 2 Hours 26 Minutes 22 Seconds - *Chrono Warrior:* **Tropic Mango**
+***VOYAGE*** - 0 Hours 28 Minutes 1 Seconds failed by **Soap**
+***REAP*** - 1 Hours 29 Minutes 57 Seconds - *Dimensional Bandit:* **eixn**
+***REAP*** - 4 Hours 55 Minutes 49 Seconds - *Chrono Warrior:* **nolo**
+***GAMBLE*** - 3 Hours 6 Minutes 34 Seconds failed by **Soap’s Smurf**
+***New Player:*** *Soap’s Smurf* joined the arena as a *Void Gambler*
+***VOYAGE*** - 2 Hours 57 Minutes 23 Seconds failed by **sjslapshot**
+***VOYAGE*** - 2 Hours 39 Minutes 9 Seconds failed by **Tatrinpaha**
+***REAP*** - 4 Hours 5 Minutes 45 Seconds - *Chrono Warrior:* **LuxuFate**
+***VOYAGE*** - 2 Hours 1 Minutes 59 Seconds failed by **Soap**
+***REAP*** - 0 Hours 24 Minutes 55 Seconds - *Dimensional Bandit:* **eixn**
+***REAP*** - 2 Hours 58 Minutes 52 Seconds - *Chrono Warrior:* **Tropic Mango**
+***REAP*** - 3 Hours 17 Minutes 51 Seconds - *Chrono Warrior:* **nolo**
+***VOYAGE*** - 2 Hours 17 Minutes 21 Seconds failed by **Ajisoo**
+***VOYAGE*** - 2 Hours 16 Minutes 57 Seconds failed by **Tatrinpaha**
+***New Player:*** *Tatrinpaha* joined the arena as a *Abyssal Voyager*
+***REAP*** - 2 Hours 19 Minutes 1 Seconds - *Chrono Warrior:* **hecc off**
+***REAP*** - 2 Hours 12 Minutes 22 Seconds - *Chrono Warrior:* **Tropic Mango**
+***VOYAGE*** - 0 Hours 22 Minutes 58 Seconds failed by **sjslapshot**
+***New Player:*** *sjslapshot* joined the arena as a *Abyssal Voyager*
+***REAP*** - 2 Hours 20 Minutes 14 Seconds - *Chrono Warrior:* **nolo**
+***New Player:*** *Ajisoo* joined the arena as a *Abyssal Voyager*
+***REAP*** - 2 Hours 43 Minutes 7 Seconds - *Dimensional Bandit:* **Spooky**
+***New Player:*** *Spooky* joined the arena as a *Dimensional Bandit*
+***REAP*** - 1 Hours 34 Minutes 4 Seconds - *Chrono Warrior:* **Tropic Mango**
+***VOYAGE*** - 0 Hours 6 Minutes 21 Seconds failed by **Soap**
+***REAP*** - 1 Hours 39 Minutes 5 Seconds - *Chrono Warrior:* **hecc off**
+***REAP*** - 1 Hours 40 Minutes 53 Seconds - *Chrono Warrior:* **nolo**
+***REAP*** - 6 Hours 27 Minutes 41 Seconds - *Chrono Warrior:* **LuxuFate**
+***REAP*** - 2 Hours 7 Minutes 39 Seconds - *Dimensional Bandit:* **eixn**
+***VOYAGE*** - 1 Hours 19 Minutes 31 Seconds failed by **Soap**
+***Class Change:*** *hecc off* is now a *Chrono Warrior*
+***REAP*** - 1 Hours 8 Minutes 19 Seconds - *Twilight Mercenary:* **hecc off**
+***New Player:*** *hecc off* joined the arena as a *Twilight Mercenary*
+***New Player:*** *eixn* joined the arena as a *Dimensional Bandit*
+***Class Change:*** *nolo* is now a *Chrono Warrior*
+***REAP*** - 1 Hours 9 Minutes 54 Seconds - *Thousand Year Fairy:* **nolo**
+***New Player:*** *nolo* joined the arena as a *Thousand Year Fairy*
+***REAP*** - 2 Hours 20 Minutes 23 Seconds - *Chrono Warrior:* **LuxuFate**
+***New Player:*** *LuxuFate* joined the arena as a *Chrono Warrior*
+***REAP*** - 1 Hours 37 Minutes 20 Seconds - *Chrono Warrior:* **Tropic Mango**
+***VOYAGE*** - 0 Hours 5 Minutes 51 Seconds failed by **Soap**
+***New Player:*** *Soap#1234* joined the arena as a *Abyssal Voyager*
+***New Player:*** *Tropic Mango#6755* joined the arena as a *Chrono Warrior*

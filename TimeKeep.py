@@ -22,7 +22,7 @@ notice_message = ""
 reap_in_progress = 0
 thief_id = 0
 
-notice_message = "** ------ Notice ------ **\nSeason Ending June 17th 11:59 P.M.\nRace Systems Coming Soon~"
+# notice_message = "** ------ Notice ------ **\nSeason Ending June 17th 11:59 P.M.\nRace Systems Coming Soon~"
 
 
 def get_latest_time():
@@ -149,7 +149,7 @@ def change_player_class(author_id, author_name, player_class_id):
         DataManager.update_logs_class(player.name, GameStat.class_name[player_class_id], True)
     except StopIteration:
         # Player doesn't exist in our logs
-        player = GameStat.Player("{}|{}|{}|{}|{}|{}".format(author_id, author_name, 0, 0, 0, player_class_id))
+        player = GameStat.Player("{}|{}|{}|{}|{}|{}".format(author_id, str(author_name)[:-5], 0, 0, 0, player_class_id))
         players.append(player)
         DataManager.write_players(players, latest_clear)
         DataManager.update_logs_class(player.name, GameStat.class_name[player_class_id])
