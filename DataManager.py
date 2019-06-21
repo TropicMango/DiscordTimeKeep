@@ -1,5 +1,6 @@
 from DiscordTimeKeep import GameStat
 import pathlib
+import datetime
 
 
 def read_players(season=GameStat.current_season):
@@ -37,16 +38,18 @@ def update_logs_win(success, type, author=None, amount=None):
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
 
+    info = datetime.datetime.now().strftime("%X") + ": "
+
     if success:
         if type == "GAMBLE":
-            info = '**💰!!!LUCKY COIN ACTIVATED!!!💰**\n'
+            info += '**💰!!!LUCKY COIN ACTIVATED!!!💰**\n'
         elif type == "VOYAGE":
-            info = '**🌌!!!ABYSSAL VOYAGE SUCCESSFUL!!!🌌**\n'
+            info += '**🌌!!!ABYSSAL VOYAGE SUCCESSFUL!!!🌌**\n'
     else:
         if type == "GAMBLE":
-            info = '***GAMBLE*** - {} failed by **{}**\n'.format(amount, author)
+            info += '***GAMBLE*** - {} failed by **{}**\n'.format(amount, author)
         elif type == "VOYAGE":
-            info = '***VOYAGE*** - {} failed by **{}**\n'.format(amount, author)
+            info += '***VOYAGE*** - {} failed by **{}**\n'.format(amount, author)
 
     content = [info] + content
     while len(content) > 100:
@@ -59,15 +62,17 @@ def update_logs_reap(author, added_time, class_type, stolen=False):
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
 
+    info = datetime.datetime.now().strftime("%X") + ": "
+
     if stolen:
-        info = '***REAP*** - {} - *STOLEN* by **{}**\n'.format(added_time, author)
+        info += '***REAP*** - {} - *STOLEN* by **{}**\n'.format(added_time, author)
     else:
         if class_type == 7:
-            info = '***GAMBLE💰*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
+            info += '***GAMBLE💰*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
         elif class_type == 8:
-            info = '***🌌VOYAGE🌌*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
+            info += '***🌌VOYAGE🌌*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
         else:
-            info = '***REAP*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
+            info += '***REAP*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)
 
     content = [info] + content
     while len(content) > 100:
@@ -80,10 +85,12 @@ def update_logs_class(author, class_type, change=False):
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
 
+    info = datetime.datetime.now().strftime("%X") + ": "
+
     if change:
-        info = '***Class Change:*** *{}* is now a *{}*\n'.format(author, class_type)
+        info += '***Class Change:*** *{}* is now a *{}*\n'.format(author, class_type)
     else:
-        info = '***New Player:*** *{}* joined the arena as a *{}*\n'.format(author, class_type)
+        info += '***New Player:*** *{}* joined the arena as a *{}*\n'.format(author, class_type)
 
     content = [info] + content
     if len(content) > 100:

@@ -286,11 +286,13 @@ async def reap(ctx):
 def roll_shell(added_time, players, author):
     reap_message = ""
     if random.random() < GameStat.blue_shell_chance and len(players) > 3:
+        # compose blue shell message
         reap_message += "\n{} BLUE SHELL ACTIVATED {}\n**{}** lost *{}*\n**{}** lost *{}*\n**{}** lost *{}*"\
             .format(GameStat.blue_shell_icon, GameStat.blue_shell_icon,
                     players[0].name, seconds_format(added_time),
                     players[1].name, seconds_format(added_time * 0.75),
                     players[2].name, seconds_format(added_time * 0.5),)
+        # calculate damage
         players[0].reaped_time -= added_time
         players[1].reaped_time -= added_time * 0.75
         players[2].reaped_time -= added_time * 0.5
@@ -300,6 +302,7 @@ def roll_shell(added_time, players, author):
 
 @bot.command(pass_context=True)
 async def steal(ctx):
+    # unique thief steal command
     player_package = await check_player(ctx)
     if player_package is None:
         return
