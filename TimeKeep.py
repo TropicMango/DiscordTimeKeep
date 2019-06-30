@@ -455,7 +455,7 @@ async def print_info(channel, user_id=0, user_rank=0):
 async def log():
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
-    log_string = ''.join(content[:25])
+    log_string = ''.join(content[:20])
     embed = discord.Embed(color=0x42d7f4)
     embed.title = "Reap Log"
     embed.description = log_string
@@ -497,8 +497,11 @@ def generate_patch_embed(start_point):
 @bot.command(pass_context=True)
 async def ping(ctx):
     t = await bot.say('Pong!')
-    ms = (t.timestamp - ctx.message.timestamp).total_seconds() * 1000
-    await bot.edit_message(t, new_content='Pong! Took: {}ms'.format(int(ms)))
+    try:
+        ms = (t.timestamp - ctx.message.timestamp).total_seconds() * 1000
+        await bot.edit_message(t, new_content='Pong! Took: {}ms'.format(int(ms)))
+    except discord.ext.commands.errors.CommandInvokeError:
+        await bot.say('(Missing Message Editing Permission) Took: {}ms'.format(int(ms)))
 
 
 @bot.command()
@@ -577,11 +580,8 @@ def generate_leaderboard_embed(start_rank, season=GameStat.current_season):
 
         # sets the icons if it's current_season
         if season >= 4:  # the season where classes are introduced
-            for i, ranked_player in enumerate(GameStat.teir_list):
-                if ranked_player == player.id:
-                    player_title += " " + GameStat.rank_icon[i]
-            if player.id == "117388990729945096":
-                player_title += " <:Gamble:580329443374006282>"
+            if player.id in GameStat.reward_icons.keys():
+                player_title += " " + GameStat.reward_icons[player.id]
 
             player_class_type = GameStat.class_name_short[player.class_type]
             embed.add_field(name='*#{}* {}: {}'.format(index + start_rank, player_class_type, player_title),
@@ -686,4 +686,7 @@ while True:
         bot.run(SecretFile.get_token())  # are you happy now Soap????
     except ConnectionResetError:
         print('-------------------error-------------------')
-        time.sleep(10)
+        time.sleep(60)
+    except TimeoutError:
+        print('-------------------error-------------------')
+        time.sleep(60)

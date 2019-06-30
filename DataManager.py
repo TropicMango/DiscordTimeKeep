@@ -38,7 +38,7 @@ def update_logs_win(success, type, author=None, amount=None):
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
 
-    info = datetime.datetime.now().strftime("%X") + ": "
+    info = datetime.datetime.now().strftime("%X")[:-3] + ": "
 
     if success:
         if type == "GAMBLE":
@@ -62,7 +62,7 @@ def update_logs_reap(author, added_time, class_type, stolen=False):
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
 
-    info = datetime.datetime.now().strftime("%X") + ": "
+    info = datetime.datetime.now().strftime("%X")[:-3] + ": "
 
     if stolen:
         info += '***REAP*** - {} - *STOLEN* by **{}**\n'.format(added_time, author)
@@ -85,7 +85,7 @@ def update_logs_class(author, class_type, change=False):
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
 
-    info = datetime.datetime.now().strftime("%X") + ": "
+    info = datetime.datetime.now().strftime("%X")[:-3] + ": "
 
     if change:
         info += '***Class Change:*** *{}* is now a *{}*\n'.format(author, class_type)
