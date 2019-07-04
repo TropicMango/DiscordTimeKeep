@@ -232,7 +232,8 @@ async def reap(ctx):
                     .format(GameStat.voyage_reward * 100)
             DataManager.update_logs_win(True, "VOYAGE")
         else:
-            msg = '**ABYSSAL VOYAGE FAILED**\n🌌There is Nothing in the Abyss🌌\n' + roll_shell(added_time, players, author)
+            msg = '**ABYSSAL VOYAGE FAILED**\n🌌{}🌌\n'.format(GameStat.get_voyage_msg()) + \
+                  roll_shell(added_time, players, author)
             await bot.say(msg)
             DataManager.write_players(players, latest_clear)
             DataManager.update_logs_win(False, "VOYAGE", str(author)[:-5], seconds_format(added_time))

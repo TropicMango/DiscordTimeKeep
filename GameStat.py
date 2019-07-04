@@ -1,3 +1,5 @@
+import random
+
 game_update_str = '**UPDATE** new patch released, use t!pn for more information~'
 log_size = 20
 current_season = 5
@@ -71,6 +73,19 @@ start_str = """"Welcome to the Arena of Time,
      Use **t!choose <Class #>** begin
      You can change with **t!change <Class #>**
      """ + char_list
+
+
+voyage_msg = [
+    'there is nothing in the abyss',
+    'you tared into the abyss, and the abyss stared back',
+    'the abyss is judging you silently',
+    'you met a fellow lost voyager',
+    'i laila este hapana nel ang A-B-Y-S-S'
+]
+
+
+def get_voyage_msg():
+    return random.choice(voyage_msg)
 
 
 class Player:
