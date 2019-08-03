@@ -1,100 +1,100 @@
-23:37: ***REAP*** - 0 Hours 55 Minutes 38 Seconds - *Space-Time Hunter:* **Kitoaka**
-22:41: ***REAP*** - 3 Hours 22 Minutes 32 Seconds - *Space-Time Hunter:* **Tropic Mango**
-22:32: ***VOYAGE*** - 3 Hours 13 Minutes 38 Seconds failed by **Soap**
-22:30: ***VOYAGE*** - 3 Hours 12 Minutes 15 Seconds failed by **nolo**
-21:36: ***VOYAGE*** - 2 Hours 18 Minutes 19 Seconds failed by **Soap’s Smurf**
-19:19: ***REAP*** - 6 Hours 1 Minutes 18 Seconds - *Chrono Warrior:* **LuxuFate**
-15:29: ***VOYAGE*** - 1 Hours 0 Minutes 7 Seconds failed by **nolo**
-14:33: ***VOYAGE*** - 0 Hours 4 Minutes 20 Seconds failed by **Soap**
-14:30: ***REAP*** - 5 Hours 56 Minutes 5 Seconds - *Space-Time Hunter:* **Tropic Mango**
-13:07: ***VOYAGE*** - 4 Hours 34 Minutes 7 Seconds failed by **hecc off**
-08:34: ***REAP*** - 6 Hours 10 Minutes 42 Seconds - *Chrono Warrior:* **LuxuFate**
-08:33: ***VOYAGE*** - 4 Hours 56 Minutes 33 Seconds failed by **nolo**
-03:37: ***REAP*** - 1 Hours 24 Minutes 42 Seconds - *Chrono Warrior:* **PandaDriver**
-02:57: ***VOYAGE*** - 0 Hours 28 Minutes 21 Seconds failed by **Soap’s Smurf**
-02:29: ***REAP*** - 3 Hours 22 Minutes 35 Seconds - *Chrono Warrior:* **LuxuFate**
-23:47: ***REAP*** - 3 Hours 3 Minutes 31 Seconds - *Space-Time Hunter:* **Tropic Mango**
-23:03: ***VOYAGE*** - 2 Hours 19 Minutes 43 Seconds failed by **hecc off**
-22:46: ***VOYAGE*** - 2 Hours 3 Minutes 25 Seconds failed by **Soap**
-20:44: ***REAP*** - 1 Hours 24 Minutes 57 Seconds - *Space-Time Hunter:* **Kitoaka**
-19:19: ***REAP*** - 4 Hours 34 Minutes 54 Seconds - *Chrono Warrior:* **LuxuFate**
-16:36: ***VOYAGE*** - 0 Hours 57 Minutes 43 Seconds failed by **nolo**
-16:20: ***VOYAGE*** - 0 Hours 41 Minutes 58 Seconds failed by **Soap’s Smurf**
-16:18: ***VOYAGE*** - 0 Hours 40 Minutes 21 Seconds failed by **Soap**
-15:39: ***REAP*** - 3 Hours 17 Minutes 57 Seconds - *Space-Time Hunter:* **Tropic Mango**
-15:16: ***VOYAGE*** - 2 Hours 56 Minutes 3 Seconds failed by **Tatrinpaha**
-12:21: ***REAP*** - 3 Hours 9 Minutes 25 Seconds - *Space-Time Hunter:* **Kitoaka**
-12:09: ***VOYAGE*** - 2 Hours 57 Minutes 56 Seconds failed by **Ajisoo**
-11:18: ***VOYAGE*** - 2 Hours 7 Minutes 3 Seconds failed by **sjslapshot**
-09:59: ***VOYAGE*** - 0 Hours 48 Minutes 4 Seconds failed by **nolo**
-09:12: ***REAP*** - 4 Hours 6 Minutes 21 Seconds - *Space-Time Hunter:* **Tropic Mango**
-08:09: ***VOYAGE*** - 1 Hours 1 Minutes 8 Seconds failed by **Soap’s Smurf**
-07:46: ***VOYAGE*** - 0 Hours 38 Minutes 24 Seconds failed by **Soap**
-07:09: ***REAP*** - 8 Hours 28 Minutes 33 Seconds - *Chrono Warrior:* **LuxuFate**
-01:31: ***VOYAGE*** - 1 Hours 10 Minutes 36 Seconds failed by **hecc off**
-00:53: ***VOYAGE*** - 0 Hours 32 Minutes 10 Seconds failed by **nolo**
-00:52: ***VOYAGE*** - 0 Hours 31 Minutes 12 Seconds failed by **Soap’s Smurf**
-00:22: ***REAP*** - 2 Hours 25 Minutes 16 Seconds - *Chrono Warrior:* **LuxuFate**
-23:58: ***VOYAGE*** - 1 Hours 33 Minutes 44 Seconds failed by **Soap**
-22:25: ***REAP*** - 3 Hours 37 Minutes 35 Seconds - *Space-Time Hunter:* **Kitoaka**
-20:37: ***REAP*** - 7 Hours 31 Minutes 36 Seconds - *Space-Time Hunter:* **Tropic Mango**
-19:20: ***VOYAGE*** - 2 Hours 30 Minutes 24 Seconds failed by **hecc off**
-18:52: ***VOYAGE*** - 2 Hours 2 Minutes 39 Seconds failed by **nolo**
-17:11: ***VOYAGE*** - 0 Hours 21 Minutes 4 Seconds failed by **Soap**
-16:51: ***REAP*** - 3 Hours 48 Minutes 45 Seconds - *Chrono Warrior:* **LuxuFate**
-16:33: ***VOYAGE*** - 2 Hours 46 Minutes 47 Seconds failed by **Soap’s Smurf**
-15:49: ***VOYAGE*** - 2 Hours 2 Minutes 17 Seconds failed by **Tatrinpaha**
-13:48: ***REAP*** - 4 Hours 9 Minutes 54 Seconds - *Space-Time Hunter:* **Kitoaka**
-12:57: ***VOYAGE*** - 3 Hours 20 Minutes 25 Seconds failed by **hecc off**
-11:11: ***VOYAGE*** - 1 Hours 34 Minutes 5 Seconds failed by **nolo**
-09:38: ***REAP*** - 1 Hours 58 Minutes 15 Seconds - *Space-Time Hunter:* **Tropic Mango**
-07:41: ***VOYAGE*** - 0 Hours 2 Minutes 14 Seconds failed by **Soap’s Smurf**
-***Blue Shell <:Blue_Shell:580276103491485701>*** - Soap’s Smurf has activated a blue shell
-07:40: ***REAP*** - 7 Hours 30 Minutes 6 Seconds - *Chrono Warrior:* **LuxuFate**
-07:15: ***VOYAGE*** - 5 Hours 37 Minutes 0 Seconds failed by **sjslapshot**
-07:00: ***VOYAGE*** - 5 Hours 21 Minutes 7 Seconds failed by **Tatrinpaha**
-06:15: ***VOYAGE*** - 4 Hours 36 Minutes 55 Seconds failed by **Soap**
+10:31: ***REAP*** - 1 Hours 57 Minutes 41 Seconds - *Space-Time Hunter:* **Kitoaka**
+09:44: ***VOYAGE*** - 1 Hours 11 Minutes 10 Seconds failed by **Porolific**
+08:33: ***REAP*** - 2 Hours 59 Minutes 42 Seconds - *Twilight Mercenary:* **That One Wandering Weirdo**
+05:33: ***🌌VOYAGE🌌*** - 424 Hours 14 Minutes 6 Seconds - *Abyssal Voyager:* **Soap**
+05:33: **🌌!!!ABYSSAL VOYAGE SUCCESSFUL!!!🌌**
+02:44: ***REAP*** - 5 Hours 13 Minutes 46 Seconds - *Chrono Warrior:* **LuxuFate**
+01:10: ***VOYAGE*** - 2 Hours 38 Minutes 17 Seconds failed by **Porolific**
+22:32: ***REAP*** - 2 Hours 48 Minutes 1 Seconds - *Twilight Mercenary:* **That One Wandering Weirdo**
+20:47: ***VOYAGE*** - 1 Hours 3 Minutes 21 Seconds failed by **Shadowhelm**
+19:44: ***GAMBLE💰*** - 3 Hours 43 Minutes 41 Seconds - *Void Gambler:* **DontForgetPepper**
+19:23: ***REAP*** - 3 Hours 32 Minutes 5 Seconds - *Chrono Warrior:* **Tropic Mango**
+19:12: ***VOYAGE*** - 2 Hours 40 Minutes 12 Seconds failed by **nolo**
+17:33: ***VOYAGE*** - 1 Hours 0 Minutes 39 Seconds failed by **Soap**
+16:32: ***REAP*** - 1 Hours 4 Minutes 28 Seconds - *Twilight Mercenary:* **That One Wandering Weirdo**
+16:06: ***VOYAGE*** - 0 Hours 38 Minutes 28 Seconds failed by **Porolific**
+15:29: ***REAP*** - 2 Hours 7 Minutes 27 Seconds - *Space-Time Hunter:* **Kitoaka**
+13:21: ***REAP*** - 1 Hours 19 Minutes 14 Seconds - *Chrono Warrior:* **Tropic Mango**
+13:12: ***GAMBLE*** - 0 Hours 55 Minutes 26 Seconds failed by **DontForgetPepper**
+12:18: ***REAP*** - 4 Hours 17 Minutes 50 Seconds - *Chrono Warrior:* **LuxuFate**
+11:47: ***VOYAGE*** - 2 Hours 57 Minutes 1 Seconds failed by **nolo**
+10:02: ***VOYAGE*** - 1 Hours 11 Minutes 10 Seconds failed by **Soap**
+09:56: ***VOYAGE*** - 1 Hours 6 Minutes 0 Seconds failed by **Porolific**
+08:50: ***REAP*** - 2 Hours 18 Minutes 28 Seconds - *Twilight Mercenary:* **That One Wandering Weirdo**
+***Blue Shell <:Blue_Shell:580276103491485701>*** - That One Wandering Weirdo has activated a blue shell
+06:33: ***REAP*** - 2 Hours 44 Minutes 25 Seconds - *Chrono Warrior:* **PandaDriver.BOSS**
+04:22: ***REAP*** - 3 Hours 39 Minutes 28 Seconds - *Chrono Warrior:* **LuxuFate**
+01:26: ***REAP*** - 5 Hours 59 Minutes 35 Seconds - *Chrono Warrior:* **Tropic Mango**
+01:01: ***VOYAGE*** - 4 Hours 23 Minutes 45 Seconds failed by **Porolific**
+00:25: ***VOYAGE*** - 3 Hours 48 Minutes 4 Seconds failed by **Shadowhelm**
+23:14: ***GAMBLE*** - 2 Hours 36 Minutes 46 Seconds failed by **DontForgetPepper**
+21:46: ***VOYAGE*** - 1 Hours 8 Minutes 25 Seconds failed by **hecc off**
+20:37: ***REAP*** - 1 Hours 42 Minutes 37 Seconds - *Twilight Mercenary:* **That One Wandering Weirdo**
+20:37: ***New Player:*** *That One Wandering Weirdo* joined the arena as a *Twilight Mercenary*
+18:56: ***REAP*** - 7 Hours 55 Minutes 52 Seconds - *Chrono Warrior:* **LuxuFate**
+18:31: ***VOYAGE*** - 5 Hours 57 Minutes 21 Seconds failed by **Ajisoo**
+18:02: ***VOYAGE*** - 5 Hours 28 Minutes 20 Seconds failed by **sjslapshot**
+17:59: ***VOYAGE*** - 5 Hours 25 Minutes 25 Seconds failed by **Tatrinpaha**
+17:24: ***VOYAGE*** - 4 Hours 49 Minutes 56 Seconds failed by **Porolific**
+12:35: ***REAP*** - 16 Hours 10 Minutes 17 Seconds - *Chrono Warrior:* **LuxuFate**
+07:33: ***VOYAGE*** - 7 Hours 54 Minutes 52 Seconds failed by **Ajisoo**
+05:32: ***VOYAGE*** - 5 Hours 54 Minutes 46 Seconds failed by **Piotr2001PL**
+01:49: ***VOYAGE*** - 2 Hours 11 Minutes 44 Seconds failed by **Shadowhelm**
+23:39: ***REAP*** - 5 Hours 3 Minutes 33 Seconds - *Chrono Warrior:* **LuxuFate**
+22:54: ***VOYAGE*** - 3 Hours 19 Minutes 9 Seconds failed by **Porolific**
+22:34: ***VOYAGE*** - 2 Hours 59 Minutes 0 Seconds failed by **nolo**
+22:30: ***VOYAGE*** - 2 Hours 55 Minutes 41 Seconds failed by **Piotr2001PL**
+22:04: ***VOYAGE*** - 2 Hours 29 Minutes 35 Seconds failed by **hecc off**
+19:36: ***REAP*** - 4 Hours 6 Minutes 0 Seconds - *Space-Time Hunter:* **Kitoaka**
+15:30: ***REAP*** - 3 Hours 28 Minutes 18 Seconds - *Chrono Warrior:* **Tropic Mango**
+15:24: ***VOYAGE*** - 2 Hours 41 Minutes 37 Seconds failed by **Porolific**
+12:43: ***VOYAGE*** - 0 Hours 1 Minutes 15 Seconds failed by **Soap**
 ***Blue Shell <:Blue_Shell:580276103491485701>*** - Soap has activated a blue shell
-01:39: ***REAP*** - 4 Hours 12 Minutes 4 Seconds - *Chrono Warrior:* **LuxuFate**
-22:18: ***REAP*** - 4 Hours 23 Minutes 19 Seconds - *Space-Time Hunter:* **Tropic Mango**
-21:51: ***VOYAGE*** - 3 Hours 57 Minutes 25 Seconds failed by **Soap’s Smurf**
-20:15: ***VOYAGE*** - 2 Hours 21 Minutes 49 Seconds failed by **hecc off**
-19:58: ***VOYAGE*** - 2 Hours 4 Minutes 37 Seconds failed by **Soap**
-18:52: ***VOYAGE*** - 0 Hours 58 Minutes 16 Seconds failed by **nolo**
-17:55: ***REAP*** - 0 Hours 24 Minutes 48 Seconds - *Space-Time Hunter:* **Kitoaka**
-17:30: ***REAP*** - 6 Hours 54 Minutes 30 Seconds - *Chrono Warrior:* **LuxuFate**
-14:39: ***VOYAGE*** - 2 Hours 42 Minutes 11 Seconds failed by **sjslapshot**
-14:36: ***VOYAGE*** - 2 Hours 38 Minutes 30 Seconds failed by **Tatrinpaha**
-13:57: ***VOYAGE*** - 2 Hours 0 Minutes 3 Seconds failed by **Soap’s Smurf**
-13:15: ***VOYAGE*** - 1 Hours 17 Minutes 50 Seconds failed by **Soap**
-***Blue Shell <:Blue_Shell:580276103491485701>*** - Soap has activated a blue shell
-11:58: ***REAP*** - 3 Hours 4 Minutes 54 Seconds - *Space-Time Hunter:* **Tropic Mango**
-11:28: ***VOYAGE*** - 2 Hours 35 Minutes 47 Seconds failed by **hecc off**
-11:08: ***VOYAGE*** - 2 Hours 15 Minutes 53 Seconds failed by **nolo**
-08:53: ***REAP*** - 7 Hours 43 Minutes 3 Seconds - *Chrono Warrior:* **LuxuFate**
-08:46: ***VOYAGE*** - 6 Hours 4 Minutes 15 Seconds failed by **Ajisoo**
-06:15: ***Class Change:*** *Soap’s Smurf* is now a *Abyssal Voyager*
-06:07: ***GAMBLE*** - 3 Hours 24 Minutes 54 Seconds failed by **Soap’s Smurf**
-06:05: ***VOYAGE*** - 3 Hours 22 Minutes 55 Seconds failed by **Soap**
-02:43: ***REAP*** - 3 Hours 48 Minutes 46 Seconds - *Chrono Warrior:* **LuxuFate**
-01:10: ***VOYAGE*** - 1 Hours 31 Minutes 4 Seconds failed by **hecc off**
-23:40: ***REAP*** - 1 Hours 46 Minutes 45 Seconds - *Space-Time Hunter:* **Tropic Mango**
-22:48: ***VOYAGE*** - 0 Hours 55 Minutes 39 Seconds failed by **nolo**
-21:53: ***REAP*** - 3 Hours 25 Minutes 51 Seconds - *Dimensional Bandit:* **Spooky**
-21:50: ***VOYAGE*** - 3 Hours 23 Minutes 27 Seconds failed by **Soap**
-20:44: ***GAMBLE*** - 2 Hours 18 Minutes 21 Seconds failed by **Soap’s Smurf**
-18:27: ***REAP*** - 3 Hours 7 Minutes 53 Seconds - *Chrono Warrior:* **LuxuFate**
-15:57: ***REAP*** - 4 Hours 3 Minutes 26 Seconds - *Space-Time Hunter:* **Tropic Mango**
-14:28: ***VOYAGE*** - 2 Hours 35 Minutes 31 Seconds failed by **Soap**
-13:24: ***VOYAGE*** - 1 Hours 32 Minutes 8 Seconds failed by **sjslapshot**
-11:52: ***GAMBLE💰*** - 19 Hours 12 Minutes 28 Seconds - *Void Gambler:* **Soap’s Smurf**
-09:58: ***REAP*** - 2 Hours 31 Minutes 37 Seconds - *Chrono Warrior:* **LuxuFate**
-09:27: ***VOYAGE*** - 1 Hours 31 Minutes 24 Seconds failed by **nolo**
-07:57: ***REAP*** - 4 Hours 31 Minutes 27 Seconds - *Space-Time Hunter:* **Kitoaka**
+12:43: ***REAP*** - 11 Hours 51 Minutes 36 Seconds - *Chrono Warrior:* **PandaDriver.BOSS**
+10:08: ***VOYAGE*** - 6 Hours 55 Minutes 4 Seconds failed by **Piotr2001PL**
+10:08: ***New Player:*** *Piotr2001PL* joined the arena as a *Abyssal Voyager*
+09:53: ***VOYAGE*** - 6 Hours 40 Minutes 23 Seconds failed by **Ajisoo**
+09:26: ***VOYAGE*** - 6 Hours 13 Minutes 12 Seconds failed by **nolo**
+07:14: ***VOYAGE*** - 4 Hours 1 Minutes 28 Seconds failed by **Tatrinpaha**
+03:51: ***VOYAGE*** - 0 Hours 38 Minutes 10 Seconds failed by **Porolific**
+03:14: ***REAP*** - 2 Hours 43 Minutes 37 Seconds - *Chrono Warrior:* **PandaDriver.BOSS**
+01:03: ***REAP*** - 6 Hours 35 Minutes 14 Seconds - *Chrono Warrior:* **Tropic Mango**
+***Blue Shell <:Blue_Shell:580276103491485701>*** - Tropic Mango has activated a blue shell
+00:01: ***VOYAGE*** - 4 Hours 15 Minutes 19 Seconds failed by **Soap**
+20:50: ***VOYAGE*** - 1 Hours 3 Minutes 57 Seconds failed by **Porolific**
+19:47: ***REAP*** - 6 Hours 40 Minutes 29 Seconds - *Space-Time Hunter:* **Kitoaka**
 ***Blue Shell <:Blue_Shell:580276103491485701>*** - Kitoaka has activated a blue shell
-07:54: ***VOYAGE*** - 4 Hours 29 Minutes 25 Seconds failed by **Ajisoo**
-05:51: ***GAMBLE*** - 2 Hours 26 Minutes 39 Seconds failed by **Soap’s Smurf**
-04:52: ***VOYAGE*** - 1 Hours 27 Minutes 22 Seconds failed by **Soap**
-03:25: ***REAP*** - 2 Hours 16 Minutes 42 Seconds - *Chrono Warrior:* **LuxuFate**
-01:36: ***REAP*** - 5 Hours 14 Minutes 52 Seconds - *Space-Time Hunter:* **Tropic Mango**
-23:08: ***Class Change:*** *hecc off* is now a *Abyssal Voyager*
+18:44: ***VOYAGE*** - 5 Hours 38 Minutes 31 Seconds failed by **Ajisoo**
+17:51: ***VOYAGE*** - 4 Hours 46 Minutes 0 Seconds failed by **nolo**
+14:06: ***VOYAGE*** - 1 Hours 1 Minutes 9 Seconds failed by **Porolific**
+13:55: ***VOYAGE*** - 0 Hours 49 Minutes 21 Seconds failed by **Soap**
+13:06: ***REAP*** - 6 Hours 12 Minutes 0 Seconds - *Chrono Warrior:* **LuxuFate**
+10:44: ***VOYAGE*** - 2 Hours 36 Minutes 14 Seconds failed by **nolo**
+08:09: ***REAP*** - 8 Hours 49 Minutes 27 Seconds - *Space-Time Hunter:* **Kitoaka**
+07:34: ***VOYAGE*** - 8 Hours 15 Minutes 40 Seconds failed by **Ajisoo**
+***Blue Shell <:Blue_Shell:580276103491485701>*** - Ajisoo has activated a blue shell
+06:58: ***VOYAGE*** - 7 Hours 39 Minutes 38 Seconds failed by **Porolific**
+01:23: ***VOYAGE*** - 2 Hours 5 Minutes 16 Seconds failed by **nolo**
+00:56: ***VOYAGE*** - 1 Hours 37 Minutes 20 Seconds failed by **Porolific**
+23:19: ***REAP*** - 5 Hours 43 Minutes 0 Seconds - *Chrono Warrior:* **LuxuFate**
+18:45: ***REAP*** - 6 Hours 39 Minutes 11 Seconds - *Chrono Warrior:* **Tropic Mango**
+17:55: ***VOYAGE*** - 4 Hours 30 Minutes 54 Seconds failed by **nolo**
+16:48: ***VOYAGE*** - 3 Hours 23 Minutes 7 Seconds failed by **Porolific**
+15:56: ***VOYAGE*** - 2 Hours 31 Minutes 25 Seconds failed by **hecc off**
+13:25: ***REAP*** - 8 Hours 38 Minutes 3 Seconds - *Chrono Warrior:* **LuxuFate**
+13:24: ***VOYAGE*** - 6 Hours 54 Minutes 8 Seconds failed by **Soap**
+10:29: ***VOYAGE*** - 3 Hours 58 Minutes 51 Seconds failed by **nolo**
+06:31: ***REAP*** - 4 Hours 30 Minutes 12 Seconds - *Chrono Warrior:* **LuxuFate**
+02:55: ***REAP*** - 2 Hours 39 Minutes 43 Seconds - *Space-Time Hunter:* **Kitoaka**
+00:15: ***REAP*** - 8 Hours 58 Minutes 55 Seconds - *Chrono Warrior:* **PandaDriver**
+00:10: ***VOYAGE*** - 7 Hours 7 Minutes 21 Seconds failed by **Porolific**
+17:04: ***REAP*** - 7 Hours 7 Minutes 45 Seconds - *Chrono Warrior:* **LuxuFate**
+17:03: ***VOYAGE*** - 5 Hours 41 Minutes 54 Seconds failed by **Porolific**
+11:22: ***REAP*** - 1 Hours 43 Minutes 4 Seconds - *Space-Time Hunter:* **Kitoaka**
+10:46: ***GAMBLE*** - 1 Hours 8 Minutes 31 Seconds failed by **DontForgetPepper**
+***Blue Shell <:Blue_Shell:580276103491485701>*** - DontForgetPepper has activated a blue shell
+10:26: ***VOYAGE*** - 0 Hours 47 Minutes 49 Seconds failed by **Porolific**
+09:39: ***REAP*** - 9 Hours 18 Minutes 3 Seconds - *Chrono Warrior:* **PandaDriver**
+05:23: ***VOYAGE*** - 3 Hours 12 Minutes 7 Seconds failed by **Soap**
+02:12: ***REAP*** - 4 Hours 31 Minutes 15 Seconds - *Chrono Warrior:* **LuxuFate**
+01:54: ***VOYAGE*** - 3 Hours 19 Minutes 33 Seconds failed by **nolo**

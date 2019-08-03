@@ -77,9 +77,9 @@ start_str = """"Welcome to the Arena of Time,
 
 voyage_msg = [
     'there is nothing in the abyss',
-    'you tared into the abyss, and the abyss stared back',
+    'you stared into the abyss, and the abyss stared back',
     'the abyss is judging you silently',
-    'you met a fellow lost voyager',
+    'you met a lost voyager',
     'i laila este hapana nel ang A-B-Y-S-S'
 ]
 

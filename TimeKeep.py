@@ -239,6 +239,8 @@ async def reap(ctx):
             DataManager.update_logs_win(False, "VOYAGE", str(author)[:-5], seconds_format(added_time))
             return
 
+
+
     DataManager.write_players(players, latest_clear)
 
     # ------------------------------- Initialize Reaping -------------------------
