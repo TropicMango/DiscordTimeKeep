@@ -2,7 +2,7 @@ import random
 
 game_update_str = '**UPDATE** new patch released, use t!pn for more information~'
 log_size = 20
-current_season = 5
+current_season = 6
 
 warrior_buff = 1.25
 hunter_crit_rate = 0.25
@@ -12,7 +12,8 @@ fairy_boost = 15
 gamble_chance = 0.125
 gamble_reward = 10
 gamble_cost = 15
-voyage_chance = 0.005
+voyage_reduction = 0.25
+voyage_chance = 0.001
 voyage_reward = 150
 reap_cooldown = 21600  # reap_cooldown = 21600
 
@@ -59,14 +60,14 @@ char_list = """
  - Bandit Only - **t!steal:** Available 1 Min After the Latest Reap
 6. **Twilight Mercenary**: Instant Reap, Can't be Stolen
 7. **Void Gambler**: {}% Chance of Getting {}x or Lose {} Minutes
-8. **Abyssal Voyager**: {}% Chance of Getting {}x (can't be stolen)
+8. **Abyssal Voyager**: {}% Less Time Reaped, but {}% chance to gain {}x
 """\
     .format((warrior_buff - 1) * 100,
             mage_reduction_rate * 100,
             hunter_crit_rate * 100,
             fairy_boost,
             gamble_chance * 100, gamble_reward, gamble_cost,
-            voyage_chance * 100, voyage_reward)
+            (1 - voyage_reduction) * 100, voyage_chance * 100, voyage_reward)
 
 
 start_str = """"Welcome to the Arena of Time,

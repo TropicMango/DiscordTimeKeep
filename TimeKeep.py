@@ -22,7 +22,7 @@ notice_message = ""
 reap_in_progress = 0
 thief_id = 0
 
-# notice_message = "** ------ Notice ------ **\nSeason Ending June 17th 11:59 P.M.\nRace Systems Coming Soon~"
+notice_message = "** ------ Notice ------ **\nSeason Ending Sept 10th 9:00 A.M."
 
 
 def get_latest_time():
@@ -219,7 +219,9 @@ async def reap(ctx):
                   + roll_shell(added_time, players, author)
             player.reaped_time -= GameStat.gamble_cost * 60
             await bot.say(msg)
+            latest_clear = current_time
             DataManager.write_players(players, latest_clear)
+            # DataManager.write_players(players, current_time)
             DataManager.update_logs_win(False, "GAMBLE", str(author)[:-5], seconds_format(added_time))
             return
 
@@ -232,14 +234,9 @@ async def reap(ctx):
                     .format(GameStat.voyage_reward * 100)
             DataManager.update_logs_win(True, "VOYAGE")
         else:
-            msg = '**ABYSSAL VOYAGE FAILED**\n🌌{}🌌\n'.format(GameStat.get_voyage_msg()) + \
-                  roll_shell(added_time, players, author)
-            await bot.say(msg)
-            DataManager.write_players(players, latest_clear)
-            DataManager.update_logs_win(False, "VOYAGE", str(author)[:-5], seconds_format(added_time))
-            return
-
-
+            added_time *= GameStat.voyage_reduction
+            reap_message += GameStat.get_voyage_msg() + '\n Reap Time Reduced to {}%\n' \
+                .format(GameStat.voyage_reduction * 100)
 
     DataManager.write_players(players, latest_clear)
 
@@ -686,10 +683,11 @@ def run_client(client, *args, **kwargs):
 
 while True:
     try:
+        print('-------------------starting-------------------')
         bot.run(SecretFile.get_token())  # are you happy now Soap????
     except ConnectionResetError:
-        print('-------------------error-------------------')
-        time.sleep(60)
+        print('-------------------c_error-------------------')
+        time.sleep(600)
     except TimeoutError:
-        print('-------------------error-------------------')
-        time.sleep(60)
+        print('-------------------t_error-------------------')
+        time.sleep(600)

@@ -1,3 +1,12 @@
+**12 Sep 2019**
+    Abyssal Voyager
+     - win chance reduced
+     - now gains scrap on reap
+**20 Aug 2019**
+    Abyssal Voyager
+     - now consumes stored time on reap
+    Void Gambler
+     - also consumes stored time on reap
 **18 June 2019**
     Season 5 Begin
 **26 May 2019**
