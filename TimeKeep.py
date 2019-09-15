@@ -22,7 +22,7 @@ notice_message = ""
 reap_in_progress = 0
 thief_id = 0
 
-notice_message = "** ------ Notice ------ **\nSeason Ending Sept 10th 9:00 A.M."
+# notice_message = "** ------ Notice ------ **\nSeason Ending Sept 10th 9:00 A.M."
 
 
 def get_latest_time():
@@ -239,9 +239,8 @@ async def reap(ctx):
                 .format(GameStat.voyage_reduction * 100)
 
     DataManager.write_players(players, latest_clear)
-
-    # ------------------------------- Initialize Reaping -------------------------
     reap_in_progress = added_time
+    # ------------------------------- Initialize Reaping -------------------------
     reap_lockin_message = await bot.say("Reap Initiated, Will be Completed in 60 Seconds")
     await bot.change_presence(game=discord.Game(name='⚔️Reaping: {}'.format("{}H {}M {}S".format(*hms(added_time)))))
     while reap_delay > 0:
@@ -319,6 +318,8 @@ async def steal(ctx):
         await bot.say("Sorry no One is Reaping Right Now\nUse **t!reap** to do so")
         return
 
+    reap_in_progress = 0
+
     global thief_id
     thief_id = ctx.message.author
 
@@ -337,7 +338,6 @@ async def steal(ctx):
     await bot.say(reap_message)
     # Strip out the last five characters (the #NNNN part)
     DataManager.update_logs_reap(str(author)[:-5], seconds_format(reap_in_progress), player.class_type, stolen=True)
-    reap_in_progress = 0
     latest_clear = current_time
     await update_time_status()
     DataManager.write_players(players, latest_clear)
