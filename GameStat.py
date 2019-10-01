@@ -92,7 +92,7 @@ def get_voyage_msg():
 class Player:
     def __init__(self, representation):
         representation = str(representation).split("|")
-        self.id = representation[0]
+        self.id = int(representation[0])
         self.name = representation[1]
         self.reaped_time = float(representation[2])
         self.next_reap = float(representation[3])

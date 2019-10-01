@@ -22,6 +22,7 @@ notice_message = ""
 reap_in_progress = 0
 thief_id = 0
 
+
 # notice_message = "** ------ Notice ------ **\nSeason Ending Sept 10th 9:00 A.M."
 
 
@@ -69,7 +70,7 @@ async def update_time_status():
         return
     flowed_time = int(time.time() - latest_clear)
     time_str = "{}H {}M {}S".format(*hms(flowed_time))
-    await bot.change_presence(game=discord.Game(name='t!: ' + time_str))
+    await bot.change_presence(activity=discord.Game(name='t!: ' + time_str))
 
 
 @bot.event
@@ -86,13 +87,12 @@ async def on_ready():  # when ready it prints the username, id, and starts the s
     await start_timer()
 
 
-@bot.command()
-async def start():
+@bot.command(pass_context=True)
+async def start(ctx):
     embed = discord.Embed(color=0x42d7f4)
     embed.title = "Welcome~ "
     embed.description = GameStat.start_str
-    # embed.set_image(url="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/{}.jpg".format(my_champ[0]))
-    await bot.say(embed=embed)
+    await ctx.message.channel.send(embed=embed)
 
 
 @bot.command(pass_context=True)
@@ -107,28 +107,30 @@ async def change(ctx):
 
 async def class_selection(ctx):
     if reap_in_progress != 0:
-        await bot.say("Sorry Reap is Currently In Progress\nClass Selection is Temporarily Disabled")
+        await ctx.message.channel.send("Sorry Reap is Currently In Progress\nClass Selection is Temporarily Disabled")
         return
 
     try:
         player_class_id = (int(ctx.message.content[9:]))
         if player_class_id == 8:
-            msg = await bot.say("<@!{}> **Abyssal Voyager Warning: **\n"
-                                "One Look into the Abyss and There Will be no Turning Back\n"
-                                "(Class Change Will be Disabled)\n**Is {} Ready to Venture Into the Abyss**"
-                                "".format(ctx.message.author.id, str(ctx.message.author)[:-5]))
-            await bot.add_reaction(msg, "✅")
-            await bot.add_reaction(msg, "❎")
+            msg = await ctx.message.channel.send("<@!{}> **Abyssal Voyager Warning: **\n"
+                                                 "One Look into the Abyss and There Will be no Turning Back\n"
+                                                 "(Class Change Will be Disabled)\n"
+                                                 "**Is {} Ready to Venture Into the Abyss**"
+                                                 "".format(ctx.message.author.id, str(ctx.message.author)[:-5]))
+            await msg.add_reaction("✅")
+            await msg.add_reaction("❎")
             return
     except (ValueError, KeyError):
         msg = "Sorry I don't understand\nUse t!choose / t!change <Class #>\n" + GameStat.char_list
-        await bot.say(msg)
+        await ctx.message.channel.send(msg)
         return
     if change_player_class(ctx.message.author.id, ctx.message.author, player_class_id):
-        await bot.say("<@!{}> is now a **{}**".format(ctx.message.author.id, GameStat.class_name[player_class_id]))
+        await ctx.message.channel.send(
+            "<@!{}> is now a **{}**".format(ctx.message.author.id, GameStat.class_name[player_class_id]))
     else:
-        await bot.say("<@!{}> Sorry Abyssal Voyage is Never Ending"
-                      "\nClass Change Cancelled".format(ctx.message.author.id))
+        await ctx.message.channel.send("<@!{}> Sorry Abyssal Voyage is Never Ending"
+                                       "\nClass Change Cancelled".format(ctx.message.author.id))
 
 
 def change_player_class(author_id, author_name, player_class_id):
@@ -138,7 +140,7 @@ def change_player_class(author_id, author_name, player_class_id):
         player = next(player for player in players if player.id == author_id)
         if player.class_type == 8:
             return False
-
+        print("found")
         player.name = str(author_name)[:-5]
         player.class_type = player_class_id
         if player.class_type == 2:
@@ -165,7 +167,7 @@ async def reap(ctx):
     player = player_package[0]
     players = player_package[1]
     if reap_in_progress != 0:
-        await bot.say("Reap is Currently In Progress \nBandits are allowed to steal with *t!steal*")
+        await ctx.message.channel.send("Reap is Currently In Progress \nBandits are allowed to steal with *t!steal*")
         return
 
     global latest_clear
@@ -182,18 +184,18 @@ async def reap(ctx):
     # --------------------- Unique Class Passive ------------------
     if player.class_type == 1:
         added_time *= GameStat.warrior_buff
-        reap_message += '**HEROIC STRIKE ACTIVATED!**\n Reap Time Increased to {}%\n'\
+        reap_message += '**HEROIC STRIKE ACTIVATED!**\n Reap Time Increased to {}%\n' \
             .format(GameStat.warrior_buff * 100)
 
     elif player.class_type == 2:
-        reap_message += '**TIME WARP ACTIVATED!**\n Reap Cooldown Reduced by {}%\n'\
+        reap_message += '**TIME WARP ACTIVATED!**\n Reap Cooldown Reduced by {}%\n' \
             .format(GameStat.mage_reduction_rate * 100)
         player.next_reap = current_time + GameStat.reap_cooldown * (1 - GameStat.mage_reduction_rate)
 
     elif player.class_type == 3:
         if random.random() < GameStat.hunter_crit_rate:
             added_time *= 2
-            reap_message += '**HUNTER\'S MARK ACTIVATED!**\n Reap Time Increased to {}%\n'\
+            reap_message += '**HUNTER\'S MARK ACTIVATED!**\n Reap Time Increased to {}%\n' \
                 .format(GameStat.hunter_crit_dmg * 100)
         else:
             reap_message += '**HUNTER\'S MARK FAILED!**\n Reap Time Gains No Modifier\n'
@@ -211,14 +213,14 @@ async def reap(ctx):
             reap_delay = 0
             added_time *= GameStat.gamble_reward
             for win in range(3):
-                reap_message += '**💰!!!LUCKY COIN ACTIVATED!!!💰**\n Reap Time Increased to {}%!!!\n'\
+                reap_message += '**💰!!!LUCKY COIN ACTIVATED!!!💰**\n Reap Time Increased to {}%!!!\n' \
                     .format(GameStat.gamble_reward * 100)
             # DataManager.update_logs_win(True, "GAMBLE")
         else:
             msg = '**LUCKY COIN FAILED**\n{} Minutes has Been Lost\n'.format(GameStat.gamble_cost) \
                   + roll_shell(added_time, players, author)
             player.reaped_time -= GameStat.gamble_cost * 60
-            await bot.say(msg)
+            await ctx.message.channel.send(msg)
             latest_clear = current_time
             DataManager.write_players(players, latest_clear)
             # DataManager.write_players(players, current_time)
@@ -230,7 +232,7 @@ async def reap(ctx):
             reap_delay = 0
             added_time *= GameStat.voyage_reward
             for win in range(20):
-                reap_message += '**🌌!!!ABYSSAL VOYAGE SUCCESSFUL!!!🌌**\n Reap Time Increased to {}%!!!\n'\
+                reap_message += '**🌌!!!ABYSSAL VOYAGE SUCCESSFUL!!!🌌**\n Reap Time Increased to {}%!!!\n' \
                     .format(GameStat.voyage_reward * 100)
             DataManager.update_logs_win(True, "VOYAGE")
         else:
@@ -241,37 +243,36 @@ async def reap(ctx):
     DataManager.write_players(players, latest_clear)
     reap_in_progress = added_time
     # ------------------------------- Initialize Reaping -------------------------
-    reap_lockin_message = await bot.say("Reap Initiated, Will be Completed in 60 Seconds")
-    await bot.change_presence(game=discord.Game(name='⚔️Reaping: {}'.format("{}H {}M {}S".format(*hms(added_time)))))
+    reap_lockin_message = await ctx.message.channel.send("Reap Initiated, Will be Completed in 60 Seconds")
+    await bot.change_presence(
+        activity=discord.Game(name='⚔️Reaping: {}'.format("{}H {}M {}S".format(*hms(added_time)))))
     while reap_delay > 0:
         if reap_in_progress != 0:
             await asyncio.sleep(5)
             reap_delay -= 5
             try:
-                await bot.edit_message(reap_lockin_message, "Reap Initiated, Will be Completed in {} Seconds"
-                                                            "".format(reap_delay))
+                await reap_lockin_message.edit(content="Reap Initiated, Will be Completed in {} Seconds".format(reap_delay))
             except discord.errors.NotFound:
-                reap_lockin_message = await bot.say("Reap Initiated, Will be Completed in {} Seconds"
-                                                    "".format(reap_delay))
+                reap_lockin_message = await ctx.message.channel.send("Reap Initiated, Will be Completed in {} Seconds".format(reap_delay))
         else:
-            await bot.edit_message(reap_lockin_message, "<@!{}> Your Reap Has Been *STOLEN* by {}"
-                                   .format(player.id, str(thief_id)[:-5]))
+            await reap_lockin_message.edit(content="<@!{}> Your Reap Has Been *STOLEN* by {}"
+                                           .format(player.id, str(thief_id)[:-5]))
             return
 
-    await bot.edit_message(reap_lockin_message, "Reap Successful")
+    await reap_lockin_message.edit(content="Reap Successful")
 
     reap_in_progress = 0
     # --------------------- Store Data ------------------
     player.reaped_time = math.floor(player.reaped_time + added_time)
     reap_message += '<@!{}> has added **{}** to their total\n' \
-                    'Adding up to be **{}**\nNext reap in **{}**\n'\
+                    'Adding up to be **{}**\nNext reap in **{}**\n' \
         .format(author.id, seconds_format(added_time), seconds_format(player.reaped_time),
                 "{} hours and {} minutes".format(*hms(player.next_reap - current_time)))
 
     # --------------------- Roll Shell ------------------
     reap_message += roll_shell(added_time, players, author)
 
-    await bot.say(reap_message)
+    await ctx.message.channel.send(reap_message)
     # Strip out the last five characters (the #NNNN part)
     DataManager.update_logs_reap(str(author)[:-5], seconds_format(added_time), player.class_type)
     latest_clear = current_time
@@ -286,11 +287,11 @@ def roll_shell(added_time, players, author):
     reap_message = ""
     if random.random() < GameStat.blue_shell_chance and len(players) > 3:
         # compose blue shell message
-        reap_message += "\n{} BLUE SHELL ACTIVATED {}\n**{}** lost *{}*\n**{}** lost *{}*\n**{}** lost *{}*"\
+        reap_message += "\n{} BLUE SHELL ACTIVATED {}\n**{}** lost *{}*\n**{}** lost *{}*\n**{}** lost *{}*" \
             .format(GameStat.blue_shell_icon, GameStat.blue_shell_icon,
                     players[0].name, seconds_format(added_time),
                     players[1].name, seconds_format(added_time * 0.75),
-                    players[2].name, seconds_format(added_time * 0.5),)
+                    players[2].name, seconds_format(added_time * 0.5), )
         # calculate damage
         players[0].reaped_time -= added_time
         players[1].reaped_time -= added_time * 0.75
@@ -309,16 +310,15 @@ async def steal(ctx):
     players = player_package[1]
 
     global reap_in_progress
+
     if player is None:
         return
     if player.class_type != 5:
-        await bot.say("Sorry **t!steal** is Only Allowed for the Dimensional Bandits")
+        await ctx.message.channel.send("Sorry **t!steal** is Only Allowed for the Dimensional Bandits")
         return
     if reap_in_progress == 0:
-        await bot.say("Sorry no One is Reaping Right Now\nUse **t!reap** to do so")
+        await ctx.message.channel.send("Sorry no One is Reaping Right Now\nUse **t!reap** to do so")
         return
-
-    reap_in_progress = 0
 
     global thief_id
     thief_id = ctx.message.author
@@ -335,24 +335,25 @@ async def steal(ctx):
                 "{} hours and {} minutes".format(*hms(player.next_reap - current_time)))
 
     global latest_clear
-    await bot.say(reap_message)
+    await ctx.message.channel.send(reap_message)
     # Strip out the last five characters (the #NNNN part)
     DataManager.update_logs_reap(str(author)[:-5], seconds_format(reap_in_progress), player.class_type, stolen=True)
     latest_clear = current_time
     await update_time_status()
     DataManager.write_players(players, latest_clear)
+    reap_in_progress = 0
     # await start_timer()
 
 
 async def check_player(ctx):
     print("- Check by {} -".format(ctx.message.author))
     if maintenance:
-        await bot.say("Sorry currently under maintenance")
+        await ctx.message.channel.send("Sorry currently under maintenance")
         return None
 
     # Bot detection
     if ctx.message.author.bot:
-        await bot.say("bot detected, command canceled")
+        await ctx.message.channel.send("bot detected, command canceled")
         return None
 
     # find player
@@ -363,14 +364,14 @@ async def check_player(ctx):
         player = next(player for player in players if player.id == author_id)
     except StopIteration:
         # We couldn't find the player, so create a new one and insert it into players
-        await bot.say("Looks like you never played before~\nUse **t!start** to get started~")
+        await ctx.message.channel.send("Looks like you never played before~\nUse **t!start** to get started~")
         return None
 
     current_time = time.time()
 
     # check for cooldown
     if current_time < player.next_reap:
-        await bot.say("""Sorry, actions is still on cooldown
+        await ctx.message.channel.send("""Sorry, actions is still on cooldown
                       please wait another **{} hours {} minutes and {} seconds**
                       """.format(*hms(player.next_reap - current_time)))
         return None
@@ -378,9 +379,9 @@ async def check_player(ctx):
     return player, players
 
 
-@bot.command()
-async def c():
-    await bot.say(" " + GameStat.char_list)
+@bot.command(pass_context=True)
+async def c(ctx):
+    await ctx.message.channel.send(" " + GameStat.char_list)
 
 
 @bot.command(pass_context=True)
@@ -394,7 +395,7 @@ async def info(ctx):
         user_rank = ctx.message.content.split('#')[1]
         await print_info(ctx.message.channel, user_rank=user_rank)
     else:
-        await bot.say("Sorry I don't understand\nUse t!info @player or t!info #<rank> or t!me")
+        await ctx.message.channel.send("Sorry I don't understand\nUse t!info @player or t!info #<rank> or t!me")
         return
 
 
@@ -406,26 +407,29 @@ async def me(ctx):
 
 async def print_info(channel, user_id=0, user_rank=0):
     if notice_message != "":
-        await bot.send_message(channel, notice_message)
+        # await channel.send(notice_message)
+        await channel.send(notice_message)
 
     players = DataManager.read_players()
+    player = None
+    index = 0
     if user_id != 0:
         try:
             # Find the current player
             index, player = next((index, player) for index, player in enumerate(players) if player.id == user_id)
         except StopIteration:
             # Player doesn't exist in our logs, so tell them to reap
-            await bot.send_message(channel, """<@!{}> has stored 0 seconds
+            await channel.send("""<@!{}> has stored 0 seconds
                                 use t!reap to get started""".format(user_id))
             return
     elif user_rank != 0:
         user_rank = int(user_rank)
         try:
             # Find the current player
-            index, player = next((index, player) for index, player in enumerate(players) if index+1 == user_rank)
+            index, player = next((index, player) for index, player in enumerate(players) if index + 1 == user_rank)
         except StopIteration:
             # Player doesn't exist in our logs, so tell them to reap
-            await bot.send_message(channel, """<@!{}> has stored 0 seconds
+            await channel.send("""<@!{}> has stored 0 seconds
                                 use t!reap to get started""".format(user_id))
             return
 
@@ -438,7 +442,7 @@ async def print_info(channel, user_id=0, user_rank=0):
     average_reap = seconds_format(0 if (player.reap_count == 0) else player.reaped_time / player.reap_count)
     # in case of div by zero
     embed = discord.Embed(color=0xfc795c)
-    embed.add_field(name="Stats of *{}*" .format(player.name), value="""
+    embed.add_field(name="Stats of *{}*".format(player.name), value="""
     **Class:** {}
     **Rank:** {}
     **Stored Time:** {}
@@ -448,25 +452,25 @@ async def print_info(channel, user_id=0, user_rank=0):
     """.format(GameStat.class_name[player.class_type], index + 1,
                seconds_format(player.reaped_time), average_reap,
                int(player.reap_count), next_reap))
-    await bot.say(embed=embed)
+    await channel.send(embed=embed)
 
 
-@bot.command()
-async def log():
+@bot.command(pass_context=True)
+async def log(ctx):
     with open("./data/reapLog.txt", "r", encoding='utf-8') as f:
         content = f.readlines()
     log_string = ''.join(content[:20])
     embed = discord.Embed(color=0x42d7f4)
     embed.title = "Reap Log"
     embed.description = log_string
-    await bot.say(embed=embed)
+    await ctx.message.channel.send(embed=embed)
 
 
-@bot.command()
-async def pn():
-    msg = await bot.say(embed=generate_patch_embed(1))
-    await bot.add_reaction(msg, "⬅")
-    await bot.add_reaction(msg, "➡")
+@bot.command(pass_context=True)
+async def pn(ctx):
+    msg = await ctx.message.channel.send(embed=generate_patch_embed(1))
+    await msg.add_reaction("⬅")
+    await msg.add_reaction("➡")
 
 
 def generate_patch_embed(start_point):
@@ -496,17 +500,18 @@ def generate_patch_embed(start_point):
 
 @bot.command(pass_context=True)
 async def ping(ctx):
-    t = await bot.say('Pong!')
+    t = await ctx.message.channel.send('Pong!')
+    ms = 0
     try:
-        ms = (t.timestamp - ctx.message.timestamp).total_seconds() * 1000
-        await bot.edit_message(t, new_content='Pong! Took: {}ms'.format(int(ms)))
+        ms = (t.created_at - ctx.message.created_at).total_seconds() * 1000
+        await t.edit(content='Pong! Took: {}ms'.format(int(ms)))
     except discord.ext.commands.errors.CommandInvokeError:
-        await bot.say('(Missing Message Editing Permission) Took: {}ms'.format(int(ms)))
+        await ctx.message.channel.send('(Missing Message Editing Permission) Took: {}ms'.format(int(ms)))
 
 
-@bot.command()
-async def help():
-    await bot.say(GameStat.help_str)
+@bot.command(pass_context=True)
+async def help(ctx):
+    await ctx.message.channel.send(GameStat.help_str)
 
 
 @bot.command(pass_context=True)
@@ -531,26 +536,26 @@ async def print_season_leaderboard(channel, msg):
         if target_season > GameStat.current_season:
             raise ValueError()
     except ValueError:
-        await bot.send_message(channel, "Sorry I don't Understand")
+        await channel.send("Sorry I don't Understand")
         return
 
     if notice_message != "":
-        await bot.send_message(channel, notice_message)
+        await channel.send(notice_message)
 
     embed = generate_leaderboard_embed(1, target_season)
-    msg = await bot.send_message(channel, embed=embed)
-    await bot.add_reaction(msg, "⬅")
-    await bot.add_reaction(msg, "➡")
+    msg = await channel.send(embed=embed)
+    await msg.add_reaction("⬅")
+    await msg.add_reaction("➡")
 
 
 async def print_leaderboard(channel):
     if notice_message != "":
-        await bot.send_message(channel, notice_message)
+        await channel.send(notice_message)
 
     embed = generate_leaderboard_embed(1)
-    msg = await bot.send_message(channel, embed=embed)
-    await bot.add_reaction(msg, "⬅")
-    await bot.add_reaction(msg, "➡")
+    msg = await channel.send(embed=embed)
+    await msg.add_reaction("⬅")
+    await msg.add_reaction("➡")
 
 
 def generate_leaderboard_embed(start_rank, season=GameStat.current_season):
@@ -592,13 +597,13 @@ def generate_leaderboard_embed(start_rank, season=GameStat.current_season):
     return embed
 
 
-@bot.command()
-async def invite():
+@bot.command(pass_context=True)
+async def invite(ctx):
     embed = discord.Embed(color=0x42d7f4)
     embed.description = \
         "[Invite me~]" \
         "(https://discordapp.com/api/oauth2/authorize?client_id=538078061682229258&permissions=14336&scope=bot)"
-    await bot.say(embed=embed)
+    await ctx.message.channel.send(embed=embed)
 
 
 @bot.event
@@ -608,19 +613,20 @@ async def on_reaction_add(reaction, user):
             if reaction.message.content.startswith("<@!"):  # this should be a player
                 if str(reaction.emoji) == "✅" and reaction.message.content[3:21] == str(user.id):
                     change_player_class(reaction.message.content[3:21], reaction.message.content[148:-34] + "#1234", 8)
-                    await bot.send_message(reaction.message.channel,
-                                           "<@!{}> is now a **{}**".format(reaction.message.content[3:21],
-                                                                           GameStat.class_name[8]))
+                    await reaction.message.channel.send(
+                        "<@!{}> is now a **{}**".format(reaction.message.content[3:21],
+                                                        GameStat.class_name[8]))
                 else:
-                    await bot.send_message(reaction.message.channel, "Class Change Cancelled")
-                await bot.delete_message(reaction.message)
+                    await reaction.message.channel.send("Class Change Cancelled")
+                await reaction.message.delete()
             else:  # this should be a leaderboard or patch note msg
-                await bot.remove_reaction(reaction.message, reaction.emoji, user)
-
-                footer = reaction.message.embeds[0]["footer"]["text"]
+                await reaction.remove(user)
+                embed = None
+                footer = reaction.message.embeds[0].footer.text
 
                 if footer.startswith('Rank'):  # process for current leaderboard
                     index = int(footer.split()[1])
+
                     if str(reaction.emoji) == "➡":
                         embed = generate_leaderboard_embed(index + 10)
                     elif str(reaction.emoji) == "⬅":
@@ -628,7 +634,7 @@ async def on_reaction_add(reaction, user):
                             return
                         embed = generate_leaderboard_embed(index - 10)
                     if embed is not None:
-                        await bot.edit_message(reaction.message, embed=embed)
+                        await reaction.message.edit(embed=embed)
                 elif footer.startswith('Season'):
                     index = int(footer.split()[3])
                     season = int(footer.split()[1])
@@ -639,7 +645,7 @@ async def on_reaction_add(reaction, user):
                             return
                         embed = generate_leaderboard_embed(index - 10, season)
                     if embed is not None:
-                        await bot.edit_message(reaction.message, embed=embed)
+                        await reaction.message.edit(embed=embed)
                 elif footer.startswith('Patch Notes'):  # process for patch notes
                     index = int(footer.split()[3])
                     if str(reaction.emoji) == "➡":
@@ -649,7 +655,7 @@ async def on_reaction_add(reaction, user):
                             return
                         embed = generate_patch_embed(index - + 1)
                     if embed is not None:
-                        await bot.edit_message(reaction.message, embed=embed)
+                        await reaction.message.edit(embed=embed)
 
 
 @bot.command(pass_context=True)
@@ -665,9 +671,9 @@ async def on_message(message):
 
 
 async def send_status(channel):
-    await bot.send_message(channel, 'Currently stored {}\n'
-                                    'across {} servers'
-                           .format(seconds_format(math.floor(time.time() - latest_clear)), len(bot.servers)))
+    await channel.send('Currently stored {}\n'
+                       'across {} servers'
+                       .format(seconds_format(math.floor(time.time() - latest_clear)), len(bot.guilds)))
 
 
 def run_client(client, *args, **kwargs):
