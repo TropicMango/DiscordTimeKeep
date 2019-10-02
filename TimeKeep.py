@@ -112,6 +112,8 @@ async def class_selection(ctx):
 
     try:
         player_class_id = (int(ctx.message.content[9:]))
+        if player_class_id > GameStat.class_name.__len__():
+            raise ValueError
         if player_class_id == 8:
             msg = await ctx.message.channel.send("<@!{}> **Abyssal Voyager Warning: **\n"
                                                  "One Look into the Abyss and There Will be no Turning Back\n"
@@ -140,7 +142,6 @@ def change_player_class(author_id, author_name, player_class_id):
         player = next(player for player in players if player.id == author_id)
         if player.class_type == 8:
             return False
-        print("found")
         player.name = str(author_name)[:-5]
         player.class_type = player_class_id
         if player.class_type == 2:
@@ -174,6 +175,20 @@ async def reap(ctx):
     current_time = time.time()
     added_time = current_time - latest_clear
     reap_message = ""
+
+    if player.class_type == 10:
+        reward = GameStat.striker_max_reward - (current_time - player.next_reap) / 60 * GameStat.striker_reward_drop
+        if reward > 1:
+            reap_message += '**MOMENTUM STABLE!**\n Reap Time Increased to {}%\n' \
+                .format(round(reward * 100))
+            added_time *= reward
+        else:
+            reap_message += '**Momentum Lost**\n Reap Time Not Effected\n'
+    if player.class_type == 11:
+        reward = (current_time - player.next_reap) / 86400 * GameStat.capacitor_boost
+        reap_message += '**CAPACITOR DISCHARGE!**\n Reap Time Increased to {}%\n' \
+            .format(round(reward * 100))
+        added_time *= reward
 
     author = ctx.message.author
     player.reap_count += 1
@@ -239,6 +254,13 @@ async def reap(ctx):
             added_time *= GameStat.voyage_reduction
             reap_message += GameStat.get_voyage_msg() + '\n Reap Time Reduced to {}%\n' \
                 .format(GameStat.voyage_reduction * 100)
+
+    elif player.class_type == 9:
+        if added_time > GameStat.sniper_threshold:
+            reap_message += '**COSMIC SHOT LANDED!**\n Reap Cooldown Rest\n'
+            player.next_reap = current_time
+        else:
+            reap_message += '**Cosmic Shot Missed**\n Reap Cooldown Not Effected\n'
 
     DataManager.write_players(players, latest_clear)
     reap_in_progress = added_time
@@ -377,6 +399,11 @@ async def check_player(ctx):
         return None
 
     return player, players
+
+
+@bot.command(pass_context=True)
+async def classes(ctx):
+    await ctx.message.channel.send(" " + GameStat.char_list)
 
 
 @bot.command(pass_context=True)

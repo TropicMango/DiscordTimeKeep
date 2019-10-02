@@ -1,11 +1,23 @@
+**10 Oct 2019**
+    Thousand Year Fairy Buff:
+     - bonus increased to 25 min
+    Time Mage Buff:
+     - cooldown reduction increased to 30%
+    Cosmic Sniper Added:
+     - resets reap cooldown if reap is longer than 2 hour
+    Meteoric Brawler Added:
+     - gains multiplier based on the recentness of your last reap
+     - 5x the second it's off cooldown, and floors to 1x at 30 minutes
+    Unknown Capacitor
+     - gains 1x for each day since last reap (stacks indefinitely)
 **12 Sep 2019**
-    Abyssal Voyager
-     - win chance reduced
-     - now gains scrap on reap
+    Abyssal Voyager Adjust:
+     - win chance reduced to 0.1%
+     - now gains 25% on reap
 **20 Aug 2019**
-    Abyssal Voyager
+    Abyssal Voyager Adjust:
      - now consumes stored time on reap
-    Void Gambler
+    Void Gambler Adjust:
      - also consumes stored time on reap
 **18 June 2019**
     Season 5 Begin
