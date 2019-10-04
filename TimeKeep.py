@@ -23,7 +23,7 @@ reap_in_progress = 0
 thief_id = 0
 
 
-# notice_message = "** ------ Notice ------ **\nSeason Ending Sept 10th 9:00 A.M."
+# notice_message = "** ------ Notice ------ **\n**UPDATE** new patch released, use t!pn for more information~"
 
 
 def get_latest_time():
@@ -117,7 +117,7 @@ async def class_selection(ctx):
         if player_class_id == 8:
             msg = await ctx.message.channel.send("<@!{}> **Abyssal Voyager Warning: **\n"
                                                  "One Look into the Abyss and There Will be no Turning Back\n"
-                                                 "(Class Change Will be Disabled)\n"
+                                                 "(Class Change Might be Disabled)\n"
                                                  "**Is {} Ready to Venture Into the Abyss**"
                                                  "".format(ctx.message.author.id, str(ctx.message.author)[:-5]))
             await msg.add_reaction("✅")
@@ -140,8 +140,8 @@ def change_player_class(author_id, author_name, player_class_id):
     try:
         # Find the current player
         player = next(player for player in players if player.id == author_id)
-        if player.class_type == 8:
-            return False
+        # if player.class_type == 8:
+        #     return False
         player.name = str(author_name)[:-5]
         player.class_type = player_class_id
         if player.class_type == 2:
@@ -183,7 +183,7 @@ async def reap(ctx):
                 .format(round(reward * 100))
             added_time *= reward
         else:
-            reap_message += '**Momentum Lost**\n Reap Time Not Effected\n'
+            reap_message += '**Momentum Lost**\n Reap Time Not Affected\n'
     if player.class_type == 11:
         reward = (current_time - player.next_reap) / 86400 * GameStat.capacitor_boost
         reap_message += '**CAPACITOR DISCHARGE!**\n Reap Time Increased to {}%\n' \
@@ -252,7 +252,7 @@ async def reap(ctx):
             DataManager.update_logs_win(True, "VOYAGE")
         else:
             added_time *= GameStat.voyage_reduction
-            reap_message += GameStat.get_voyage_msg() + '\n Reap Time Reduced to {}%\n' \
+            reap_message += '**' + GameStat.get_voyage_msg() + '**\n Reap Time Reduced to {}%\n' \
                 .format(GameStat.voyage_reduction * 100)
 
     elif player.class_type == 9:
@@ -273,9 +273,12 @@ async def reap(ctx):
             await asyncio.sleep(5)
             reap_delay -= 5
             try:
-                await reap_lockin_message.edit(content="Reap Initiated, Will be Completed in {} Seconds".format(reap_delay))
+                await reap_lockin_message.edit(
+                    content="Reap Initiated, Will be Completed in {} Seconds\nFun Fact: {}"
+                            "".format(reap_delay, GameStat.get_fun_fact()))
             except discord.errors.NotFound:
-                reap_lockin_message = await ctx.message.channel.send("Reap Initiated, Will be Completed in {} Seconds".format(reap_delay))
+                reap_lockin_message = await ctx.message.channel.send(
+                    "Reap Initiated, Will be Completed in {} Seconds".format(reap_delay))
         else:
             await reap_lockin_message.edit(content="<@!{}> Your Reap Has Been *STOLEN* by {}"
                                            .format(player.id, str(thief_id)[:-5]))

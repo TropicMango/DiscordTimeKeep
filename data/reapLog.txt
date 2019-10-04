@@ -1,57 +1,100 @@
-18:33: ***🌌VOYAGE🌌*** - 0 Hours 6 Minutes 9 Seconds - *Abyssal Voyager:* **Soap**
-18:07: ***REAP*** - 0 Hours 0 Minutes 0 Seconds - *STOLEN* by **innocentbystander**
-18:07: ***New Player:*** *Shadowhelm* joined the arena as a *Space-Time Hunter*
-17:06: ***🌌VOYAGE🌌*** - 0 Hours 5 Minutes 48 Seconds - *Abyssal Voyager:* **sjslapshot**
-17:05: ***New Player:*** *sjslapshot* joined the arena as a *Abyssal Voyager*
-16:43: ***🌌VOYAGE🌌*** - 0 Hours 18 Minutes 12 Seconds - *Abyssal Voyager:* **hecc off**
-16:42: ***New Player:*** *hecc off* joined the arena as a *Abyssal Voyager*
-15:30: ***REAP*** - 2 Hours 34 Minutes 44 Seconds - *Chrono Warrior:* **LuxuFate**
-13:29: ***Class Change:*** *Tropic Mango* is now a *Chrono Warrior*
-13:27: ***New Player:*** *plusqwerty* joined the arena as a *Void Gambler*
-13:27: ***REAP*** - 0 Hours 56 Minutes 59 Seconds - *Time Mage:* **Tropic Mango**
-12:30: ***REAP*** - 1 Hours 0 Minutes 36 Seconds - *Space-Time Hunter:* **halfemptygirl**
-11:29: ***REAP*** - 1 Hours 26 Minutes 49 Seconds - *Chrono Warrior:* **Eisbrecher**
-10:20: ***🌌VOYAGE🌌*** - 0 Hours 33 Minutes 2 Seconds - *Abyssal Voyager:* **Soap**
-08:07: ***REAP*** - 3 Hours 2 Minutes 56 Seconds - *Dimensional Bandit:* **innocentbystander**
-05:04: ***REAP*** - 2 Hours 39 Minutes 19 Seconds - *Chrono Warrior:* **PandaDriver.BOSS**
-05:03: ***New Player:*** *PandaDriver.BOSS* joined the arena as a *Chrono Warrior*
-02:57: ***REAP*** - 1 Hours 40 Minutes 14 Seconds - *Chrono Warrior:* **LuxuFate**
-01:37: ***REAP*** - 2 Hours 3 Minutes 18 Seconds - *Time Mage:* **Tropic Mango**
-23:33: ***🌌VOYAGE🌌*** - 0 Hours 4 Minutes 39 Seconds - *Abyssal Voyager:* **Soap**
-23:15: ***REAP*** - 0 Hours 10 Minutes 21 Seconds - *Dimensional Bandit:* **innocentbystander**
-23:04: ***🌌VOYAGE🌌*** - 0 Hours 20 Minutes 50 Seconds - *Abyssal Voyager:* **nolo**
-21:41: ***REAP*** - 1 Hours 1 Minutes 34 Seconds - *Space-Time Hunter:* **halfemptygirl**
-20:40: ***REAP*** - 5 Hours 41 Minutes 40 Seconds - *Chrono Warrior:* **Eisbrecher**
-20:38: ***New Player:*** *Eisbrecher* joined the arena as a *Chrono Warrior*
-16:05: ***REAP*** - 0 Hours 0 Minutes 0 Seconds - *STOLEN* by **innocentbystander**
-13:59: ***REAP*** - 1 Hours 50 Minutes 25 Seconds - *Time Mage:* **Tropic Mango**
-12:09: ***🌌VOYAGE🌌*** - 0 Hours 26 Minutes 25 Seconds - *Abyssal Voyager:* **Porolific**
-12:08: ***New Player:*** *Porolific* joined the arena as a *Abyssal Voyager*
-10:23: ***🌌VOYAGE🌌*** - 0 Hours 27 Minutes 3 Seconds - *Abyssal Voyager:* **nolo**
-10:22: ***New Player:*** *nolo* joined the arena as a *Abyssal Voyager*
-08:34: ***REAP*** - 0 Hours 0 Minutes 0 Seconds - *STOLEN* by **innocentbystander**
-07:03: ***🌌VOYAGE🌌*** - 0 Hours 30 Minutes 23 Seconds - *Abyssal Voyager:* **Soap**
-05:02: ***REAP*** - 4 Hours 44 Minutes 58 Seconds - *Time Mage:* **Tropic Mango**
-00:17: ***REAP*** - 0 Hours 55 Minutes 32 Seconds - *Time Mage:* **Tropic Mango**
-23:21: ***REAP*** - 3 Hours 24 Minutes 26 Seconds - *Chrono Warrior:* **LuxuFate**
-20:38: ***REAP*** - 2 Hours 0 Minutes 30 Seconds - *Space-Time Hunter:* **halfemptygirl**
-18:37: ***🌌VOYAGE🌌*** - 0 Hours 3 Minutes 15 Seconds - *Abyssal Voyager:* **Soap**
-18:24: ***REAP*** - 0 Hours 40 Minutes 36 Seconds - *Space-Time Hunter:* **DontForgetPepper**
-18:24: ***REAP*** - 0 Hours 40 Minutes 36 Seconds - *STOLEN* by **innocentbystander**
-17:44: ***REAP*** - 0 Hours 32 Minutes 28 Seconds - *Time Mage:* **Tropic Mango**
-17:11: ***REAP*** - 3 Hours 12 Minutes 15 Seconds - *Chrono Warrior:* **LuxuFate**
-***Blue Shell <:Blue_Shell:580276103491485701>*** - LuxuFate has activated a blue shell
-14:37: ***REAP*** - 3 Hours 23 Minutes 12 Seconds - *Space-Time Hunter:* **halfemptygirl**
-12:56: ***REAP*** - 1 Hours 49 Minutes 10 Seconds - *Time Mage:* **Tropic Mango**
-12:55: ***New Player:*** *Tropic Mango* joined the arena as a *Time Mage*
-11:07: ***REAP*** - 2 Hours 32 Minutes 37 Seconds - *Chrono Warrior:* **LuxuFate**
-***Blue Shell <:Blue_Shell:580276103491485701>*** - LuxuFate has activated a blue shell
-11:05: ***New Player:*** *LuxuFate* joined the arena as a *Chrono Warrior*
-09:04: ***🌌VOYAGE🌌*** - 0 Hours 5 Minutes 7 Seconds - *Abyssal Voyager:* **Soap**
+18:16: ***Class Change:*** *halfemptygirl* is now a *Cosmic Sniper*
+17:54: ***Class Change:*** *LuxuFate* is now a *Unknown Capacitor*
+17:10: ***REAP*** - 0 Hours 21 Minutes 9 Seconds - *Momentum Striker:* **Tropic Mango**
+16:49: ***REAP*** - 2 Hours 14 Minutes 48 Seconds - *Momentum Striker:* **DontForgetPepper**
+14:34: ***REAP*** - 0 Hours 50 Minutes 53 Seconds - *Momentum Striker:* **innocentbystander**
+13:43: ***🌌VOYAGE🌌*** - 0 Hours 16 Minutes 56 Seconds - *Abyssal Voyager:* **nolo**
+12:35: ***🌌VOYAGE🌌*** - 0 Hours 17 Minutes 11 Seconds - *Abyssal Voyager:* **hecc off**
+***Blue Shell <:Blue_Shell:580276103491485701>*** - hecc off has activated a blue shell
+11:26: ***REAP*** - 1 Hours 11 Minutes 8 Seconds - *Space-Time Hunter:* **halfemptygirl**
+10:17: ***Class Change:*** *Tropic Mango* is now a *Momentum Striker*
+10:15: ***REAP*** - 1 Hours 43 Minutes 48 Seconds - *Thousand Year Fairy:* **Tropic Mango**
+08:56: ***🌌VOYAGE🌌*** - 0 Hours 7 Minutes 57 Seconds - *Abyssal Voyager:* **Soap**
+08:25: ***REAP*** - 1 Hours 0 Minutes 49 Seconds - *Momentum Striker:* **DontForgetPepper**
+07:24: ***REAP*** - 6 Hours 14 Minutes 17 Seconds - *Momentum Striker:* **innocentbystander**
+01:11: ***Class Change:*** *Tropic Mango* is now a *Thousand Year Fairy*
+01:09: ***REAP*** - 3 Hours 15 Minutes 32 Seconds - *Momentum Striker:* **Tropic Mango**
+00:30: ***🌌VOYAGE🌌*** - 0 Hours 34 Minutes 7 Seconds - *Abyssal Voyager:* **nolo**
+22:15: ***Class Change:*** *innocentbystander* is now a *Momentum Striker*
+22:14: ***REAP*** - 0 Hours 1 Minutes 7 Seconds - *Space-Time Hunter:* **innocentbystander**
+22:13: ***REAP*** - 2 Hours 36 Minutes 6 Seconds - *Momentum Striker:* **DontForgetPepper**
+21:27: ***REAP*** - 1 Hours 7 Minutes 40 Seconds - *Twilight Mercenary:* **That One Spooky Weirdo**
+20:21: ***🌌VOYAGE🌌*** - 0 Hours 1 Minutes 10 Seconds - *Abyssal Voyager:* **Soap**
+20:16: ***🌌VOYAGE🌌*** - 0 Hours 16 Minutes 37 Seconds - *Abyssal Voyager:* **hecc off**
+***Blue Shell <:Blue_Shell:580276103491485701>*** - hecc off has activated a blue shell
+19:09: ***REAP*** - 4 Hours 18 Minutes 48 Seconds - *Momentum Striker:* **Tropic Mango**
+18:00: ***REAP*** - 2 Hours 52 Minutes 19 Seconds - *Space-Time Hunter:* **halfemptygirl**
+17:26: ***Class Change:*** *Shadowhelm* is now a *Unknown Capacitor*
+16:44: ***Class Change:*** *Spooky* is now a *Unknown Capacitor*
+16:03: ***Class Change:*** *DontForgetPepper* is now a *Momentum Striker*
+15:07: ***REAP*** - 1 Hours 16 Minutes 9 Seconds - *Space-Time Hunter:* **innocentbystander**
+13:51: ***🌌VOYAGE🌌*** - 0 Hours 14 Minutes 24 Seconds - *Abyssal Voyager:* **nolo**
+13:39: ***Class Change:*** *Porolific* is now a *Momentum Striker*
+13:01: ***Class Change:*** *Tropic Mango* is now a *Momentum Striker*
+12:53: ***REAP*** - 1 Hours 13 Minutes 25 Seconds - *Time Mage:* **Tropic Mango**
+***Blue Shell <:Blue_Shell:580276103491485701>*** - Tropic Mango has activated a blue shell
+11:40: ***🌌VOYAGE🌌*** - 0 Hours 16 Minutes 57 Seconds - *Abyssal Voyager:* **hecc off**
+10:32: ***REAP*** - 2 Hours 34 Minutes 30 Seconds - *Space-Time Hunter:* **halfemptygirl**
+07:58: ***REAP*** - 7 Hours 19 Minutes 9 Seconds - *Space-Time Hunter:* **innocentbystander**
+00:38: ***🌌VOYAGE🌌*** - 0 Hours 18 Minutes 5 Seconds - *Abyssal Voyager:* **nolo**
+23:26: ***REAP*** - 0 Hours 47 Minutes 27 Seconds - *Time Mage:* **Tropic Mango**
+22:39: ***REAP*** - 0 Hours 25 Minutes 6 Seconds - *Space-Time Hunter:* **innocentbystander**
+22:14: ***🌌VOYAGE🌌*** - 0 Hours 26 Minutes 38 Seconds - *Abyssal Voyager:* **hecc off**
+20:37: ***Class Change:*** *DontForgetPepper* is now a *Chrono Warrior*
+20:27: ***REAP*** - 1 Hours 25 Minutes 37 Seconds - *Space-Time Hunter:* **halfemptygirl**
+19:01: ***🌌VOYAGE🌌*** - 0 Hours 12 Minutes 58 Seconds - *Abyssal Voyager:* **Soap**
+18:09: ***REAP*** - 2 Hours 53 Minutes 15 Seconds - *Space-Time Hunter:* **DontForgetPepper**
+15:16: ***REAP*** - 0 Hours 14 Minutes 50 Seconds - *Space-Time Hunter:* **innocentbystander**
+15:01: ***REAP*** - 1 Hours 11 Minutes 33 Seconds - *Time Mage:* **Tropic Mango**
+13:50: ***🌌VOYAGE🌌*** - 0 Hours 11 Minutes 0 Seconds - *Abyssal Voyager:* **Porolific**
+13:06: ***REAP*** - 2 Hours 18 Minutes 19 Seconds - *Chrono Warrior:* **LuxuFate**
+11:15: ***REAP*** - 1 Hours 31 Minutes 23 Seconds - *Chrono Warrior:* **Eisbrecher**
+10:02: ***🌌VOYAGE🌌*** - 0 Hours 6 Minutes 36 Seconds - *Abyssal Voyager:* **Soap**
+09:36: ***REAP*** - 0 Hours 58 Minutes 16 Seconds - *Space-Time Hunter:* **halfemptygirl**
+08:37: ***🌌VOYAGE🌌*** - 0 Hours 17 Minutes 37 Seconds - *Abyssal Voyager:* **hecc off**
+07:27: ***REAP*** - 4 Hours 37 Minutes 27 Seconds - *Space-Time Hunter:* **innocentbystander**
+02:49: ***REAP*** - 2 Hours 9 Minutes 44 Seconds - *Chrono Warrior:* **LuxuFate**
+01:06: ***REAP*** - 1 Hours 34 Minutes 9 Seconds - *Time Mage:* **Tropic Mango**
+23:31: ***REAP*** - 0 Hours 2 Minutes 23 Seconds - *Space-Time Hunter:* **innocentbystander**
+23:30: ***🌌VOYAGE🌌*** - 0 Hours 22 Minutes 52 Seconds - *Abyssal Voyager:* **nolo**
+***Blue Shell <:Blue_Shell:580276103491485701>*** - nolo has activated a blue shell
+21:59: ***🌌VOYAGE🌌*** - 0 Hours 16 Minutes 57 Seconds - *Abyssal Voyager:* **hecc off**
+20:51: ***REAP*** - 1 Hours 2 Minutes 22 Seconds - *Space-Time Hunter:* **halfemptygirl**
+19:49: ***🌌VOYAGE🌌*** - 0 Hours 2 Minutes 31 Seconds - *Abyssal Voyager:* **Porolific**
+19:37: ***GAMBLE*** - 1 Hours 36 Minutes 18 Seconds failed by **plusqwerty**
+18:02: ***REAP*** - 1 Hours 44 Minutes 32 Seconds - *Chrono Warrior:* **Eisbrecher**
+16:38: ***REAP*** - 0 Hours 48 Minutes 45 Seconds - *Space-Time Hunter:* **innocentbystander**
+15:50: ***REAP*** - 1 Hours 57 Minutes 57 Seconds - *Space-Time Hunter:* **DontForgetPepper**
+13:52: ***🌌VOYAGE🌌*** - 0 Hours 16 Minutes 19 Seconds - *Abyssal Voyager:* **nolo**
+12:46: ***🌌VOYAGE🌌*** - 0 Hours 3 Minutes 52 Seconds - *Abyssal Voyager:* **Soap**
+12:31: ***REAP*** - 1 Hours 24 Minutes 30 Seconds - *Time Mage:* **Tropic Mango**
+11:06: ***🌌VOYAGE🌌*** - 0 Hours 12 Minutes 6 Seconds - *Abyssal Voyager:* **hecc off**
+10:18: ***REAP*** - 1 Hours 31 Minutes 56 Seconds - *Chrono Warrior:* **PandaDriver.BOSS**
+09:04: ***REAP*** - 2 Hours 3 Minutes 10 Seconds - *Chrono Warrior:* **LuxuFate**
+07:26: ***REAP*** - 8 Hours 14 Minutes 32 Seconds - *Space-Time Hunter:* **innocentbystander**
+23:11: ***REAP*** - 1 Hours 22 Minutes 52 Seconds - *Time Mage:* **Tropic Mango**
+21:48: ***🌌VOYAGE🌌*** - 0 Hours 16 Minutes 24 Seconds - *Abyssal Voyager:* **hecc off**
+20:43: ***🌌VOYAGE🌌*** - 0 Hours 7 Minutes 13 Seconds - *Abyssal Voyager:* **Soap**
+20:13: ***GAMBLE*** - 1 Hours 44 Minutes 52 Seconds failed by **plusqwerty**
+18:28: ***REAP*** - 0 Hours 58 Minutes 24 Seconds - *Twilight Mercenary:* **That One Wandering Weirdo**
+17:31: ***REAP*** - 0 Hours 7 Minutes 32 Seconds - *Space-Time Hunter:* **innocentbystander**
+17:23: ***REAP*** - 1 Hours 15 Minutes 2 Seconds - *Space-Time Hunter:* **DontForgetPepper**
+16:08: ***REAP*** - 2 Hours 15 Minutes 55 Seconds - *Chrono Warrior:* **Eisbrecher**
+14:19: ***REAP*** - 1 Hours 35 Minutes 15 Seconds - *Space-Time Hunter:* **halfemptygirl**
+12:44: ***🌌VOYAGE🌌*** - 0 Hours 6 Minutes 14 Seconds - *Abyssal Voyager:* **Porolific**
+***Blue Shell <:Blue_Shell:580276103491485701>*** - Porolific has activated a blue shell
+12:19: ***🌌VOYAGE🌌*** - 0 Hours 26 Minutes 58 Seconds - *Abyssal Voyager:* **hecc off**
+10:31: ***REAP*** - 1 Hours 50 Minutes 12 Seconds - *Space-Time Hunter:* **innocentbystander**
+08:41: ***REAP*** - 8 Hours 0 Minutes 0 Seconds - *Space-Time Hunter:* **DontForgetPepper**
+00:41: ***REAP*** - 1 Hours 49 Minutes 13 Seconds - *Time Mage:* **Tropic Mango**
+22:52: ***REAP*** - 1 Hours 17 Minutes 28 Seconds - *Space-Time Hunter:* **innocentbystander**
+21:34: ***🌌VOYAGE🌌*** - 0 Hours 21 Minutes 28 Seconds - *Abyssal Voyager:* **hecc off**
+20:08: ***REAP*** - 1 Hours 33 Minutes 29 Seconds - *Space-Time Hunter:* **DontForgetPepper**
+18:34: ***REAP*** - 0 Hours 31 Minutes 21 Seconds - *Twilight Mercenary:* **That One Wandering Weirdo**
+18:04: ***🌌VOYAGE🌌*** - 0 Hours 11 Minutes 28 Seconds - *Abyssal Voyager:* **Soap**
 ***Blue Shell <:Blue_Shell:580276103491485701>*** - Soap has activated a blue shell
-09:03: ***New Player:*** *Soap* joined the arena as a *Abyssal Voyager*
-08:45: ***New Player:*** *DontForgetPepper* joined the arena as a *Space-Time Hunter*
-08:44: ***REAP*** - 0 Hours 58 Minutes 58 Seconds - *Dimensional Bandit:* **innocentbystander**
-08:43: ***New Player:*** *innocentbystander* joined the arena as a *Dimensional Bandit*
-07:45: ***REAP*** - 3 Hours 38 Minutes 30 Seconds - *Space-Time Hunter:* **halfemptygirl**
-07:44: ***New Player:*** *halfemptygirl* joined the arena as a *Space-Time Hunter*
+17:18: ***🌌VOYAGE🌌*** - 0 Hours 28 Minutes 5 Seconds - *Abyssal Voyager:* **nolo**
+15:25: ***REAP*** - 2 Hours 11 Minutes 19 Seconds - *Space-Time Hunter:* **halfemptygirl**
+13:14: ***🌌VOYAGE🌌*** - 1 Hours 0 Minutes 53 Seconds - *Abyssal Voyager:* **Tatrinpaha**
+09:10: ***🌌VOYAGE🌌*** - 0 Hours 30 Minutes 41 Seconds - *Abyssal Voyager:* **nolo**
+07:08: ***🌌VOYAGE🌌*** - 0 Hours 37 Minutes 2 Seconds - *Abyssal Voyager:* **hecc off**

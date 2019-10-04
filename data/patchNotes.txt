@@ -1,11 +1,14 @@
-**10 Oct 2019**
+**02 Oct 2019**
+    Abyssal Voyager Buff?:
+     - can now change classes as normal
+**01 Oct 2019**
     Thousand Year Fairy Buff:
      - bonus increased to 25 min
     Time Mage Buff:
      - cooldown reduction increased to 30%
     Cosmic Sniper Added:
      - resets reap cooldown if reap is longer than 2 hour
-    Meteoric Brawler Added:
+    Momentum Striker Added:
      - gains multiplier based on the recentness of your last reap
      - 5x the second it's off cooldown, and floors to 1x at 30 minutes
     Unknown Capacitor

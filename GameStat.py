@@ -95,11 +95,29 @@ voyage_msg = [
     'you stared into the abyss, and the abyss stared back',
     'the abyss is judging you silently',
     'you met a lost voyager',
-    'i laila este hapana nel ang A-B-Y-S-S'
+    'i laila este hapana nel ang A-B-Y-S-S',
+    'you are getting hungry',
+    'sleep.......',
+    'i\'m sorry for your loss?'
+    'you hear . . . nothing (cuz space :3)'
 ]
 
 
 def get_voyage_msg():
+    return random.choice(voyage_msg)
+
+
+fun_fact = [
+    'there\'s like actually nothing in the abyss',
+    'find who last reaped by doing t!log',
+    'find patch notes with t!pn',
+    'change class whenever you like with t!change',
+    'introduce me to your friends with t!invite',
+    'some of the classes are not balanced cuz the developer\'s dumb and lazy'
+]
+
+
+def get_fun_fact():
     return random.choice(voyage_msg)
 
 
