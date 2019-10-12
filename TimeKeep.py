@@ -185,7 +185,7 @@ async def reap(ctx):
         else:
             reap_message += '**Momentum Lost**\n Reap Time Not Affected\n'
     if player.class_type == 11:
-        reward = (current_time - player.next_reap) / 86400 * GameStat.capacitor_boost
+        reward = (current_time - player.next_reap) / 86400 * GameStat.capacitor_boost + 1
         reap_message += '**CAPACITOR DISCHARGE!**\n Reap Time Increased to {}%\n' \
             .format(round(reward * 100))
         added_time *= reward
@@ -260,7 +260,7 @@ async def reap(ctx):
             reap_message += '**COSMIC SHOT LANDED!**\n Reap Cooldown Rest\n'
             player.next_reap = current_time
         else:
-            reap_message += '**Cosmic Shot Missed**\n Reap Cooldown Not Effected\n'
+            reap_message += '**Cosmic Shot Missed**\n Reap Cooldown Not Affected\n'
 
     DataManager.write_players(players, latest_clear)
     reap_in_progress = added_time
@@ -268,6 +268,8 @@ async def reap(ctx):
     reap_lockin_message = await ctx.message.channel.send("Reap Initiated, Will be Completed in 60 Seconds")
     await bot.change_presence(
         activity=discord.Game(name='⚔️Reaping: {}'.format("{}H {}M {}S".format(*hms(added_time)))))
+
+    fun_fact = GameStat.get_fun_fact()
     while reap_delay > 0:
         if reap_in_progress != 0:
             await asyncio.sleep(5)
@@ -275,7 +277,7 @@ async def reap(ctx):
             try:
                 await reap_lockin_message.edit(
                     content="Reap Initiated, Will be Completed in {} Seconds\nFun Fact: {}"
-                            "".format(reap_delay, GameStat.get_fun_fact()))
+                            "".format(reap_delay, fun_fact))
             except discord.errors.NotFound:
                 reap_lockin_message = await ctx.message.channel.send(
                     "Reap Initiated, Will be Completed in {} Seconds".format(reap_delay))
@@ -348,7 +350,7 @@ async def steal(ctx):
     global thief_id
     thief_id = ctx.message.author
 
-    author = ctx.message.author
+    author = ctx.message.author.display_name
     current_time = time.time()
     player.reaped_time += reap_in_progress
     player.reap_count += 1
@@ -371,7 +373,7 @@ async def steal(ctx):
 
 
 async def check_player(ctx):
-    print("- Check by {} -".format(ctx.message.author))
+    print("- Check by {} -".format(ctx.message.author.display_name))
     if maintenance:
         await ctx.message.channel.send("Sorry currently under maintenance")
         return None
@@ -410,6 +412,11 @@ async def classes(ctx):
 
 
 @bot.command(pass_context=True)
+async def characters(ctx):
+    await ctx.message.channel.send(" " + GameStat.char_list)
+
+
+@bot.command(pass_context=True)
 async def c(ctx):
     await ctx.message.channel.send(" " + GameStat.char_list)
 
@@ -420,7 +427,7 @@ async def info(ctx):
         user_id = ctx.message.content.split('@')[1][:-1]
         if user_id[0] == '!':
             user_id = user_id[1:]
-        await print_info(ctx.message.channel, user_id=user_id)
+        await print_info(ctx.message.channel, user_id=int(user_id))
     elif '#' in ctx.message.content:
         user_rank = ctx.message.content.split('#')[1]
         await print_info(ctx.message.channel, user_rank=user_rank)
@@ -467,7 +474,11 @@ async def print_info(channel, user_id=0, user_rank=0):
     if current_time < player.next_reap:
         next_reap = seconds_format(player.next_reap - current_time)
     else:
-        next_reap = 'Your next reap is up'
+        if player.class_type == 11:
+            next_reap = "Your next reap is avalible ({}%)".format(
+                round((current_time - player.next_reap) / 864 * GameStat.capacitor_boost) + 100)
+        else:
+            next_reap = 'Your next reap is avalible'
 
     average_reap = seconds_format(0 if (player.reap_count == 0) else player.reaped_time / player.reap_count)
     # in case of div by zero

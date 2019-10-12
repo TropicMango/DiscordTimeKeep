@@ -1,3 +1,6 @@
+**08 Oct 2019**
+    Momentum Striker Nerfed:
+     - max momentum reduced to 3x
 **02 Oct 2019**
     Abyssal Voyager Buff?:
      - can now change classes as normal

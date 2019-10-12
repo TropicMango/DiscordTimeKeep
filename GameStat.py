@@ -16,8 +16,8 @@ voyage_reduction = 0.25
 voyage_chance = 0.001
 voyage_reward = 150
 sniper_threshold = 7200
-striker_max_reward = 5
-striker_reward_drop = 1 / 6
+striker_max_reward = 3
+striker_reward_drop = 5 / 18
 capacitor_boost = 1
 reap_cooldown = 21600  # reap_cooldown = 21600
 
@@ -98,7 +98,7 @@ voyage_msg = [
     'i laila este hapana nel ang A-B-Y-S-S',
     'you are getting hungry',
     'sleep.......',
-    'i\'m sorry for your loss?'
+    'i\'m sorry for your loss?',
     'you hear . . . nothing (cuz space :3)'
 ]
 
@@ -113,12 +113,12 @@ fun_fact = [
     'find patch notes with t!pn',
     'change class whenever you like with t!change',
     'introduce me to your friends with t!invite',
-    'some of the classes are not balanced cuz the developer\'s dumb and lazy'
+    'some of the classes are not balanced, cuz the developer\'s dumb and lazy'
 ]
 
 
 def get_fun_fact():
-    return random.choice(voyage_msg)
+    return random.choice(fun_fact)
 
 
 class Player:
