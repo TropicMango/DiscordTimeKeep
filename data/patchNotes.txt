@@ -1,3 +1,9 @@
+**19 Nov 2019**
+    Cosmic Sniper Nerd:
+     - reset condition 2h -> 3h
+**18 Oct 2019**
+    Unknown Capacitor Nerfed:
+     - begins charging after reap is avalible
 **08 Oct 2019**
     Momentum Striker Nerfed:
      - max momentum reduced to 3x

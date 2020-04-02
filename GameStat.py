@@ -2,7 +2,7 @@ import random
 
 game_update_str = '**UPDATE** new patch released, use t!pn for more information~'
 log_size = 20
-current_season = 6
+current_season = 7
 
 warrior_buff = 1.25
 hunter_crit_rate = 0.25
@@ -15,7 +15,7 @@ gamble_cost = 15
 voyage_reduction = 0.25
 voyage_chance = 0.001
 voyage_reward = 150
-sniper_threshold = 7200
+sniper_threshold = 10800 / 10 # /10 is temp
 striker_max_reward = 3
 striker_reward_drop = 5 / 18
 capacitor_boost = 1
@@ -38,12 +38,12 @@ class_name_short = {1: "Warrior", 2: "Mage",
                     9: "Sniper", 10: "Striker",
                     11: "Capacitor"}
 
-reward_icons = {'193550776340185088': '<:Challenger_Rank:559574999149838377>',
-                '219324654290993153': '<:Diamond_Rank:559575017885532194>',
-                '137016970917707776': '<:Plat_Rank:559575046516113423>',
-                '297971074518351872': '<:Gold_Rank:559575070670848001>',
-                '236279950259257345': '<:Silver_Rank:559575087955836938>',
-                '585607406143406080': '<:Bronze_Rank:559575105634566144>',
+reward_icons = {'158019287020208129': '<:Challenger_Rank:559574999149838377>',
+                '186208659221643264': '<:Diamond_Rank:559575017885532194>',
+                '359528106068934677': '<:Plat_Rank:559575046516113423>',
+                '585607406143406080': '<:Gold_Rank:559575070670848001>',
+                '195755433766420480': '<:Silver_Rank:559575087955836938>',
+                '219324654290993153': '<:Bronze_Rank:559575105634566144>',
                 '500656746440949761': '<:Gamble:580329443374006282>'}
 
 help_str = """Current Available Commands
@@ -71,7 +71,7 @@ char_list = """
 8. **Abyssal Voyager**: {}% Less Time Reaped, but {}% chance to gain {}x
 9. **Cosmic Sniper**: Reset Cooldown When Reap is over {} Minutes
 10. **Momentum Striker**: Gains Up to {}x Based on Time Since Reap Ready
-11. **Unknown Capacitor**: Gains {}x for Each Day Since Your Last Reap
+11. **Unknown Capacitor**: Gains {}x for Each Day Since Your Last Available Reap
 """\
     .format((warrior_buff - 1) * 100,
             mage_reduction_rate * 100,

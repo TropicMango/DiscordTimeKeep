@@ -24,6 +24,7 @@ thief_id = 0
 
 
 # notice_message = "** ------ Notice ------ **\n**UPDATE** new patch released, use t!pn for more information~"
+# notice_message = "** ------ Notice ------ **\n**End of Season: ** 12/17 - 6:00 P.M. PST"
 
 
 def get_latest_time():
@@ -152,7 +153,8 @@ def change_player_class(author_id, author_name, player_class_id):
         DataManager.update_logs_class(player.name, GameStat.class_name[player_class_id], True)
     except StopIteration:
         # Player doesn't exist in our logs
-        player = GameStat.Player("{}|{}|{}|{}|{}|{}".format(author_id, str(author_name)[:-5], 0, 0, 0, player_class_id))
+        player = GameStat.Player("{}|{}|{}|{}|{}|{}"
+                                 .format(author_id, str(author_name)[:-5], 0, time.time(), 0, player_class_id))
         players.append(player)
         DataManager.write_players(players, latest_clear)
         DataManager.update_logs_class(player.name, GameStat.class_name[player_class_id])
@@ -257,7 +259,7 @@ async def reap(ctx):
 
     elif player.class_type == 9:
         if added_time > GameStat.sniper_threshold:
-            reap_message += '**COSMIC SHOT LANDED!**\n Reap Cooldown Rest\n'
+            reap_message += '**COSMIC SHOT LANDED!**\n Reap Cooldown Reset\n'
             player.next_reap = current_time
         else:
             reap_message += '**Cosmic Shot Missed**\n Reap Cooldown Not Affected\n'
@@ -475,10 +477,10 @@ async def print_info(channel, user_id=0, user_rank=0):
         next_reap = seconds_format(player.next_reap - current_time)
     else:
         if player.class_type == 11:
-            next_reap = "Your next reap is avalible ({}%)".format(
+            next_reap = "Your next reap is available ({}%)".format(
                 round((current_time - player.next_reap) / 864 * GameStat.capacitor_boost) + 100)
         else:
-            next_reap = 'Your next reap is avalible'
+            next_reap = 'Your next reap is available'
 
     average_reap = seconds_format(0 if (player.reap_count == 0) else player.reaped_time / player.reap_count)
     # in case of div by zero
