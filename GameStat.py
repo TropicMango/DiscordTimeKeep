@@ -2,7 +2,7 @@ import random
 
 game_update_str = '**UPDATE** new patch released, use t!pn for more information~'
 log_size = 20
-current_season = 7
+current_season = 8
 
 warrior_buff = 1.25
 hunter_crit_rate = 0.25
@@ -18,7 +18,7 @@ voyage_reward = 150
 sniper_threshold = 10800 # /10 is temp
 striker_max_reward = 3
 striker_reward_drop = 5 / 18
-capacitor_boost = 1
+capacitor_boost = 0.5
 reap_cooldown = 21600  # reap_cooldown = 21600
 
 blue_shell_chance = 0.05
@@ -38,13 +38,13 @@ class_name_short = {1: "Warrior", 2: "Mage",
                     9: "Sniper", 10: "Striker",
                     11: "Capacitor"}
 
-reward_icons = {'158019287020208129': '<:Challenger_Rank:559574999149838377>',
-                '186208659221643264': '<:Diamond_Rank:559575017885532194>',
-                '359528106068934677': '<:Plat_Rank:559575046516113423>',
-                '585607406143406080': '<:Gold_Rank:559575070670848001>',
+reward_icons = {'225822313550053376': '<:Challenger_Rank:559574999149838377>',
+                '219324654290993153': '<:Diamond_Rank:559575017885532194>',
+                '186208659221643264': '<:Plat_Rank:559575046516113423>',
+                '117388990729945096': '<:Gold_Rank:559575070670848001>',
                 '195755433766420480': '<:Silver_Rank:559575087955836938>',
-                '219324654290993153': '<:Bronze_Rank:559575105634566144>',
-                '500656746440949761': '<:Gamble:580329443374006282>'}
+                '139183403797839872': '<:Bronze_Rank:559575105634566144>',
+                '167090536602140682': '<:Gamble:580329443374006282>'}
 
 help_str = """Current Available Commands
                **t!start:** Game Description~

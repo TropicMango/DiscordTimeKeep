@@ -59,7 +59,7 @@ async def start_timer():
             # await asyncio.sleep(1)
             # t_interval += 1
             await update_time_status()
-            await asyncio.sleep(30)
+            await asyncio.sleep(120)
     except websockets.exceptions.ConnectionClosed:
         await asyncio.sleep(10)
         global restart
