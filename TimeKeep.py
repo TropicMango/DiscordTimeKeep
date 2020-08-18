@@ -59,7 +59,7 @@ async def start_timer():
             # await asyncio.sleep(1)
             # t_interval += 1
             await update_time_status()
-            await asyncio.sleep(120)
+            await asyncio.sleep(300)
     except websockets.exceptions.ConnectionClosed:
         await asyncio.sleep(10)
         global restart
@@ -360,7 +360,7 @@ async def steal(ctx):
     player.name = str(author)[:-5]
     reap_message = '<@!{}> has *STOLEN* **{}** to their total\n' \
                    'Adding up to be **{}**\nNext reap in **{}**' \
-        .format(author.id, seconds_format(reap_in_progress), seconds_format(player.reaped_time),
+        .format(ctx.message.author.id, seconds_format(reap_in_progress), seconds_format(player.reaped_time),
                 "{} hours and {} minutes".format(*hms(player.next_reap - current_time)))
 
     global latest_clear
