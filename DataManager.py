@@ -65,7 +65,7 @@ def update_logs_reap(author, added_time, class_type, stolen=False):
     info = datetime.datetime.now().strftime("%X")[:-3] + ": "
 
     if stolen:
-        info += '***REAP*** - {} - *STOLEN* by **{}**\n'.format(added_time, author)
+        info += '***REAP*** - {} - *STOLEN* from *{}* by **{}**\n'.format(added_time, stolen, author)
     else:
         if class_type == 7:
             info += '***GAMBLE💰*** - {} - *{}:* **{}**\n'.format(added_time, GameStat.class_name[class_type], author)

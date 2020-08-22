@@ -20,11 +20,12 @@ restart = False
 notice_message = ""
 
 reap_in_progress = 0
+reap_name = ""
 thief_id = 0
 
 
 # notice_message = "** ------ Notice ------ **\n**UPDATE** new patch released, use t!pn for more information~"
-# notice_message = "** ------ Notice ------ **\n**End of Season: ** 12/17 - 6:00 P.M. PST"
+notice_message = "** ------ Notice ------ **\n**End of Season: ** 08/31 - 11:59 P.M. PST"
 
 
 def get_latest_time():
@@ -118,7 +119,7 @@ async def class_selection(ctx):
         if player_class_id == 8:
             msg = await ctx.message.channel.send("<@!{}> **Abyssal Voyager Warning: **\n"
                                                  "One Look into the Abyss and There Will be no Turning Back\n"
-                                                 "(Class Change Might be Disabled)\n"
+                                                 "(Class Change Will be Disabled)\n"
                                                  "**Is {} Ready to Venture Into the Abyss**"
                                                  "".format(ctx.message.author.id, str(ctx.message.author)[:-5]))
             await msg.add_reaction("✅")
@@ -141,8 +142,8 @@ def change_player_class(author_id, author_name, player_class_id):
     try:
         # Find the current player
         player = next(player for player in players if player.id == author_id)
-        # if player.class_type == 8:
-        #     return False
+        if player.class_type == 8:
+            return False
         player.name = str(author_name)[:-5]
         player.class_type = player_class_id
         if player.class_type == 2:
@@ -242,6 +243,7 @@ async def reap(ctx):
             DataManager.write_players(players, latest_clear)
             # DataManager.write_players(players, current_time)
             DataManager.update_logs_win(False, "GAMBLE", str(author)[:-5], seconds_format(added_time))
+            await update_time_status()
             return
 
     elif player.class_type == 8:
@@ -266,6 +268,8 @@ async def reap(ctx):
 
     DataManager.write_players(players, latest_clear)
     reap_in_progress = added_time
+    global reap_name
+    reap_name = player.name
     # ------------------------------- Initialize Reaping -------------------------
     reap_lockin_message = await ctx.message.channel.send("Reap Initiated, Will be Completed in 60 Seconds")
     await bot.change_presence(
@@ -366,7 +370,8 @@ async def steal(ctx):
     global latest_clear
     await ctx.message.channel.send(reap_message)
     # Strip out the last five characters (the #NNNN part)
-    DataManager.update_logs_reap(str(author)[:-5], seconds_format(reap_in_progress), player.class_type, stolen=True)
+    DataManager.update_logs_reap(str(author)[:-5], seconds_format(reap_in_progress), player.class_type,
+                                 stolen=reap_name)
     latest_clear = current_time
     await update_time_status()
     DataManager.write_players(players, latest_clear)
@@ -654,11 +659,13 @@ async def on_reaction_add(reaction, user):
     if user.name != bot.user.name:
         if reaction.message.author.name == bot.user.name:
             if reaction.message.content.startswith("<@!"):  # this should be a player
-                if str(reaction.emoji) == "✅" and reaction.message.content[3:21] == str(user.id):
-                    change_player_class(reaction.message.content[3:21], reaction.message.content[148:-34] + "#1234", 8)
-                    await reaction.message.channel.send(
-                        "<@!{}> is now a **{}**".format(reaction.message.content[3:21],
-                                                        GameStat.class_name[8]))
+                if str(reaction.emoji) == "✅":
+                    if reaction.message.content[3:21] == str(user.id):
+                        change_player_class(int(reaction.message.content[3:21]), (reaction.message.content[148:-34] + "#1234")
+                                            .strip(), 8)
+                        await reaction.message.channel.send(
+                            "<@!{}> is now a **{}**".format(reaction.message.content[3:21],
+                                                            GameStat.class_name[8]))
                 else:
                     await reaction.message.channel.send("Class Change Cancelled")
                 await reaction.message.delete()

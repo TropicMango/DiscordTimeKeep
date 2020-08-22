@@ -15,7 +15,7 @@ gamble_cost = 15
 voyage_reduction = 0.25
 voyage_chance = 0.001
 voyage_reward = 150
-sniper_threshold = 10800 # /10 is temp
+sniper_threshold = 10800  # /10 is temp
 striker_max_reward = 3
 striker_reward_drop = 5 / 18
 capacitor_boost = 0.5
@@ -60,22 +60,22 @@ help_str = """Current Available Commands
                **t!invite:** Invite Me :heart:"""
 
 char_list = """
-1. **Chrono Warrior**: bonus {}% Time Reaped
+1. **Chrono Warrior**: bonus {}x Time Reaped
 2. **Time Mage**: {}% Faster Reap Cooldown
-3. **Space-Time Hunter**: {}% Chance to Crit
+3. **Space-Time Hunter**: {}% Chance to get {}x
 4. **Thousand Year Fairy**: Bonus {} Min per Reap
 5. **Dimensional Bandit**: Gains a *steal* ability
  - Bandit Only - **t!steal:** Available 1 Min After the Latest Reap
 6. **Twilight Mercenary**: Instant Reap, Can't be Stolen
-7. **Void Gambler**: {}% Chance of Getting {}x or Lose {} Minutes
-8. **Abyssal Voyager**: {}% Less Time Reaped, but {}% chance to gain {}x
-9. **Cosmic Sniper**: Reset Cooldown When Reap is over {} Minutes
-10. **Momentum Striker**: Gains Up to {}x Based on Time Since Reap Ready
+7. **Void Gambler**: {}% Chance of Getting {}x, Lose {} Minutes Otherwise
+8. **Abyssal Voyager**: {}% Less Time Reaped, But {}% Chance to Gain {}x
+9. **Cosmic Sniper**: Reset Cooldown When Reap is Over {} Minutes
+10. **Momentum Striker**: {}x When Reap is Avalible, Drops to 1x After 60 Minutes
 11. **Unknown Capacitor**: Gains {}x for Each Day Since Your Last Available Reap
 """\
-    .format((warrior_buff - 1) * 100,
+    .format((warrior_buff - 1),
             mage_reduction_rate * 100,
-            hunter_crit_rate * 100,
+            hunter_crit_rate * 100, hunter_crit_dmg,
             fairy_boost,
             gamble_chance * 100, gamble_reward, gamble_cost,
             (1 - voyage_reduction) * 100, voyage_chance * 100, voyage_reward,

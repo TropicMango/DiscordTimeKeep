@@ -1,5 +1,12 @@
+**21 Aug 2020**
+    Clarity update
+     - cleaned up multiplier convention
+     - updated log tracking
+**19 Aug 2020**
+    Abyssal Voyager Nerf:
+     - can nolonger change classes
 **19 Nov 2019**
-    Cosmic Sniper Nerd:
+    Cosmic Sniper Nerfed:
      - reset condition 2h -> 3h
 **18 Oct 2019**
     Unknown Capacitor Nerfed:
@@ -8,7 +15,7 @@
     Momentum Striker Nerfed:
      - max momentum reduced to 3x
 **02 Oct 2019**
-    Abyssal Voyager Buff?:
+    Abyssal Voyager Buff:
      - can now change classes as normal
 **01 Oct 2019**
     Thousand Year Fairy Buff:
