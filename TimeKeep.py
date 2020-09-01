@@ -25,7 +25,7 @@ thief_id = 0
 
 
 # notice_message = "** ------ Notice ------ **\n**UPDATE** new patch released, use t!pn for more information~"
-notice_message = "** ------ Notice ------ **\n**End of Season: ** 08/31 - 11:59 P.M. PST"
+# notice_message = "** ------ Notice ------ **\n**End of Season: ** 08/31 - 11:59 P.M. PST"
 
 
 def get_latest_time():

@@ -70,7 +70,7 @@ char_list = """
 7. **Void Gambler**: {}% Chance of Getting {}x, Lose {} Minutes Otherwise
 8. **Abyssal Voyager**: {}% Less Time Reaped, But {}% Chance to Gain {}x
 9. **Cosmic Sniper**: Reset Cooldown When Reap is Over {} Minutes
-10. **Momentum Striker**: {}x When Reap is Avalible, Drops to 1x After 60 Minutes
+10. **Momentum Striker**: {}x When Reap is Avalible, Gradually Drops to 1x After 60 Minutes
 11. **Unknown Capacitor**: Gains {}x for Each Day Since Your Last Available Reap
 """\
     .format((warrior_buff - 1),
