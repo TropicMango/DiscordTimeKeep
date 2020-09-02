@@ -84,6 +84,19 @@ char_list = """
             capacitor_boost)
 
 
+class_data_info = {1: "**Extra Time Obtained**: {}",
+              2: "**Time Reduced**: {}",
+              3: "**Crits Landed**: {}",
+              4: "**Extra Time Obtained**: {}",
+              5: "**Reaps Stolen**: {}",
+              6: "**FU*K Bandits!@#**",
+              7: "**Successful Gambles**: {}",
+              8: "**Time Lost to Void**: {}",
+              9: "**Snipes Landed**: {}",
+              10: "**Strikes Comboed**: {}",
+              11: "**Charge Time**: {}"}
+
+
 start_str = """"Welcome to the Arena of Time,
      Use **t!choose <Class #>** begin
      You can change with **t!change <Class #>**
@@ -132,9 +145,11 @@ class Player:
         try:
             self.reap_count = int(representation[4])
             self.class_type = int(representation[5])
+            self.class_data = float(representation[6])
         except (ValueError, IndexError):
             return  # Nothing happens
 
     def __str__(self):
         return "{}|{}|{}|{}|{}|{}"\
-            .format(self.id, self.name, round(self.reaped_time), self.next_reap, self.reap_count, self.class_type)
+            .format(self.id, self.name, round(self.reaped_time), self.next_reap, self.reap_count, self.class_type,
+                    self.class_data)

@@ -179,61 +179,53 @@ async def reap(ctx):
     added_time = current_time - latest_clear
     reap_message = ""
 
-    if player.class_type == 10:
-        reward = GameStat.striker_max_reward - (current_time - player.next_reap) / 60 * GameStat.striker_reward_drop
-        if reward > 1:
-            reap_message += '**MOMENTUM STABLE!**\n Reap Time Increased to {}%\n' \
-                .format(round(reward * 100))
-            added_time *= reward
-        else:
-            reap_message += '**Momentum Lost**\n Reap Time Not Affected\n'
-    if player.class_type == 11:
-        reward = (current_time - player.next_reap) / 86400 * GameStat.capacitor_boost + 1
-        reap_message += '**CAPACITOR DISCHARGE!**\n Reap Time Increased to {}%\n' \
-            .format(round(reward * 100))
-        added_time *= reward
-
     author = ctx.message.author
     player.reap_count += 1
     player.next_reap = current_time + GameStat.reap_cooldown
     player.name = str(author)[:-5]
+    reap_await = current_time - player.next_reap
     reap_delay = 60
 
     # --------------------- Unique Class Passive ------------------
-    if player.class_type == 1:
+    if player.class_type == 1:  # ---------------------------- Warrior ------------------------------
         added_time *= GameStat.warrior_buff
         reap_message += '**HEROIC STRIKE ACTIVATED!**\n Reap Time Increased to {}%\n' \
             .format(GameStat.warrior_buff * 100)
+        player.class_data += (added_time * (GameStat.warrior_buff-1)) / 3600
 
-    elif player.class_type == 2:
+    elif player.class_type == 2:  # ---------------------------- Mage ------------------------------
         reap_message += '**TIME WARP ACTIVATED!**\n Reap Cooldown Reduced by {}%\n' \
             .format(GameStat.mage_reduction_rate * 100)
         player.next_reap = current_time + GameStat.reap_cooldown * (1 - GameStat.mage_reduction_rate)
+        player.class_data += (GameStat.reap_cooldown - reap_await) / 3600
 
-    elif player.class_type == 3:
+    elif player.class_type == 3:  # ---------------------------- Hunter ------------------------------
         if random.random() < GameStat.hunter_crit_rate:
             added_time *= 2
             reap_message += '**HUNTER\'S MARK ACTIVATED!**\n Reap Time Increased to {}%\n' \
                 .format(GameStat.hunter_crit_dmg * 100)
+            player.class_data += 1
         else:
             reap_message += '**HUNTER\'S MARK FAILED!**\n Reap Time Gains No Modifier\n'
 
-    elif player.class_type == 4:
+    elif player.class_type == 4:  # ---------------------------- Fairy ------------------------------
         added_time += GameStat.fairy_boost * 60
         reap_message += '**WILD GROWTH ACTIVATED!**\n Reap Time Increased by {}M\n'.format(GameStat.fairy_boost)
+        player.class_data += GameStat.fairy_boost / 60
 
-    elif player.class_type == 6:
+    elif player.class_type == 6:  # ---------------------------- Merc ------------------------------
         reap_delay = 0
         reap_message += '**BLINDING ASSAULT ACTIVATED!**\n Instant Reap Complete\n'
 
-    elif player.class_type == 7:
+    elif player.class_type == 7:  # ---------------------------- Gambler ------------------------------
         if random.random() < GameStat.gamble_chance:
             reap_delay = 0
             added_time *= GameStat.gamble_reward
             for win in range(3):
                 reap_message += '**💰!!!LUCKY COIN ACTIVATED!!!💰**\n Reap Time Increased to {}%!!!\n' \
                     .format(GameStat.gamble_reward * 100)
-            # DataManager.update_logs_win(True, "GAMBLE")
+
+            player.class_data += 1
         else:
             msg = '**LUCKY COIN FAILED**\n{} Minutes has Been Lost\n'.format(GameStat.gamble_cost) \
                   + roll_shell(added_time, players, author)
@@ -241,12 +233,11 @@ async def reap(ctx):
             await ctx.message.channel.send(msg)
             latest_clear = current_time
             DataManager.write_players(players, latest_clear)
-            # DataManager.write_players(players, current_time)
             DataManager.update_logs_win(False, "GAMBLE", str(author)[:-5], seconds_format(added_time))
             await update_time_status()
             return
 
-    elif player.class_type == 8:
+    elif player.class_type == 8:  # ---------------------------- Voyager ------------------------------
         if random.random() < GameStat.voyage_chance:
             reap_delay = 0
             added_time *= GameStat.voyage_reward
@@ -255,6 +246,7 @@ async def reap(ctx):
                     .format(GameStat.voyage_reward * 100)
             DataManager.update_logs_win(True, "VOYAGE")
         else:
+            player.class_data += added_time * (1 - GameStat.voyage_reduction)
             added_time *= GameStat.voyage_reduction
             reap_message += '**' + GameStat.get_voyage_msg() + '**\n Reap Time Reduced to {}%\n' \
                 .format(GameStat.voyage_reduction * 100)
@@ -263,8 +255,27 @@ async def reap(ctx):
         if added_time > GameStat.sniper_threshold:
             reap_message += '**COSMIC SHOT LANDED!**\n Reap Cooldown Reset\n'
             player.next_reap = current_time
+            player.class_data += 1
         else:
             reap_message += '**Cosmic Shot Missed**\n Reap Cooldown Not Affected\n'
+
+    elif player.class_type == 10:
+        reward = GameStat.striker_max_reward - reap_await / 60 * GameStat.striker_reward_drop
+        if reward > 1:
+            reap_message += '**MOMENTUM STABLE!**\n Reap Time Increased to {}%\n' \
+                .format(round(reward * 100))
+            added_time *= reward
+            player.class_data += 1
+        else:
+            reap_message += '**Momentum Lost**\n Reap Time Not Affected\n'
+
+    elif player.class_type == 11:
+        player.class_data += reap_await / 3600
+
+        reward = reap_await / 86400 * GameStat.capacitor_boost + 1
+        reap_message += '**CAPACITOR DISCHARGE!**\n Reap Time Increased to {}%\n' \
+            .format(round(reward * 100))
+        added_time *= reward
 
     DataManager.write_players(players, latest_clear)
     reap_in_progress = added_time
@@ -450,14 +461,11 @@ async def me(ctx):
 
 
 async def print_info(channel, user_id=0, user_rank=0):
-    if notice_message != "":
-        # await channel.send(notice_message)
-        await channel.send(notice_message)
-
     players = DataManager.read_players()
     player = None
     index = 0
-    if user_id != 0:
+
+    if user_id != 0:  # Check by ID
         try:
             # Find the current player
             index, player = next((index, player) for index, player in enumerate(players) if player.id == user_id)
@@ -466,7 +474,7 @@ async def print_info(channel, user_id=0, user_rank=0):
             await channel.send("""<@!{}> has stored 0 seconds
                                 use t!reap to get started""".format(user_id))
             return
-    elif user_rank != 0:
+    elif user_rank != 0:  # Check by Rank
         user_rank = int(user_rank)
         try:
             # Find the current player
@@ -477,6 +485,7 @@ async def print_info(channel, user_id=0, user_rank=0):
                                 use t!reap to get started""".format(user_id))
             return
 
+    # Initiate Data
     current_time = float(time.time())
     if current_time < player.next_reap:
         next_reap = seconds_format(player.next_reap - current_time)
@@ -497,10 +506,13 @@ async def print_info(channel, user_id=0, user_rank=0):
     **Average Reap:** {}
     **Reap Count:** {}
     **Next Reap:** {}
+    {}
     """.format(GameStat.class_name[player.class_type], index + 1,
                seconds_format(player.reaped_time), average_reap,
-               int(player.reap_count), next_reap))
-    await channel.send(embed=embed)
+               int(player.reap_count), next_reap,
+               player.get_class_data(GameStat.class_data_info[player.class_type].format(player.class_data))))
+
+    await channel.send(content=notice_message, embed=embed)
 
 
 @bot.command(pass_context=True)
